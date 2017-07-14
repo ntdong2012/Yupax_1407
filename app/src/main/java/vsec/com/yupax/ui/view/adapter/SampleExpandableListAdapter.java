@@ -52,16 +52,6 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
     }
 
     public void popolaCheckMap() {
-
-//        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-//        String buffer = null;
-//
-//        for (int i = 0; i < _objInt; i++) {
-//            buffer = settings.getString(String.valueOf((int) i), "false");
-//            if (buffer.equals("false"))
-//                checkboxMap.put((long) i, false);
-//            else checkboxMap.put((long) i, true);
-//        }
     }
 
     public class CheckListener implements OnCheckedChangeListener {
@@ -103,25 +93,10 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
         View v = convertView;
         String child = getChild(groupPosition, childPosition);
         int id_res = 0;
-//        if (groupPosition == 0) {
-//            if (childPosition == 0) id_res = R.drawable.audi_a4;
-//            if (childPosition == 1) id_res = R.drawable.audi_q7;
-//            if (childPosition == 2) id_res = R.drawable.audi_r8;
-//        } else if (groupPosition == 1) {
-//            if (childPosition == 0) id_res = R.drawable.bmw_m6;
-//            if (childPosition == 1) id_res = R.drawable.bmw_x6;
-//        } else if (groupPosition == 2) {
-//            if (childPosition == 0) id_res = R.drawable.ferrari_enzo;
-//            if (childPosition == 1) id_res = R.drawable.ferrari_f430;
-//            if (childPosition == 2) id_res = R.drawable.ferrari_f430_italia;
-//        }
-
         if (child != null) {
             v = vi.inflate(CHILD_ITEM_RESOURCE, null);
             RateViewHolder holder = new RateViewHolder(v);
             holder.text.setText(Html.fromHtml(child));
-
-//            holder.imageview.setImageResource(id_res);
         }
         return v;
     }
@@ -146,12 +121,11 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
         int id_res = 0;
         long group_id = getGroupId(groupPosition);
 
-        group = "" + (group_id + 1);
+        group = "" + (group_id + 1) + ".";
 
         if (group != null) {
             v = vi.inflate(GROUP_ITEM_RESOURCE, null);
             RateGroupViewHolder holder = new RateGroupViewHolder(v);
-
             holder.num.setText(Html.fromHtml(group));
             holder.question.setText(rateQuestions.get(groupPosition).getQuestion());
         }

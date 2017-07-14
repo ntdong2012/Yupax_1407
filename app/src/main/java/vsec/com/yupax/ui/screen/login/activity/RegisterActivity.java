@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.SignUpContract;
@@ -34,6 +35,12 @@ public class RegisterActivity extends BaseActivity<SignUpPresenter> implements S
     protected void initEventAndData() {
         userNameEdt.requestFocus();
         userNameEdt.requestFocusFromTouch();
+    }
+
+    @OnClick(R.id.back_icon_iv)
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override

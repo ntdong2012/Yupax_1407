@@ -54,7 +54,6 @@ public class SystemUtil {
         ClipData clipData = ClipData.newPlainText("url", text);
         ClipboardManager manager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         manager.setPrimaryClip(clipData);
-        ToastUtils.shortShow("已复制到剪贴板");
     }
 
     public static Uri saveBitmapToFile(Context context, String url, Bitmap bitmap, View container, boolean isShare){
@@ -72,15 +71,15 @@ public class SystemUtil {
             FileOutputStream fos = new FileOutputStream(imageFile);
             boolean isCompress = bitmap.compress(Bitmap.CompressFormat.PNG, 90, fos);
             if (isCompress) {
-                SnackbarUtil.showShort(container,"保存妹纸成功n(*≧▽≦*)n");
+                SnackbarUtil.showShort(container,"aaaa");
             } else {
-                SnackbarUtil.showShort(container,"保存妹纸失败ヽ(≧Д≦)ノ");
+                SnackbarUtil.showShort(container,"bbb");
             }
             fos.flush();
             fos.close();
         } catch (IOException e) {
             e.printStackTrace();
-            SnackbarUtil.showShort(container,"保存妹纸失败ヽ(≧Д≦)ノ");
+            SnackbarUtil.showShort(container,"CCC");
         }
         try {
             MediaStore.Images.Media.insertImage(context.getContentResolver(), imageFile.getAbsolutePath(), fileName, null);

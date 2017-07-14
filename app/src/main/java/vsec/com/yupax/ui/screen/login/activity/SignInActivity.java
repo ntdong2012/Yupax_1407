@@ -37,7 +37,6 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @OnClick(R.id.register_tv)
     void onCallRegisterAction() {
         RegisterActivity.callRegisterActivity(this, new Bundle());
-        this.finish();
     }
 
     @OnClick(R.id.login_btn)
@@ -49,7 +48,6 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @OnClick(R.id.forgot_pass_tv)
     void onCallForgotPasswordAction() {
         ForgotPasswordActivity.callForgotPassword(this, new Bundle());
-        this.finish();
     }
 
     @Override

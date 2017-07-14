@@ -304,7 +304,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
         searchEdt.setVisibility(View.GONE);
         yupaxIv.setVisibility(View.GONE);
         cityLayout.setVisibility(View.GONE);
-        backIconIv.setVisibility(View.VISIBLE);
+        backIconIv.setVisibility(View.GONE);
         titleActionBar.setText(title);
     }
 

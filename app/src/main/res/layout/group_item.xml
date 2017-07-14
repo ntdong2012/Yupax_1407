@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:layout_height="match_parent">
 
 
     <TextView
         android:id="@+id/num_tv"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/df_martin"
-        android:background="@drawable/icon_circle"
         android:gravity="center"
-        android:text="1"
-        android:textColor="@android:color/holo_red_dark"
+        android:text="1."
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/question_tv"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/df_martin"
         android:layout_toRightOf="@id/num_tv"
-        android:background="@drawable/bg_rate"
         android:gravity="center_vertical"
         android:paddingLeft="@dimen/df_martin_bi"
         android:text="TextView"
-        android:textColor="@android:color/white"
-        android:textSize="11sp" />
+        android:textSize="@dimen/df_text_size" />
 </RelativeLayout>

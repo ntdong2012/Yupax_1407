@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_image">
 
+    <ImageView
+        android:id="@+id/back_icon_iv"
+        android:layout_width="@dimen/df_back_icon_size"
+        android:layout_height="@dimen/df_back_icon_size"
+        android:layout_marginLeft="@dimen/df_martin"
+        android:layout_marginRight="@dimen/df_martin"
+        android:layout_marginTop="@dimen/df_martin"
+        android:src="@drawable/back_icon" />
+
 
     <ImageView
         android:id="@+id/language_change_icon"

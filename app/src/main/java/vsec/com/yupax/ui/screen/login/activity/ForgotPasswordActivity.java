@@ -26,6 +26,7 @@ public class ForgotPasswordActivity extends BaseActivity<ForgotPasswordPresenter
         ((Activity) context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
     }
 
+    @OnClick(R.id.back_icon_iv)
     @Override
     public void onBackPressed() {
         super.onBackPressed();

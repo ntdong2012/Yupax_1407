@@ -10,7 +10,7 @@
     <string name="forgot_pass_actionbar_title">Quên mật khẩu</string>
     <string name="resent_active_code_label">Gửi lại mã kích hoạt</string>
     <string name="resend_password_label">Gửi lại mật khẩu</string>
-    <string name="personal_label">Cá nhân</string>
+    <string name="personal_label">Xếp hạng</string>
     <string name="change_personal_info">Thay đổi thông tin cá nhân</string>
     <string name="change_password_info">Thay đổi mật khẩu</string>
     <string name="link_account_label">Link account</string>
@@ -85,11 +85,12 @@ Không những thế, hành khách mua vé online và thanh toán thành công v
     <string name="merchant_code_label">Mã đơn vị thành viên</string>
     <string name="register_email_hint_text">Email hoặc số điện thoại</string>
     <string name="forgot_pass_btn_text">Lấy lại mật khẩu</string>
-    <string name="setting_label">Lựa chọn</string>
+    <string name="setting_label">Cá nhân</string>
     <string name="voucher_label">Voucher</string>
     <string name="dont_have_account">Bạn chưa có tài khoản?   </string>
 
     <string name="event_label">Sự kiện</string>
     <string name="select_merchant">Chọn đơn vị thành viên</string>
+    <string name="rate_done_label">Xác nhận</string>
 
 </resources>

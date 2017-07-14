@@ -28,6 +28,7 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
 
     @BindViews({R.id.resun_rb, R.id.vj_rb, R.id.yupax_rb})
     AppCompatRadioButton[] merchants;
+    private boolean isFirstTime = false;
 
     @Override
     protected int getLayout() {
@@ -48,27 +49,52 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
 
     @OnCheckedChanged({R.id.resun_rb, R.id.vj_rb, R.id.yupax_rb})
     public void onRadioButtonCheckChanged(CompoundButton button, boolean checked) {
-        for (int i = 0; i < merchants.length; i++) {
-            merchants[i].setChecked(false);
-        }
         if (checked) {
             switch (button.getId()) {
                 case R.id.resun_rb:
-                    mPresenter.setCurrentMerchant(Common.SPF.RESUN_MERCHANT);
-                    merchants[0].setChecked(true);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mPresenter.setCurrentMerchant(Common.SPF.RESUN_MERCHANT);
+                            merchants[0].setChecked(true);
+                        }
+                    });
                     break;
                 case R.id.vj_rb:
-                    mPresenter.setCurrentMerchant(Common.SPF.VIETJET_MERCHANT);
-                    merchants[1].setChecked(true);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mPresenter.setCurrentMerchant(Common.SPF.VIETJET_MERCHANT);
+                            merchants[1].setChecked(true);
+                        }
+                    });
                     break;
                 case R.id.yupax_rb:
-                    mPresenter.setCurrentMerchant(Common.SPF.YUPAX_MERCHANT);
-                    merchants[2].setChecked(true);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mPresenter.setCurrentMerchant(Common.SPF.YUPAX_MERCHANT);
+                            merchants[2].setChecked(true);
+                        }
+                    });
                     break;
             }
+            if (isFirstTime) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        HomeActivity.callHomeActivity(MerchantActivity.this, new Bundle());
+                        MerchantActivity.this.finish();
+                    }
+                });
+            }
         }
-        HomeActivity.callHomeActivity(this, new Bundle());
-        this.finish();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        isFirstTime = true;
     }
 
     @Override

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/df_martin_bi"
+        android:background="@drawable/rate_border_layout"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/df_martin"
+            android:gravity="center"
+            android:text="@string/rate_label"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <View
+            android:id="@+id/sp1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_separate_height"
+            android:layout_below="@id/title_tv"
+            android:layout_marginTop="@dimen/df_martin"
+            android:background="@color/separate_color" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/confirm_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/df_btn_height"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/df_martin_bi"
+            android:layout_marginTop="@dimen/df_martin"
+            android:background="@drawable/rate_confirm_border"
+            android:paddingLeft="@dimen/df_martin"
+            android:paddingRight="@dimen/df_martin"
+            android:text="@string/rate_done_label"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/df_btn_text_size" />
+
+        <ExpandableListView
+            android:id="@+id/expandableListView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/confirm_btn"
+            android:layout_below="@id/sp1"
+            android:layout_marginTop="@dimen/df_martin"
+            android:divider="@null"
+            android:dividerHeight="@dimen/df_martin_sm"
+            android:groupIndicator="@android:color/transparent"
+            android:scrollbars="none" />
+    </RelativeLayout>
+
+</LinearLayout>

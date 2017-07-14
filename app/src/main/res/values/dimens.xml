@@ -20,6 +20,7 @@
     <dimen name="df_card_view_martin_top">0.75dp</dimen>
     <dimen name="df_text_size">14sp</dimen>
     <dimen name="df_btn_text_size">14sp</dimen>
+    <dimen name="df_back_icon_size">30dp</dimen>
 
     <dimen name="df_cardview_radius">3dp</dimen>
     <dimen name="actionbar_search_text_size">12sp</dimen>
@@ -95,5 +96,6 @@
     <dimen name="logo_martin_top">60dp</dimen>
     <dimen name="logo_height">130dp</dimen>
     <dimen name="select_merchant_text_size">17sp</dimen>
+    <dimen name="rate_border_radius">20dp</dimen>
 
 </resources>

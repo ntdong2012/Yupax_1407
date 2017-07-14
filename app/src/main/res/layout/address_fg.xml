@@ -61,10 +61,24 @@
         android:layout_below="@id/mapView"
         android:layout_centerHorizontal="true" />
 
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menu"
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/df_martin"
+        android:layout_marginRight="@dimen/df_martin"
+        android:padding="@dimen/df_martin_bi"
+        android:scaleType="fitCenter"
+        android:src="@drawable/rate_icon"
+        android:visibility="visible"
+        app:fab_size="mini" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/menu"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="10dp"
@@ -79,7 +93,7 @@
         fab:menu_colorRipple="#99FFFFFF"
         fab:menu_fab_label=""
         fab:menu_fab_size="normal"
-        fab:menu_icon="@drawable/icon_rate_45"
+        fab:menu_icon="@drawable/rate_icon"
         fab:menu_labels_colorNormal="#333333"
         fab:menu_labels_colorPressed="#444444"
         fab:menu_labels_colorRipple="#66FFFFFF"
@@ -106,13 +120,13 @@
         fab:menu_shadowYOffset="3dp"
         fab:menu_showShadow="true">
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_rate_45"
-            fab:fab_label="Đánh giá dịch vụ"
-            fab:fab_size="mini" />
+        <!--<com.github.clans.fab.FloatingActionButton-->
+        <!--android:id="@+id/menu_item"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/icon_rate_45"-->
+        <!--fab:fab_label="Đánh giá dịch vụ"-->
+        <!--fab:fab_size="mini" />-->
 
     </com.github.clans.fab.FloatingActionMenu>
 </RelativeLayout>
