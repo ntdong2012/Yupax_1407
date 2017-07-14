@@ -290,7 +290,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
         }
         switch (currentPosition) {
             case Common.CONTROL_ICON_POSITION.ADDRESS:
-                controlIcons[currentPosition].setImageDrawable(getResources().getDrawable(R.drawable.home_icon_bottombar));
+                controlIcons[currentPosition].setImageDrawable(getResources().getDrawable(R.drawable.home_icon_bottom));
                 break;
             case Common.CONTROL_ICON_POSITION.NOTIFICATION:
                 controlIcons[currentPosition].setImageDrawable(getResources().getDrawable(R.drawable.notification_icon_bottombar));

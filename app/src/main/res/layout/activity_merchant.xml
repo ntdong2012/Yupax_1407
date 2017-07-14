@@ -84,7 +84,6 @@
         android:layout_marginRight="@dimen/df_martin_bi"
         android:layout_marginTop="@dimen/df_martin"
         android:buttonTint="@android:color/white"
-        android:checked="true"
         android:shadowColor="@android:color/white"
         android:text="Yupax"
         android:textColor="@android:color/white"

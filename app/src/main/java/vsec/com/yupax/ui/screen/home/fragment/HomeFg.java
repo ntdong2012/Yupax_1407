@@ -322,7 +322,10 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
 
         locationAdapter.notifyDataSetChanged();
-        progressBar.setVisibility(View.GONE);
+
+        if (progressBar != null) {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
 
