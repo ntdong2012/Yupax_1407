@@ -48,7 +48,6 @@ import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.HomeFgContract;
-import vsec.com.yupax.di.view.AddressView;
 import vsec.com.yupax.presenter.HomeFgPresenter;
 import vsec.com.yupax.ui.screen.home.activity.CompanyDetailActivity;
 import vsec.com.yupax.ui.screen.home.activity.RateActivity;
@@ -60,7 +59,7 @@ import vsec.com.yupax.utils.Utils;
  * Created by nguyenthanhdong0109@gmail.com on 5/14/17.
  */
 
-public class HomeFg extends BaseFragment<HomeFgPresenter> implements AddressView, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener, HomeFgContract.View {
 
     public HomeFg() {
@@ -319,7 +318,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements AddressView
         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent("getLocationOK"));
     }
 
-    @Override
     public void onGetLocationSuccess() {
         Log.d("ntdong", "onGetLocationSuccess");
 
@@ -341,30 +339,9 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements AddressView
         locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
 
         locationAdapter.notifyDataSetChanged();
-        hiddenProcess(progressBar);
+        progressBar.setVisibility(View.GONE);
     }
 
-    @Override
-    public void onGetLocationError() {
-
-    }
-
-    @Override
-    public void showProcess(ProgressBar progressBar) {
-
-    }
-
-    @Override
-    public void hiddenProcess(ProgressBar progressBar) {
-        if (progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void onError() {
-
-    }
 
     @Override
     public void useLanguage(String language) {

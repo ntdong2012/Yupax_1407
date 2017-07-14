@@ -5,7 +5,6 @@ import android.app.Activity;
 import dagger.Component;
 import vsec.com.yupax.di.module.ActivityModule;
 import vsec.com.yupax.di.scope.ActivityScope;
-import vsec.com.yupax.ui.screen.home.activity.MoneyHistoryActivity;
 import vsec.com.yupax.ui.screen.home.activity.ChangePasswordActivity;
 import vsec.com.yupax.ui.screen.home.activity.ChangeProfileActivity;
 import vsec.com.yupax.ui.screen.home.activity.EventDetailActivity;
@@ -27,8 +26,6 @@ public interface ActivityComponent {
     Activity getActivity();
 
     void inject(HomeActivity homeActivity);
-
-    void inject(MoneyHistoryActivity moneyHistoryActivity);
 
     void inject(LanguageActivity languageActivity);
 

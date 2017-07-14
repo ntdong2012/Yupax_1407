@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFg;
-import vsec.com.yupax.di.view.GiftView;
 import vsec.com.yupax.model.http.response.EventItem;
 import vsec.com.yupax.ui.screen.home.activity.EventDetailActivity;
 import vsec.com.yupax.ui.view.adapter.EventAdapter;
@@ -31,7 +30,7 @@ import vsec.com.yupax.ui.view.adapter.EventAdapter;
  * Created by nguyenthanhdong0109@gmail.com on 5/13/17.
  */
 
-public class NowEventFg extends BaseFg implements GiftView {
+public class NowEventFg extends BaseFg  {
 
     public NowEventFg() {
     }
@@ -80,7 +79,6 @@ public class NowEventFg extends BaseFg implements GiftView {
                 eventItems.add(new EventItem("VTB Công ty cổ phần công nghệ Tiến Đạt", "Giảm giá 5%", "18/07/2017 - 30/07/2017"));
 
                 eventAdapter.notifyDataSetChanged();
-                hiddenProcess(progressBar);
 
 
                 return false;
@@ -127,23 +125,5 @@ public class NowEventFg extends BaseFg implements GiftView {
         sortSpinner.performClick();
     }
 
-    @Override
-    public void onGetGiftSuccess() {
 
-    }
-
-    @Override
-    public void showProcess(ProgressBar progressBar) {
-
-    }
-
-    @Override
-    public void hiddenProcess(ProgressBar progressBar) {
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onError() {
-
-    }
 }

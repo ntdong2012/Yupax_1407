@@ -18,7 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFg;
-import vsec.com.yupax.di.view.CharityView;
 import vsec.com.yupax.model.http.response.Charity;
 import vsec.com.yupax.ui.screen.home.activity.EventDetailActivity;
 import vsec.com.yupax.ui.view.adapter.CharityAdapter;
@@ -27,7 +26,7 @@ import vsec.com.yupax.ui.view.adapter.CharityAdapter;
  * Created by nguyenthanhdong0109@gmail.com on 5/13/17.
  */
 
-public class OnGoingEventFg extends BaseFg implements CharityView {
+public class OnGoingEventFg extends BaseFg  {
 
 
     View rootView;
@@ -80,32 +79,14 @@ public class OnGoingEventFg extends BaseFg implements CharityView {
         handler.sendEmptyMessageDelayed(1, 4000);
     }
 
-    @Override
+
     public void onLoadCharitySuccess() {
         charities.add(new Charity("Hoi chu thap do"));
         charities.add(new Charity("Hoi chu thap do"));
         charities.add(new Charity("Hoi chu thap do"));
         charityAdapter.notifyDataSetChanged();
-        hiddenProcess(progressBar);
-    }
-
-    @Override
-    public void onLoadCharityError() {
 
     }
 
-    @Override
-    public void showProcess(ProgressBar progressBar) {
 
-    }
-
-    @Override
-    public void hiddenProcess(ProgressBar progressBar) {
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onError() {
-
-    }
 }
