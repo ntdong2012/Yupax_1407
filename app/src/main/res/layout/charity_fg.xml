@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/search_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/df_edt_height"
+        android:layout_marginLeft="@dimen/df_martin_sm"
+        android:layout_marginRight="@dimen/df_martin_sm"
+        android:layout_marginTop="@dimen/df_martin"
+        android:background="@drawable/border_search"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/search_icon_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin_sm"
+            android:paddingBottom="@dimen/df_martin_sm"
+            android:paddingTop="@dimen/df_martin_sm"
+            android:src="@drawable/search_ico" />
+
+        <EditText
+            android:id="@+id/search_edt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_edt_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin_sm"
+            android:layout_marginRight="@dimen/df_martin_sm"
+            android:layout_toRightOf="@id/search_icon_iv"
+            android:background="@android:color/transparent"
+            android:cursorVisible="false"
+            android:hint="@string/search_charity_hint"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/process"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <include
+        android:id="@+id/empty_layout"
+        layout="@layout/no_item_layout"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/charity_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_rl"
+        android:layout_marginTop="@dimen/df_martin_sm" />
+
+</RelativeLayout>

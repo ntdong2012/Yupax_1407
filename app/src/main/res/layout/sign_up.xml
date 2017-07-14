@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fg_bg_color">
+
+
+    <RelativeLayout
+        android:id="@+id/first_name_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/df_martin"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:paddingBottom="@dimen/df_martin_sm"
+            android:paddingTop="@dimen/df_martin_sm"
+            android:src="@drawable/icon_user" />
+
+        <EditText
+            android:id="@+id/first_name_edt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_edt_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_toRightOf="@id/user_icon"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:hint="@string/first_name_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/df_text_size" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_separate_height"
+            android:layout_below="@id/user_icon"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_toRightOf="@id/user_icon"
+            android:background="@color/separate_color" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/last_name_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/first_name_wrapper"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/last_name_icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:paddingBottom="@dimen/df_martin_sm"
+            android:paddingTop="@dimen/df_martin_sm"
+            android:src="@drawable/icon_user" />
+
+        <EditText
+            android:id="@+id/last_name_edt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_edt_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_toRightOf="@id/last_name_icon"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:hint="@string/last_name_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/df_text_size" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_separate_height"
+            android:layout_below="@id/last_name_icon"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_toRightOf="@id/last_name_icon"
+            android:background="@color/separate_color" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/email_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/last_name_wrapper"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/email_icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:paddingBottom="@dimen/df_martin_sm"
+            android:paddingTop="@dimen/df_martin_sm"
+            android:src="@drawable/icon_email" />
+
+        <EditText
+            android:id="@+id/email_edt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_edt_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_toRightOf="@id/email_icon"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:hint="@string/user_name_hint_text"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/df_text_size" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_separate_height"
+            android:layout_below="@id/email_icon"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_toRightOf="@id/email_icon"
+            android:background="@color/separate_color" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/password_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/email_wrapper"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/password_icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:paddingBottom="@dimen/df_martin_sm"
+            android:paddingTop="@dimen/df_martin_sm"
+            android:src="@drawable/icon_password" />
+
+        <EditText
+            android:id="@+id/password_edt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_edt_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_toRightOf="@id/password_icon"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:hint="@string/password_hint_text"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/df_text_size" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_separate_height"
+            android:layout_below="@id/password_icon"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_toRightOf="@id/password_icon"
+            android:background="@color/separate_color" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/merchant_code_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/password_wrapper"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/app_code_icon"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:paddingBottom="@dimen/df_martin_sm"
+            android:paddingTop="@dimen/df_martin_sm"
+            android:src="@drawable/icon_password" />
+
+        <EditText
+            android:id="@+id/merchant_code_edt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_edt_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_toRightOf="@id/app_code_icon"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:hint="@string/merchant_code_hint"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textSize="@dimen/df_text_size" />
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/register_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/df_btn_height"
+        android:layout_below="@id/merchant_code_wrapper"
+        android:layout_marginLeft="@dimen/df_martin_bi"
+        android:layout_marginRight="@dimen/df_martin_bi"
+        android:layout_marginTop="@dimen/df_martin_bi"
+        android:background="@drawable/btn_border"
+        android:text="@string/register_label"
+        android:textAllCaps="true"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/df_btn_text_size" />
+
+</RelativeLayout>

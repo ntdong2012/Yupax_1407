@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="vj_red_color">#825696</color>
+    <color name="separate_color">#BBBBBB</color>
+    <color name="separate_color_two">#AAAAAA</color>
+    <color name="layout_bg_color">#f9f9f9</color>
+    <color name="df_text_color">#222222</color>
+    <color name="tab_text_not_select_color">#CCCCCC</color>
+    <color name="toast_bg">#dddfe0</color>
+    <color name="fg_bg_color">#f0f0f0</color>
+    <color name="actionbar_personal_color">#da4d50</color>
+    <color name="black_bg_color">#96000000</color>
+
+    <color name="bg_new_design">#825696</color>
+    <color name="yelown_color">#fef14f</color>
+    <color name="actionbar_item_bg_color">#a88bb7</color>
+    <color name="seperate_color_for_personal_item">#f1f3f5</color>
+</resources>

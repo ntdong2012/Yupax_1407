@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_image"
+    tools:context="vsec.com.yupax.ui.activity.login.SignInActivity">
+
+
+    <ImageView
+        android:id="@+id/language_change_icon"
+        android:layout_width="@dimen/register_change_language_icon_size"
+        android:layout_height="@dimen/register_change_language_icon_size"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/df_martin_bi"
+        android:layout_marginRight="@dimen/df_martin_bi"
+        android:src="@drawable/english_language_logo" />
+
+    <TextView
+        android:id="@+id/forgot_pass_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/language_change_icon"
+        android:layout_marginBottom="@dimen/df_martin"
+        android:gravity="center"
+        android:text="@string/forgot_pass_label"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/forgot_pass_text_size" />
+
+    <TextView
+        android:id="@+id/register_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/forgot_pass_tv"
+        android:layout_marginBottom="@dimen/df_martin_sm"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@android:color/white" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/register_btn_height"
+        android:layout_above="@id/register_tv"
+        android:layout_marginBottom="@dimen/df_martin_bi"
+        android:layout_marginLeft="@dimen/register_item_martin_left_right"
+        android:layout_marginRight="@dimen/register_item_martin_left_right"
+        android:background="@drawable/btn_login_border"
+        android:text="@string/login_label"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textSize="@dimen/login_btn_text_size" />
+
+    <RadioButton
+        android:id="@+id/save_login_states_radio_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/login_btn"
+        android:layout_marginBottom="@dimen/df_martin"
+        android:layout_marginLeft="@dimen/register_item_martin_left_right"
+        android:layout_marginRight="@dimen/register_item_martin_left_right"
+        android:text="@string/register_login_state"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/df_text_size" />
+
+
+    <RelativeLayout
+        android:id="@+id/password_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/register_wrapper_height"
+        android:layout_above="@id/save_login_states_radio_btn"
+        android:layout_marginBottom="@dimen/df_martin_bi"
+        android:layout_marginLeft="@dimen/register_item_martin_left_right"
+        android:layout_marginRight="@dimen/register_item_martin_left_right">
+
+
+        <ImageView
+            android:id="@+id/pass_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/pass_icon" />
+
+
+        <View
+            android:id="@+id/view_pass_sp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_separate_height"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/password_edt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/register_edt_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin_sm"
+            android:layout_toRightOf="@id/pass_icon"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:hint="@string/password_hint_text"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/df_martin"
+            android:paddingRight="@dimen/df_martin"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/user_name_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/register_wrapper_height"
+        android:layout_above="@id/password_wrapper"
+        android:layout_marginBottom="@dimen/df_martin_bi"
+        android:layout_marginLeft="@dimen/register_item_martin_left_right"
+        android:layout_marginRight="@dimen/register_item_martin_left_right">
+
+
+        <ImageView
+            android:id="@+id/user_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/user_icon" />
+
+
+        <View
+            android:id="@+id/view_user_sp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_separate_height"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/user_name_edt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/register_edt_height"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin_sm"
+            android:layout_toRightOf="@id/user_icon"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:hint="@string/user_login_label"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/df_martin"
+            android:paddingRight="@dimen/df_martin"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="130dp"
+        android:layout_above="@id/user_name_wrapper"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/register_logo_image_martin_bottom"
+        android:src="@drawable/logo" />
+
+</RelativeLayout>

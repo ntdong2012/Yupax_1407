@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardView="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/df_martin_sm"
+    android:layout_marginLeft="@dimen/df_martin_sm"
+    android:layout_marginRight="@dimen/df_martin_sm"
+    cardView:cardCornerRadius="@dimen/df_cardview_radius">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <vsec.com.yupax.ui.view.customview.CircleImageView
+            android:id="@+id/friend_icon"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_margin="@dimen/df_martin"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile_avatar_circle_default" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/donate_btn"
+            android:layout_width="@dimen/donate_btn_width"
+            android:layout_height="@dimen/donate_btn_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/df_martin"
+            android:background="@drawable/border_btn_exchange"
+            android:text="@string/donate_label"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/donate_btn_text_size" />
+
+        <TextView
+            android:id="@+id/friend_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/df_martin"
+            android:layout_toRightOf="@id/friend_icon"
+            android:text="Do Van Kien"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/friend_phone_ico_tv"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/friend_name_tv"
+            android:layout_marginTop="@dimen/df_martin"
+            android:layout_toRightOf="@id/friend_icon"
+            android:gravity="center"
+            android:text="@string/ico_phone"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/friend_phone_label_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/friend_name_tv"
+            android:layout_marginLeft="@dimen/df_martin_sm"
+            android:layout_marginTop="@dimen/df_martin"
+            android:layout_toLeftOf="@id/donate_btn"
+            android:layout_toRightOf="@id/friend_phone_ico_tv"
+            android:text="098923423"
+            android:textSize="11sp" />
+
+
+        <TextView
+            android:id="@+id/friend_email_ico_tv"
+            android:layout_width="24dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/friend_phone_ico_tv"
+            android:layout_marginTop="@dimen/df_martin"
+            android:layout_toRightOf="@id/friend_icon"
+            android:gravity="center"
+            android:text="@string/ico_email"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/friend_email_label_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/friend_phone_ico_tv"
+            android:layout_marginBottom="@dimen/df_martin"
+            android:layout_marginLeft="@dimen/df_martin_sm"
+            android:layout_marginTop="@dimen/df_martin"
+            android:layout_toLeftOf="@id/donate_btn"
+            android:layout_toRightOf="@id/friend_email_ico_tv"
+            android:text="nguyenthanhdong0109@gmail.com"
+            android:textSize="11sp" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

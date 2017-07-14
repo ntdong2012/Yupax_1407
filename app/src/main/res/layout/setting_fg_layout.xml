@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_image">
+
+
+    <RelativeLayout
+        android:id="@+id/personal_info_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/avatar_ico"
+            android:layout_width="@dimen/profile_avatar_size"
+            android:layout_height="@dimen/profile_avatar_size"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_marginTop="@dimen/df_martin"
+            android:src="@drawable/avatar_default" />
+
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/avatar_ico"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/df_martin"
+            android:text="Thai Hoang Anh"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/profile_name_text_size"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <View
+            android:id="@+id/sp1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_separate_height"
+            android:layout_below="@id/name_tv"
+            android:layout_marginTop="@dimen/df_martin_bi"
+            android:background="@android:color/background_light" />
+
+
+        <LinearLayout
+            android:id="@+id/group_wrapper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sp1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/df_martin">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/group_icon" />
+
+            <TextView
+                android:id="@+id/group_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/name_tv"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/df_martin_bi"
+                android:layout_toRightOf="@id/avatar_ico"
+                android:text="Vietjet air"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/profile_group_text_size"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/sp2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_separate_height"
+            android:layout_below="@id/group_wrapper"
+            android:layout_marginTop="@dimen/df_martin"
+            android:background="@android:color/background_light" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sp2"
+            android:layout_marginTop="@dimen/df_martin">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/phone_icon"
+                    android:layout_width="15sp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/df_martin_bi"
+                    android:src="@drawable/phone_icon" />
+
+                <TextView
+                    android:id="@+id/phone_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/phone_icon"
+                    android:text="0979439395"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/profile_phone_text_size"
+                    android:visibility="visible" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/email_icon"
+                    android:layout_width="15sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:src="@drawable/email_icon_personal" />
+
+                <TextView
+                    android:id="@+id/email_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/df_martin_bi"
+                    android:layout_toRightOf="@id/email_icon"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="thaihoanganh@gmail.com"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/profile_phone_text_size"
+                    android:visibility="visible" />
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <!--<ImageView-->
+        <!--android:id="@+id/barcode_iv"-->
+        <!--android:layout_width="150dp"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:layout_below="@id/phone_tv"-->
+        <!--android:layout_marginLeft="@dimen/df_martin_bi"-->
+        <!--android:layout_marginTop="@dimen/df_martin_sm"-->
+        <!--android:layout_toRightOf="@id/avatar_ico"-->
+        <!--android:scaleType="fitXY"-->
+        <!--android:src="@drawable/barcode"-->
+        <!--android:visibility="gone" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/df_martin"
+            android:layout_marginLeft="@dimen/df_martin_bi"
+            android:layout_marginRight="@dimen/df_martin_bi"
+            android:layout_marginTop="@dimen/df_martin"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/df_martin"
+                android:layout_weight="1"
+                android:background="@drawable/default_edt_border">
+
+                <ImageView
+                    android:id="@+id/money_ico"
+                    android:layout_width="@dimen/profile_money_ico_size"
+                    android:layout_height="@dimen/profile_money_ico_size"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="@dimen/df_martin_sm"
+                    android:layout_marginLeft="@dimen/df_martin_sm"
+                    android:layout_marginTop="@dimen/df_martin_sm"
+                    android:src="@drawable/ic_rose_money" />
+
+                <TextView
+                    android:id="@+id/money_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_marginTop="@dimen/df_martin_sm"
+                    android:layout_toRightOf="@id/money_ico"
+                    android:text="0"
+                    android:textColor="@color/vj_red_color"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/money_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/money_value"
+                    android:text="Xếp hạng vàng"
+                    android:textColor="@color/vj_red_color" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/df_martin_sm"
+                    android:src="@drawable/ic_arrow_right_red" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/default_edt_border">
+
+                <ImageView
+                    android:id="@+id/point_ico"
+                    android:layout_width="@dimen/profile_money_ico_size"
+                    android:layout_height="@dimen/profile_money_ico_size"
+                    android:layout_marginBottom="@dimen/df_martin_sm"
+                    android:layout_marginLeft="@dimen/df_martin_sm"
+                    android:layout_marginTop="@dimen/df_martin_sm"
+                    android:src="@drawable/ic_rose_money" />
+
+                <TextView
+                    android:id="@+id/point_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/df_martin_sm"
+                    android:layout_marginTop="@dimen/df_martin_sm"
+                    android:layout_toRightOf="@id/point_ico"
+                    android:text="0"
+                    android:textColor="@color/vj_red_color" />
+
+                <TextView
+                    android:id="@+id/point_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/df_martin_sm"
+                    android:layout_toRightOf="@id/point_value"
+                    android:text="Điểm tích luỹ"
+                    android:textColor="@color/vj_red_color" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/df_martin"
+                    android:src="@drawable/ic_arrow_right_red" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/personal_info_view"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="@dimen/df_martin"
+        android:background="@drawable/df_main_layout_border">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/change_personal_info_layout"
+                layout="@layout/setting_item_layout" />
+
+            <include
+                android:id="@+id/change_password_layout"
+                layout="@layout/setting_item_layout" />
+
+            <include
+                android:id="@+id/upgrade_account_level_layout"
+                layout="@layout/setting_item_layout" />
+
+            <include
+                android:id="@+id/link_account_layout"
+                layout="@layout/setting_item_layout"
+                android:visibility="gone" />
+
+            <include
+                android:id="@+id/history_transaction_layout"
+                layout="@layout/setting_item_layout" />
+
+            <include
+                android:id="@+id/share_app_layout"
+                layout="@layout/setting_item_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/df_martin_bi"
+                android:visibility="gone" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@color/seperate_color_for_personal_item" />
+
+
+            <include
+                android:id="@+id/invite_friend_layout"
+                layout="@layout/setting_item_layout" />
+
+            <include
+                android:id="@+id/logout_app_layout"
+                layout="@layout/setting_item_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/df_separate_height"
+                android:background="@color/separate_color" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>

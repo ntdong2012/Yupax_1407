@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fg_bg_color">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_height"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="top"
+        android:background="@color/vj_red_color"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/actionbar_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/language_label"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/actionbar_title_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/back_tv"
+                android:layout_width="@dimen/actionbar_back_tv_width"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:text="@string/ico_back"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/actionbar_back_text_size" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+    <RelativeLayout
+        android:id="@+id/english_language_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="@dimen/df_martin_sm"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="@dimen/df_martin_sm"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_marginTop="@dimen/df_martin_sm"
+            android:src="@drawable/splash_screen_select_language_english" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/english_language_label"
+            android:textAllCaps="true"
+            android:textColor="@color/vj_red_color" />
+
+        <ImageView
+            android:id="@+id/eng_selected_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/df_martin"
+            android:src="@drawable/forma_selected"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/vietnam_language_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/english_language_rl"
+        android:layout_marginTop="@dimen/df_martin_sm"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="@dimen/df_martin_sm"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_marginTop="@dimen/df_martin_sm"
+            android:src="@drawable/splash_screen_select_language_vietnam" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/vietnam_language_label"
+            android:textAllCaps="true"
+            android:textColor="@color/vj_red_color" />
+
+        <ImageView
+            android:id="@+id/vietnam_selected_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/df_martin"
+            android:src="@drawable/forma_selected" />
+    </RelativeLayout>
+</RelativeLayout>

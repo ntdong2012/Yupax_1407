@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/actionbar_height"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="top"
+        android:background="@color/vj_red_color"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/actionbar_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Chương trình khuyến mại chào hè 2017"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/actionbar_title_text_size_for_event_detail"
+                android:textStyle="bold" />
+
+            <vsec.com.yupax.ui.view.customview.FontAwesomeTv
+                android:id="@+id/back_tv"
+                android:layout_width="@dimen/actionbar_back_tv_width"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:gravity="center"
+                android:text="@string/ico_back"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/actionbar_back_text_size" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/event_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_alignParentTop="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/vi" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="160dp"
+                android:background="@color/black_bg_color">
+
+                <View
+                    android:id="@+id/view_id"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:background="@drawable/red_border" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/view_id"
+                    android:text="Đối tác VietJet Cargo"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/white" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/event_detail_message_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_image"
+                android:layout_marginLeft="@dimen/df_martin_sm"
+                android:layout_marginRight="@dimen/df_martin_sm"
+                android:layout_marginTop="@dimen/df_martin_sm"
+                android:text="@string/event_detail_message" />
+
+            <TextView
+                android:id="@+id/address_label_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_detail_message_tv"
+                android:layout_marginTop="@dimen/df_martin_sm"
+                android:background="@color/fg_bg_color"
+                android:paddingBottom="@dimen/event_address_label_padding"
+                android:paddingLeft="@dimen/df_martin"
+                android:paddingTop="@dimen/event_address_label_padding"
+                android:text="@string/address_label"
+                android:textAllCaps="true"
+                android:textSize="@dimen/event_address_label_text_size" />
+
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/event_address_map_height"
+                android:layout_below="@id/address_label_tv"
+                android:visibility="visible" />
+
+
+            <RelativeLayout
+                android:id="@+id/address_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mapView"
+                android:layout_marginBottom="@dimen/df_martin_sm"
+                android:layout_marginTop="@dimen/df_martin"
+                android:background="@android:color/white">
+
+                <ImageView
+                    android:id="@+id/address_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:paddingBottom="@dimen/df_martin_sm"
+                    android:paddingTop="@dimen/df_martin_sm"
+                    android:src="@drawable/icon_bottom_location" />
+
+                <TextView
+                    android:id="@+id/address_value_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/address_icon"
+                    android:ellipsize="end"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text="Tầng 2, 56 Vũ Trọng Phụng, Thanh xuân, Hà nội" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/df_separate_height"
+                    android:layout_below="@id/address_icon"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/address_icon"
+                    android:background="@color/separate_color" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/phone_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/address_wrapper"
+                android:layout_marginBottom="@dimen/df_martin_sm"
+                android:background="@android:color/white">
+
+                <ImageView
+                    android:id="@+id/phone_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:paddingBottom="@dimen/df_martin_sm"
+                    android:paddingTop="@dimen/df_martin_sm"
+                    android:src="@drawable/icon_detail_merchant_phone" />
+
+                <TextView
+                    android:id="@+id/phone_value_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/phone_icon"
+                    android:ellipsize="end"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text="0979439395" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/df_separate_height"
+                    android:layout_below="@id/phone_icon"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/phone_icon"
+                    android:background="@color/separate_color" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/bk_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/phone_wrapper"
+                android:layout_marginBottom="@dimen/df_martin_sm"
+                android:background="@android:color/white">
+
+
+                <ImageView
+                    android:id="@+id/bk_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingBottom="@dimen/df_martin_sm"
+                    android:paddingTop="@dimen/df_martin_sm"
+                    android:src="@drawable/icon_network" />
+
+                <RelativeLayout
+                    android:id="@+id/bk_info_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/bk_icon">
+
+                    <TextView
+                        android:id="@+id/bk_label"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Hạng Bạch Kim" />
+
+                    <View
+                        android:id="@+id/bk_view_h"
+                        android:layout_width="@dimen/df_separate_height"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@id/bk_label"
+                        android:background="@color/separate_color" />
+
+                    <TextView
+                        android:id="@+id/bk_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/df_martin"
+                        android:layout_toRightOf="@id/bk_view_h"
+                        android:text="Giảm giá 30%" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/df_separate_height"
+                    android:layout_below="@id/bk_info_rl"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@id/bk_icon"
+                    android:background="@color/separate_color" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/v_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/bk_wrapper"
+                android:layout_marginBottom="@dimen/df_martin_sm"
+                android:background="@android:color/white">
+
+
+                <ImageView
+                    android:id="@+id/v_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingBottom="@dimen/df_martin_sm"
+                    android:paddingTop="@dimen/df_martin_sm"
+                    android:src="@drawable/icon_circle_document"
+                    android:visibility="invisible" />
+
+                <RelativeLayout
+                    android:id="@+id/v_info_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/v_icon">
+
+                    <TextView
+                        android:id="@+id/v_label"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Hạng vàng" />
+
+                    <View
+                        android:id="@+id/v_view_h"
+                        android:layout_width="@dimen/df_separate_height"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@id/v_label"
+                        android:background="@color/separate_color" />
+
+                    <TextView
+                        android:id="@+id/v_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/df_martin"
+                        android:layout_toRightOf="@id/v_view_h"
+                        android:text="Giảm giá 25%" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/df_separate_height"
+                    android:layout_below="@id/v_info_rl"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@id/v_icon"
+                    android:background="@color/separate_color" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/b_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/v_wrapper"
+                android:layout_marginBottom="@dimen/df_martin_sm"
+                android:background="@android:color/white">
+
+
+                <ImageView
+                    android:id="@+id/b_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingBottom="@dimen/df_martin_sm"
+                    android:paddingTop="@dimen/df_martin_sm"
+                    android:src="@drawable/icon_circle_document"
+                    android:visibility="invisible" />
+
+                <RelativeLayout
+                    android:id="@+id/b_info_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/b_icon">
+
+                    <TextView
+                        android:id="@+id/b_label"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Hạng bạc" />
+
+                    <View
+                        android:id="@+id/b_view_h"
+                        android:layout_width="@dimen/df_separate_height"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@id/b_label"
+                        android:background="@color/separate_color" />
+
+                    <TextView
+                        android:id="@+id/b_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/df_martin"
+                        android:layout_toRightOf="@id/b_view_h"
+                        android:text="Giảm giá 20%" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/df_separate_height"
+                    android:layout_below="@id/b_info_rl"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@id/b_icon"
+                    android:background="@color/separate_color" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/d_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/b_wrapper"
+                android:layout_marginBottom="@dimen/df_martin_sm"
+                android:background="@android:color/white">
+
+
+                <ImageView
+                    android:id="@+id/d_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingBottom="@dimen/df_martin_sm"
+                    android:paddingTop="@dimen/df_martin_sm"
+                    android:src="@drawable/icon_circle_document"
+                    android:visibility="invisible" />
+
+                <RelativeLayout
+                    android:id="@+id/d_info_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/d_icon">
+
+                    <TextView
+                        android:id="@+id/d_label"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Hạng đồng" />
+
+                    <View
+                        android:id="@+id/d_view_h"
+                        android:layout_width="@dimen/df_separate_height"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@id/d_label"
+                        android:background="@color/separate_color" />
+
+                    <TextView
+                        android:id="@+id/d_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/df_martin"
+                        android:layout_toRightOf="@id/d_view_h"
+                        android:text="Giảm giá 15%" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/df_separate_height"
+                    android:layout_below="@id/d_info_rl"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@id/d_icon"
+                    android:background="@color/separate_color" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/n_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/d_wrapper"
+                android:layout_marginBottom="@dimen/df_martin_sm"
+                android:background="@android:color/white">
+
+
+                <ImageView
+                    android:id="@+id/n_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingBottom="@dimen/df_martin_sm"
+                    android:paddingTop="@dimen/df_martin_sm"
+                    android:src="@drawable/icon_circle_document"
+                    android:visibility="invisible" />
+
+                <RelativeLayout
+                    android:id="@+id/n_info_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/n_icon">
+
+                    <TextView
+                        android:id="@+id/n_label"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="Thành viên thường" />
+
+                    <View
+                        android:id="@+id/n_view_h"
+                        android:layout_width="@dimen/df_separate_height"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@id/n_label"
+                        android:background="@color/separate_color" />
+
+                    <TextView
+                        android:id="@+id/n_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/df_martin"
+                        android:layout_toRightOf="@id/n_view_h"
+                        android:text="Giảm giá 10%" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/df_separate_height"
+                    android:layout_below="@id/n_info_rl"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@id/n_icon"
+                    android:background="@color/separate_color" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/t_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/n_wrapper"
+                android:layout_marginBottom="@dimen/df_martin_sm"
+                android:background="@android:color/white">
+
+
+                <ImageView
+                    android:id="@+id/t_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:paddingBottom="@dimen/df_martin_sm"
+                    android:paddingTop="@dimen/df_martin_sm"
+                    android:src="@drawable/icon_circle_document"
+                    android:visibility="invisible" />
+
+
+                <TextView
+                    android:id="@+id/t_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/t_icon"
+                    android:text="Chương trình áp dụng từ ngày 19/06/2017 đến ngày 19/07/2017" />
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

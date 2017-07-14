@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/df_card_view_martin"
+    android:padding="@dimen/df_card_view_martin"
+    cardview:cardCornerRadius="@dimen/df_cardview_radius">
+
+    <RelativeLayout
+        android:id="@+id/item_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/address_icon"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_margin="@dimen/df_martin"
+            android:scaleType="fitCenter"
+            android:src="@drawable/product_item_icon" />
+
+        <TextView
+            android:id="@+id/location_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/df_martin_sm"
+            android:layout_toRightOf="@id/address_icon"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/df_martin_sm"
+            android:paddingRight="@dimen/df_martin_sm"
+            android:text="Cơm chay hồ tây Duy tân"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/address_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/location_name_tv"
+            android:layout_toRightOf="@id/address_icon"
+            android:ellipsize="end"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/df_martin_sm"
+            android:paddingRight="@dimen/df_martin_sm"
+            android:text="CT04 Khu do thi Mi dinh"
+            android:textSize="12sp" />
+
+        <LinearLayout
+            android:id="@+id/location_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/address_tv"
+            android:layout_toRightOf="@id/address_icon">
+
+            <vsec.com.yupax.ui.view.customview.FontAwesomeTv
+                android:id="@+id/location_ico_tv"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/address_tv"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="@string/ico_location"
+                android:textColor="@color/bg_new_design"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/location_label_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/df_martin_sm"
+                android:text="12km"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/phone_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/location_wrapper"
+            android:layout_toRightOf="@id/address_icon">
+
+            <vsec.com.yupax.ui.view.customview.FontAwesomeTv
+                android:id="@+id/phone_ico_tv"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="@string/ico_phone"
+                android:textColor="@color/bg_new_design"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/phone_label_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/df_martin_sm"
+                android:text="nguyenthanhdong0109@gmail.com"
+                android:textSize="11sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/phone_wrapper"
+            android:layout_toRightOf="@id/address_icon">
+
+            <vsec.com.yupax.ui.view.customview.FontAwesomeTv
+                android:id="@+id/tag_icon"
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:text="@string/ico_tag"
+                android:textColor="@color/bg_new_design"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/message_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/df_martin_sm"
+                android:ellipsize="end"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/df_martin_sm"
+                android:paddingRight="@dimen/df_martin_sm"
+                android:text="nguyenthanhdong0109@gmail.com"
+                android:textSize="11sp" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/rate_icon_iv"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/df_martin_sm"
+            android:src="@drawable/icon_rate" />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

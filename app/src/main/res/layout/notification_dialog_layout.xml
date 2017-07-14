@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/df_martin_bi"
+        android:layout_marginRight="@dimen/df_martin_bi"
+        android:layout_marginTop="@dimen/notification_layout_martin_top"
+        android:background="@drawable/border_notification_dialog">
+
+
+        <TextView
+            android:id="@+id/notification_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:gravity="center"
+            android:text="@string/notification_title_label"
+            android:textColor="@color/df_text_color"
+            android:textSize="@dimen/notification_title_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/notification_message_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/notification_title_tv"
+            android:layout_marginTop="@dimen/notification_dialog_message_martin_top"
+            android:gravity="center"
+            android:paddingLeft="@dimen/df_martin_bi"
+            android:paddingRight="@dimen/df_martin_bi"
+            android:textColor="@color/df_text_color"
+            android:textSize="@dimen/notification_message_text_size" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/close_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/notification_btn_height"
+            android:layout_below="@id/notification_message_tv"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="@dimen/notification_btn_padding_left_right"
+            android:layout_marginRight="@dimen/notification_btn_padding_left_right"
+            android:layout_marginTop="@dimen/df_martin_bi"
+            android:background="@drawable/btn_border"
+            android:text="@string/close_label"
+            android:textAllCaps="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/notification_btn_text_size" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/notification_icon"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/notification_icon_martin_top"
+        android:src="@drawable/popup_noti_icon" />
+</RelativeLayout>

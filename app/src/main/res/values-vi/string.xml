@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Yupax</string>
+    <string name="login_label">Đăng nhập</string>
+    <string name="register_label">Tạo tài khoản</string>
+    <string name="user_name_label">Tên đăng nhập</string>
+    <string name="password_label">Mật khẩu</string>
+    <string name="forgot_pass_label">Quên mật khẩu?</string>
+    <string name="forgot_pass_actionbar_title">Quên mật khẩu</string>
+    <string name="resent_active_code_label">Gửi lại mã kích hoạt</string>
+    <string name="resend_password_label">Gửi lại mật khẩu</string>
+    <string name="personal_label">Cá nhân</string>
+    <string name="change_personal_info">Thay đổi thông tin cá nhân</string>
+    <string name="change_password_info">Thay đổi mật khẩu</string>
+    <string name="link_account_label">Link account</string>
+    <string name="history_transaction_label">Lịch sử giao dịch</string>
+    <string name="my_shop_label">My shop</string>
+    <string name="upgrade_account_level_label">Hướng dẫn lên hạng thành viên</string>
+    <string name="notification_label">Thông báo</string>
+    <string name="home_label">Trang chủ</string>
+    <string name="exchange_label">Sự kiện</string>
+    <string name="gift_label">Gift</string>
+    <string name="charity_label">Charity</string>
+    <string name="donate_label">Donate</string>
+
+    <string name="search_hint">Search...</string>
+    <string name="search_charity_hint">Search charity...</string>
+    <string name="search_charity_friend">Search friend...</string>
+    <string name="income_label">Income</string>
+    <string name="outcome_label">Outcome</string>
+    <string name="money_history">Money History</string>
+    <string name="history_mooney_empty_notice">You dont have any transaction</string>
+    <string name="language_label">Ngôn ngữ</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="sign_up">Đăng ký</string>
+    <string name="user_name_hint_text">Email hoặc số điện thoại</string>
+    <string name="password_hint_text">Mật khẩu</string>
+    <string name="english_language_label">English</string>
+    <string name="vietnam_language_label">Tiếng Việt</string>
+    <string name="forgot_pass_guide">Nhập email/Số điện thoại đăng ký, chúng tôi sẽ gửi mã mật khẩu xác nhận đến cho bạn</string>
+
+    <string name="on_going_event_tabs_label">Sắp diễn ra</string>
+    <string name="now_event_tabs_label">Đang diễn ra</string>
+    <string name="share_app_label">Chia sẻ ứng dụng</string>
+    <string name="invite_friend_label">Mời bạn bè tham gia</string>
+    <string name="transaction_tab_one_label">Giao dịch được xếp hạng</string>
+    <string name="transaction_tab_two_label">Giao dịch điểm tích lũy</string>
+    <string name="new_password_hint">Nhập mật khẩu mới</string>
+    <string name="re_new_password_hint">Nhập lại mật khẩu mới</string>
+    <string name="done_label">Hoàn tất</string>
+    <string name="first_name_hint">Họ</string>
+    <string name="last_name_hint">Tên</string>
+    <string name="merchant_code_hint">Mã đơn vị thành viên nếu có</string>
+    <string name="resend_active_code_actionbar_title">Gửi mã kích hoạt</string>
+    <string name="notification_title_label">Thông báo</string>
+    <string name="close_label">Đóng</string>
+    <string name="notification_resend_message_success">Mã kích hoạt của bạn đã gửi về địa chỉ email </string>
+
+    <string name="change_profile_actionbar_title">Thay đổi thông tin cá nhân</string>
+    <string name="user_login_label">Tên đăng nhập</string>
+    <string name="email_label">Email</string>
+    <string name="phone_label">Số điện thoại</string>
+    <string name="birthday_label">Ngày sinh</string>
+    <string name="sex_label">Giới tính</string>
+    <string name="nation_label">Quốc gia</string>
+    <string name="city_label">Tỉnh/Thành phố</string>
+    <string name="district_label">Quận/Huyện</string>
+    <string name="address_label">Địa chỉ</string>
+    <string name="update_label">Cập nhật</string>
+    <string name="you_find_label">Tìm kiếm...</string>
+    <string name="male_label">Nam</string>
+    <string name="female_label">Nữ</string>
+    <string name="join_label">Tôi tham gia</string>
+    <string name="event_detail_message">VUI TRỌN "HÈ BAY FREE", TƯNG BỪNG BAY TRONG NƯỚC VÀ QUỐC TẾ CÙNG VIETJET
+Tận hưởng trọn vẹn mùa hè ý nghĩa, Vietjet tiếp tục mang đến nhiều ưu đãi hoành tráng từ chương trình “Hè bay Free, đi thỏa thích” với 3 ngày vàng 06, 07, 08/6/2017 với 800,000 vé siêu tiết kiệm giá chỉ từ 0 đồng vào khung giờ vàng 12h – 14h tại website www.vietjetair.com. Chương trình áp dụng trên tất cả đường bay trong nước và quốc tế, áp dụng cho thời gian bay từ 01/8/2017 – 31/12/2017 (trừ các ngày lễ tết).
+Không những thế, hành khách mua vé online và thanh toán thành công vào khung giờ vàng 12h – 14h từ nay đến 15/6/2017 còn có cơ hội rút thăm nhận các phần quà hấp dẫn tại summerwin.vietjetair.com như thẻ điện thoại, giảm giá ưu đãi.</string>
+
+
+    <string name="rate_label">Đánh giá</string>
+    <string name="logout_app">Đăng xuất</string>
+
+    <string name="register_login_state">Ghi nhớ đăng nhập</string>
+
+    <string name="merchant_code_label">Mã đơn vị thành viên</string>
+    <string name="register_email_hint_text">Email hoặc số điện thoại</string>
+    <string name="forgot_pass_btn_text">Lấy lại mật khẩu</string>
+    <string name="setting_label">Lựa chọn</string>
+    <string name="voucher_label">Voucher</string>
+    <string name="dont_have_account">Bạn chưa có tài khoản?   </string>
+    <string name="event_label">Sự kiện</string>
+
+</resources>

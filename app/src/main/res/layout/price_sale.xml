@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/phone_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:paddingBottom="@dimen/df_martin_sm"
+        android:paddingTop="@dimen/df_martin_sm"
+        android:src="@drawable/icon_circle_document" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="@dimen/df_martin"
+        android:layout_toRightOf="@id/phone_icon">
+
+        <TextView
+            android:id="@+id/bk_label"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Hạng Bạch Kim" />
+
+        <View
+            android:id="@+id/bk_view_h"
+            android:layout_width="@dimen/df_separate_height"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/bk_label"
+            android:background="@color/separate_color" />
+
+        <TextView
+            android:id="@+id/bk_value"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_toRightOf="@id/bk_view_h"
+            android:text="Giảm giá 30%" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/df_separate_height"
+            android:layout_below="@id/bk_view_h"
+            android:background="@color/separate_color" />
+    </RelativeLayout>
+
+</RelativeLayout>

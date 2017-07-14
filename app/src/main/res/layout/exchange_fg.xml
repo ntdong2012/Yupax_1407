@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_image">
+
+    <RelativeLayout
+        android:id="@+id/personal_info_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profile_personal_height"
+        android:background="@color/vj_red_color"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/avatar_ico"
+            android:layout_width="@dimen/profile_avatar_size"
+            android:layout_height="@dimen/profile_avatar_size"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_marginTop="@dimen/df_martin"
+            android:src="@drawable/default_avatar_award" />
+
+        <TextView
+            android:id="@+id/name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/df_martin_bi"
+            android:layout_marginTop="@dimen/df_martin"
+            android:layout_toRightOf="@id/avatar_ico"
+            android:text="Hieu Bin"
+            android:textAllCaps="true"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/profile_name_text_size" />
+
+        <TextView
+            android:id="@+id/phone_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name_tv"
+            android:layout_marginLeft="@dimen/df_martin_bi"
+            android:layout_toRightOf="@id/avatar_ico"
+            android:text="0979439395"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/profile_phone_text_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/avatar_ico"
+            android:layout_marginLeft="@dimen/df_martin"
+            android:layout_marginRight="@dimen/df_martin"
+            android:layout_marginTop="@dimen/df_martin">
+
+            <RelativeLayout
+                android:id="@+id/money_ll"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/df_martin"
+                android:layout_weight="1"
+                android:background="@drawable/default_edt_border">
+
+                <ImageView
+                    android:id="@+id/money_ico"
+                    android:layout_width="@dimen/profile_money_ico_size"
+                    android:layout_height="@dimen/profile_money_ico_size"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="@dimen/df_martin_sm"
+                    android:layout_marginLeft="@dimen/df_martin_sm"
+                    android:layout_marginTop="@dimen/df_martin_sm"
+                    android:src="@drawable/ic_rose_money" />
+
+                <TextView
+                    android:id="@+id/money_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_marginTop="@dimen/df_martin_sm"
+                    android:layout_toRightOf="@id/money_ico"
+                    android:text="0"
+                    android:textColor="@color/vj_red_color" />
+
+                <TextView
+                    android:id="@+id/money_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/money_value"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/money_ico"
+                    android:text="Tien Hoa Hong"
+                    android:textColor="@color/vj_red_color" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/df_martin_sm"
+                    android:src="@drawable/ic_arrow_right_red" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/default_edt_border">
+
+                <ImageView
+                    android:id="@+id/point_ico"
+                    android:layout_width="@dimen/profile_money_ico_size"
+                    android:layout_height="@dimen/profile_money_ico_size"
+                    android:layout_marginBottom="@dimen/df_martin_sm"
+                    android:layout_marginLeft="@dimen/df_martin_sm"
+                    android:layout_marginTop="@dimen/df_martin_sm"
+                    android:src="@drawable/ic_rose_money" />
+
+                <TextView
+                    android:id="@+id/point_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/df_martin_bi"
+                    android:layout_marginTop="@dimen/df_martin_sm"
+                    android:layout_toRightOf="@id/point_ico"
+                    android:text="0"
+                    android:textColor="@color/vj_red_color" />
+
+                <TextView
+                    android:id="@+id/point_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/point_value"
+                    android:layout_marginLeft="@dimen/df_martin_bi"
+                    android:layout_toRightOf="@id/point_ico"
+                    android:text="Tien Hoa Hong"
+                    android:textColor="@color/vj_red_color" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/df_martin"
+                    android:src="@drawable/ic_arrow_right_red" />
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/personal_info_view"
+        app:tabBackground="@android:color/transparent"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/yelown_color"
+        app:tabIndicatorHeight="4dp"
+        app:tabMode="fixed"
+        app:tabPaddingEnd="10dp"
+        app:tabPaddingStart="10dp"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabTextAppearance="@style/MyCustomTextAppearanceForEvent"
+        app:tabTextColor="@color/tab_text_not_select_color" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabs" />
+
+</RelativeLayout>

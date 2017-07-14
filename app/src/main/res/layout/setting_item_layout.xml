@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/personal_icon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="@dimen/df_martin"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="@dimen/df_martin"
+        android:padding="@dimen/df_martin_sm"
+        android:src="@drawable/guide_update_level_icon" />
+
+    <ImageView
+        android:id="@+id/personal_right_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/df_martin"
+        android:src="@drawable/next_image_icon" />
+
+    <TextView
+        android:id="@+id/personal_label_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/df_martin"
+        android:layout_toLeftOf="@id/personal_right_icon"
+        android:layout_toRightOf="@id/personal_icon"
+        android:text="@string/change_personal_info" />
+
+
+    <View
+        android:id="@+id/view_sp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/df_separate_height"
+        android:layout_below="@id/personal_icon"
+        android:layout_marginLeft="@dimen/df_martin"
+        android:layout_toRightOf="@id/personal_icon"
+        android:background="@color/separate_color" />
+</RelativeLayout>

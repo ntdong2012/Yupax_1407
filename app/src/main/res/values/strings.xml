@@ -1,0 +1,101 @@
+<resources>
+    <string name="app_name">Yupax</string>
+    <string name="login_label">Login</string>
+    <string name="register_label">Register</string>
+    <string name="user_name_label">Username</string>
+    <string name="password_label">Password</string>
+    <string name="forgot_pass_label">Forgot password?</string>
+    <string name="forgot_pass_actionbar_title">Forgot password</string>
+    <string name="resent_active_code_label">Resend active code</string>
+    <string name="resend_password_label">Resend Password</string>
+    <string name="personal_label">Personal</string>
+    <string name="change_personal_info">Change personal information</string>
+    <string name="change_password_info">Change password</string>
+    <string name="link_account_label">Link account</string>
+    <string name="history_transaction_label">History transaction</string>
+    <string name="my_shop_label">My shop</string>
+    <string name="upgrade_account_level_label">Upgrade account level</string>
+    <string name="notification_label">Notification</string>
+    <string name="exchange_label">Exchange</string>
+    <string name="gift_label">Gift</string>
+    <string name="charity_label">Charity</string>
+    <string name="donate_label">Donate</string>
+
+    <string name="search_hint">Search...</string>
+    <string name="search_charity_hint">Search charity...</string>
+    <string name="search_charity_friend">Search friend...</string>
+    <string name="income_label">Income</string>
+    <string name="outcome_label">Outcome</string>
+    <string name="money_history">Money History</string>
+    <string name="history_mooney_empty_notice">You dont have any transaction</string>
+    <string name="language_label">Language</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="user_name_hint_text">Email or Phone number</string>
+    <string name="password_hint_text">Password</string>
+    <string name="english_language_label">English</string>
+    <string name="vietnam_language_label">Tiếng Việt</string>
+    <string name="forgot_pass_guide">Input email/phone registered, we will send the password to you.</string>
+
+    <string name="on_going_event_tabs_label">On going events</string>
+    <string name="now_event_tabs_label">Now events</string>
+    <string name="share_app_label">Share application</string>
+    <string name="invite_friend_label">Invite friend</string>
+    <string name="transaction_tab_one_label">Transaction one</string>
+    <string name="transaction_tab_two_label">Transaction two</string>
+    <string name="new_password_hint">Input new password</string>
+    <string name="re_new_password_hint">Re input new password</string>
+    <string name="done_label">Done</string>
+    <string name="first_name_hint">First name</string>
+    <string name="last_name_hint">Last name</string>
+    <string name="merchant_code_hint">Merchant code(if have)</string>
+    <string name="resend_active_code_actionbar_title">Resend active code</string>
+    <string name="notification_title_label">Notification</string>
+    <string name="close_label">Close</string>
+    <string name="notification_resend_message_success">Your active code was send to your email: </string>
+
+    <string name="change_profile_actionbar_title">Change profile</string>
+    <string name="user_login_label">Login user</string>
+    <string name="email_label">Email</string>
+    <string name="phone_label">Phone</string>
+    <string name="birthday_label">Birthday</string>
+    <string name="sex_label">Sex</string>
+    <string name="nation_label">Nation</string>
+    <string name="city_label">City</string>
+    <string name="district_label">District</string>
+    <string name="address_label">Address</string>
+    <string name="update_label">Update</string>
+    <string name="you_find_label">You find...</string>
+    <string name="home_label">Home</string>
+    <string name="male_label">Male</string>
+    <string name="female_label">Female</string>
+    <string name="join_label">Join</string>
+    <string name="event_detail_message">VUI TRỌN "HÈ BAY FREE", TƯNG BỪNG BAY TRONG NƯỚC VÀ QUỐC TẾ CÙNG VIETJET
+Tận hưởng trọn vẹn mùa hè ý nghĩa, Vietjet tiếp tục mang đến nhiều ưu đãi hoành tráng từ chương trình “Hè bay Free, đi thỏa thích” với 3 ngày vàng 06, 07, 08/6/2017 với 800,000 vé siêu tiết kiệm giá chỉ từ 0 đồng vào khung giờ vàng 12h – 14h tại website www.vietjetair.com. Chương trình áp dụng trên tất cả đường bay trong nước và quốc tế, áp dụng cho thời gian bay từ 01/8/2017 – 31/12/2017 (trừ các ngày lễ tết).
+Không những thế, hành khách mua vé online và thanh toán thành công vào khung giờ vàng 12h – 14h từ nay đến 15/6/2017 còn có cơ hội rút thăm nhận các phần quà hấp dẫn tại summerwin.vietjetair.com như thẻ điện thoại, giảm giá ưu đãi.</string>
+
+
+    <string name="logout_app">Logout</string>
+    <string name="rate_label">Rate</string>
+
+    <string name="ico_back">&#xf104;</string>
+    <string name="ico_phone">&#xf10b;</string>
+    <string name="ico_email">&#xf003;</string>
+    <string name="ico_location">&#xf124;</string>
+    <string name="ico_tag">&#xf02c;</string>
+    <string name="ico_clock">&#xf017;</string>
+
+
+    <string name="register_login_state">Register login state</string>
+    <string name="google_map_key">AIzaSyABYnVeqmRsqPLBFPwi2Q_0w9HHu5JgfVg</string>
+
+    <string name="merchant_code_label">Merchant code</string>
+    <string name="register_email_hint_text">Email or phone number</string>
+    <string name="forgot_pass_btn_text">Get new password</string>
+    <string name="setting_label">Setting</string>
+    <string name="voucher_label">Voucher</string>
+    <string name="event_label">Event</string>
+    <string name="dont_have_account">You dont have account?   </string>
+
+
+</resources>
