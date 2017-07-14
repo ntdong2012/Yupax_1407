@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.login;
+package vsec.com.yupax.ui.screen.login.fragment;
 
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFragment;

@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.home;
+package vsec.com.yupax.ui.screen.home.fragment;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;

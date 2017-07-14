@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.login;
+package vsec.com.yupax.ui.screen.login.activity;
 
 import android.app.Activity;
 import android.content.Context;

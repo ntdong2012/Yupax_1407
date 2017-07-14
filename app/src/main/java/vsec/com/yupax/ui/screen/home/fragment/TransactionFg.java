@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.home;
+package vsec.com.yupax.ui.screen.home.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;

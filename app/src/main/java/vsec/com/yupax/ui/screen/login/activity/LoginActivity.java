@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.login;
+package vsec.com.yupax.ui.screen.login.activity;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -24,6 +24,8 @@ import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.app.YupaxApps;
 import vsec.com.yupax.base.SimpleActivity;
+import vsec.com.yupax.ui.screen.login.fragment.SignInFg;
+import vsec.com.yupax.ui.screen.login.fragment.SignUpFg;
 import vsec.com.yupax.utils.Common;
 import vsec.com.yupax.utils.FontUtils;
 import vsec.com.yupax.utils.PerUtils;

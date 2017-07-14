@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.login;
+package vsec.com.yupax.ui.screen.login.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,7 +15,7 @@ import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.SignInContract;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.presenter.SignInPresenter;
-import vsec.com.yupax.ui.activity.home.HomeActivity;
+import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
 
 public class SignInActivity extends BaseActivity<SignInPresenter> implements SignInContract.View {
 

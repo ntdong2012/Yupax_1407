@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.home;
+package vsec.com.yupax.ui.screen.home.activity;
 
 import android.Manifest;
 import android.app.Activity;

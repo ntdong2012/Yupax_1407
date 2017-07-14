@@ -17,7 +17,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_map_key" />
 
-        <activity android:name=".ui.activity.login.SplashActivity">
+        <activity android:name=".ui.screen.login.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,32 +25,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.home.HomeActivity"
+            android:name=".ui.screen.home.activity.HomeActivity"
             android:theme="@style/LoginTheme"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name=".ui.activity.MoneyHistoryActivity"
+            android:name=".ui.screen.home.activity.MoneyHistoryActivity"
             android:theme="@style/LoginTheme" />
         <activity
-            android:name=".ui.activity.login.ForgotPasswordActivity"
+            android:name=".ui.screen.login.activity.ForgotPasswordActivity"
             android:theme="@style/LoginTheme" />
         <activity
-            android:name=".ui.activity.login.LanguageActivity"
+            android:name=".ui.screen.login.activity.LanguageActivity"
             android:theme="@style/LoginTheme" />
-        <activity android:name=".ui.activity.home.HistoryTransactionActivity" />
-        <activity android:name=".ui.activity.home.ChangePasswordActivity" />
-        <activity android:name=".ui.activity.login.ResendActiveCodeActivity" />
+        <activity android:name=".ui.screen.home.activity.HistoryTransactionActivity" />
+        <activity android:name=".ui.screen.home.activity.ChangePasswordActivity" />
+        <activity android:name=".ui.screen.login.activity.ResendActiveCodeActivity" />
         <activity
-            android:name=".ui.activity.home.ChangeProfileActivity"
+            android:name=".ui.screen.home.activity.ChangeProfileActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.activity.home.EventDetailActivity" />
+        <activity android:name=".ui.screen.home.activity.EventDetailActivity" />
         <activity
-            android:name=".ui.activity.home.CompanyDetailActivity"
+            android:name=".ui.screen.home.activity.CompanyDetailActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.activity.home.RateActivity" />
-        <activity android:name=".ui.activity.login.LoginActivity" />
-        <activity android:name=".ui.activity.login.SignInActivity" />
-        <activity android:name=".ui.activity.login.RegisterActivity" />
+        <activity android:name=".ui.screen.home.activity.RateActivity" />
+        <activity android:name=".ui.screen.login.activity.LoginActivity" />
+        <activity android:name=".ui.screen.login.activity.SignInActivity" />
+        <activity android:name=".ui.screen.login.activity.RegisterActivity" />
     </application>
 
 </manifest>

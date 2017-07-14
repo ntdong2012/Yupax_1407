@@ -5,16 +5,16 @@ import android.app.Activity;
 import dagger.Component;
 import vsec.com.yupax.di.module.ActivityModule;
 import vsec.com.yupax.di.scope.ActivityScope;
-import vsec.com.yupax.ui.activity.MoneyHistoryActivity;
-import vsec.com.yupax.ui.activity.home.ChangePasswordActivity;
-import vsec.com.yupax.ui.activity.home.ChangeProfileActivity;
-import vsec.com.yupax.ui.activity.home.EventDetailActivity;
-import vsec.com.yupax.ui.activity.home.HomeActivity;
-import vsec.com.yupax.ui.activity.home.RateActivity;
-import vsec.com.yupax.ui.activity.login.LanguageActivity;
-import vsec.com.yupax.ui.activity.login.RegisterActivity;
-import vsec.com.yupax.ui.activity.login.ResendActiveCodeActivity;
-import vsec.com.yupax.ui.activity.login.SignInActivity;
+import vsec.com.yupax.ui.screen.home.activity.MoneyHistoryActivity;
+import vsec.com.yupax.ui.screen.home.activity.ChangePasswordActivity;
+import vsec.com.yupax.ui.screen.home.activity.ChangeProfileActivity;
+import vsec.com.yupax.ui.screen.home.activity.EventDetailActivity;
+import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
+import vsec.com.yupax.ui.screen.home.activity.RateActivity;
+import vsec.com.yupax.ui.screen.login.activity.LanguageActivity;
+import vsec.com.yupax.ui.screen.login.activity.RegisterActivity;
+import vsec.com.yupax.ui.screen.login.activity.ResendActiveCodeActivity;
+import vsec.com.yupax.ui.screen.login.activity.SignInActivity;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/20/17.

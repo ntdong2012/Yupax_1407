@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.home;
+package vsec.com.yupax.ui.screen.home.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +24,7 @@ import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFg;
 import vsec.com.yupax.di.view.GiftView;
 import vsec.com.yupax.model.http.response.EventItem;
+import vsec.com.yupax.ui.screen.home.activity.EventDetailActivity;
 import vsec.com.yupax.ui.view.adapter.EventAdapter;
 
 /**

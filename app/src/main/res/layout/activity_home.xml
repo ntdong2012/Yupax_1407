@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_image"
-    tools:context="vsec.com.yupax.ui.activity.home.HomeActivity">
+    tools:context=".ui.screen.home.activity.HomeActivity">
 
     <LinearLayout
         android:id="@+id/home_control_ll"
@@ -191,7 +191,7 @@
 
     <fragment
         android:id="@+id/home_fg"
-        android:name="vsec.com.yupax.ui.activity.home.HomeFg"
+        android:name="vsec.com.yupax.ui.screen.home.fragment.HomeFg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/logo_iv"

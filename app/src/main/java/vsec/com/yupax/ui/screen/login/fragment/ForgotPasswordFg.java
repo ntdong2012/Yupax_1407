@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.login;
+package vsec.com.yupax.ui.screen.login.fragment;
 
 import android.text.TextUtils;
 import android.widget.EditText;

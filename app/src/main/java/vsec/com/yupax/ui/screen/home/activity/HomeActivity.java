@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.home;
+package vsec.com.yupax.ui.screen.home.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,6 +28,11 @@ import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.HomeContract;
 import vsec.com.yupax.model.http.response.City;
 import vsec.com.yupax.presenter.HomePresenter;
+import vsec.com.yupax.ui.screen.home.fragment.ExchangeFg;
+import vsec.com.yupax.ui.screen.home.fragment.HomeFg;
+import vsec.com.yupax.ui.screen.home.fragment.NotificationFg;
+import vsec.com.yupax.ui.screen.home.fragment.PersonalFg;
+import vsec.com.yupax.ui.screen.home.fragment.SettingsFg;
 import vsec.com.yupax.ui.view.customview.CircularTextView;
 import vsec.com.yupax.utils.Common;
 import vsec.com.yupax.ui.view.adapter.CityAdapter;

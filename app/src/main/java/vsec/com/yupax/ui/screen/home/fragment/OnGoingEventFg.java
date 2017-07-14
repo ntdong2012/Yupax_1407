@@ -1,11 +1,10 @@
-package vsec.com.yupax.ui.activity.home;
+package vsec.com.yupax.ui.screen.home.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +20,7 @@ import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFg;
 import vsec.com.yupax.di.view.CharityView;
 import vsec.com.yupax.model.http.response.Charity;
+import vsec.com.yupax.ui.screen.home.activity.EventDetailActivity;
 import vsec.com.yupax.ui.view.adapter.CharityAdapter;
 
 /**

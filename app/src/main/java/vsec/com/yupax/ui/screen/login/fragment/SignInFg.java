@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.login;
+package vsec.com.yupax.ui.screen.login.fragment;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -11,7 +11,9 @@ import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.SignInContract;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.presenter.SignInPresenter;
-import vsec.com.yupax.ui.activity.home.HomeActivity;
+import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
+import vsec.com.yupax.ui.screen.login.activity.ForgotPasswordActivity;
+import vsec.com.yupax.ui.screen.login.activity.ResendActiveCodeActivity;
 import vsec.com.yupax.utils.AnimationUtils;
 import vsec.com.yupax.utils.Common;
 import vsec.com.yupax.utils.log.DLog;

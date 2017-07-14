@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFg;
-import vsec.com.yupax.ui.activity.home.HomeActivity;
+import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/9/2017.

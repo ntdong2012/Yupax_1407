@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.home;
+package vsec.com.yupax.ui.screen.home.fragment;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +9,10 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.SimpleFragment;
-import vsec.com.yupax.ui.activity.login.SignInActivity;
+import vsec.com.yupax.ui.screen.login.activity.SignInActivity;
+import vsec.com.yupax.ui.screen.home.activity.ChangePasswordActivity;
+import vsec.com.yupax.ui.screen.home.activity.ChangeProfileActivity;
+import vsec.com.yupax.ui.screen.home.activity.HistoryTransactionActivity;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/12/2017.

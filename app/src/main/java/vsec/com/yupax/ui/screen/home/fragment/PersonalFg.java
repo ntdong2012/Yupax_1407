@@ -1,6 +1,4 @@
-package vsec.com.yupax.ui.activity.home;
-
-import android.support.v4.app.FragmentManager;
+package vsec.com.yupax.ui.screen.home.fragment;
 
 import butterknife.OnClick;
 import vsec.com.yupax.R;

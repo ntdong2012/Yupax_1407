@@ -4,6 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="vsec.com.yupax.ui.activity.login.RegisterActivity">
+    tools:context="vsec.com.yupax.ui.screen.login.activity.RegisterActivity">
 
 </android.support.constraint.ConstraintLayout>

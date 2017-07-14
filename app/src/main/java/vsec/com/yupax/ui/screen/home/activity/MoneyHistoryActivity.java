@@ -1,8 +1,7 @@
-package vsec.com.yupax.ui.activity;
+package vsec.com.yupax.ui.screen.home.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;

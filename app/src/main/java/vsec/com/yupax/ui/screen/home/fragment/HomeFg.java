@@ -1,4 +1,4 @@
-package vsec.com.yupax.ui.activity.home;
+package vsec.com.yupax.ui.screen.home.fragment;
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -50,6 +50,8 @@ import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.HomeFgContract;
 import vsec.com.yupax.di.view.AddressView;
 import vsec.com.yupax.presenter.HomeFgPresenter;
+import vsec.com.yupax.ui.screen.home.activity.CompanyDetailActivity;
+import vsec.com.yupax.ui.screen.home.activity.RateActivity;
 import vsec.com.yupax.ui.view.adapter.LocationAdapter;
 import vsec.com.yupax.utils.ResizeAnimation;
 import vsec.com.yupax.utils.Utils;
