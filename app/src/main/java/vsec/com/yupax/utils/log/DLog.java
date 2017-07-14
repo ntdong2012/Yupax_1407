@@ -1,5 +1,7 @@
 package vsec.com.yupax.utils.log;
 
+import android.text.TextUtils;
+
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -96,9 +98,14 @@ public class DLog {
         try {
             kind = (Integer) values[0];
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
         print(kind, V, values);
+    }
+
+    public static void v(String tag, String values) {
+        int kind = OTHERS;
+        print(tag, kind, V, values);
     }
 
     public static void d(Object... values) {
@@ -106,9 +113,13 @@ public class DLog {
         try {
             kind = (Integer) values[0];
         } catch (Exception e) {
-            // TODO: handle exception
+            // e.printStackTrace();
         }
         print(kind, D, values);
+    }
+
+    public static void d(String tag, String values) {
+        print(tag, OTHERS, D, values);
     }
 
     public static void i(Object... values) {
@@ -116,9 +127,14 @@ public class DLog {
         try {
             kind = (Integer) values[0];
         } catch (Exception e) {
-            // TODO: handle exception
+            //e.printStackTrace();
         }
         print(kind, I, values);
+    }
+
+    public static void i(String tag, String values) {
+        int kind = OTHERS;
+        print(tag, kind, I, values);
     }
 
     public static void w(Object... values) {
@@ -126,9 +142,14 @@ public class DLog {
         try {
             kind = (Integer) values[0];
         } catch (Exception e) {
-            // TODO: handle exception
+//            e.printStackTrace();
         }
         print(kind, W, values);
+    }
+
+    public static void w(String tag, String values) {
+        int kind = OTHERS;
+        print(tag, kind, W, values);
     }
 
     public static void e(Exception e) {
@@ -166,7 +187,6 @@ public class DLog {
                     }
                     strValus += " " + Arrays.toString(m);
                 }
-
             } else {
                 strValus += " " + Arrays.toString(values);
             }
@@ -207,6 +227,125 @@ public class DLog {
 
             String strType = "";
 
+            switch (type) {
+                case V:
+                    strType = "(V)";
+                    break;
+                case D:
+                    strType = "(D)";
+                    break;
+                case I:
+                    strType = "(I)";
+                    break;
+                case W:
+                    strType = "(W)";
+                    break;
+                case E:
+                    strType = "(E)";
+                    break;
+            }
+
+            String strPrintString = DateUtils.getCurrentTime() + "\t" + strType
+                    + "\t" + info.filename + "\t" + info.methodName + "("
+                    + info.lineNumber + ")" + "\t" + strValus;
+
+            FileWriter logFile = null;
+            BufferedWriter out = null;
+
+            try {
+                out = new BufferedWriter(logFile);
+                out.write(strPrintString);
+                out.newLine();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (out != null)
+                        out.close();
+                    if (logFile != null)
+                        logFile.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    private static void print(String tag, int kind, int type, Object... values) {
+
+        if (TextUtils.isEmpty(tag)) {
+            print(kind, type, values);
+            return;
+        }
+
+        LogInfo info = null;
+        String strValus = "";
+
+        if (values != null && values.length > 0) {
+            if (values.length > 0 && values[0] != null
+                    && values[0].toString().compareTo("+") == 0) {
+                info = getLogInfo(4);
+                LogInfo preInfo = getLogInfo(3);
+                values[0] = preInfo.methodName;
+            } else {
+                info = getLogInfo(3);
+            }
+
+            if (kind == ENVIRONMENT) {
+                if (values.length == 1) {
+                    strValus = "";
+                } else {
+                    ArrayList<Object> n = new ArrayList<Object>();
+                    for (int i = 0; i < values.length - 1; i++) {
+                        n.add(values[i + 1]);
+                    }
+                    int size = n.size();
+                    Object[] m = new Object[size];
+                    for (int i = 0; i < size; i++) {
+                        m[i] = n.get(i);
+                    }
+                    strValus += " " + Arrays.toString(m);
+                }
+            } else {
+                strValus += " " + Arrays.toString(values);
+            }
+
+        } else {
+            info = getLogInfo(3);
+        }
+
+        if (isShowLog && kind != ENVIRONMENT) {
+            String strPrintString = info.methodName + "(" + info.lineNumber
+                    + ") " + strValus;
+
+            switch (type) {
+                case V:
+
+                    android.util.Log.v(tag, info.filename + " : " + strPrintString);
+                    break;
+                case D:
+                    android.util.Log.d(tag, info.filename + " : " + strPrintString);
+                    break;
+                case I:
+                    android.util.Log.i(tag, info.filename + " : " + strPrintString);
+                    break;
+                case W:
+                    android.util.Log.w(tag, info.filename + " : " + strPrintString);
+                    break;
+                case E:
+                    android.util.Log.e(tag, info.filename + " : " + strPrintString);
+                    if (values[0] instanceof Exception) {
+                        Exception e = (Exception) values[0];
+                        e.printStackTrace();
+                    }
+                    break;
+            }
+        }
+
+        if (isShowLog && kind == ENVIRONMENT) {
+            String strType = "";
             switch (type) {
                 case V:
                     strType = "(V)";

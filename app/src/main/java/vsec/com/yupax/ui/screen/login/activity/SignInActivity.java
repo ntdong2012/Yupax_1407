@@ -16,6 +16,7 @@ import vsec.com.yupax.base.contract.SignInContract;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.presenter.SignInPresenter;
 import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
+import vsec.com.yupax.utils.log.DLog;
 
 public class SignInActivity extends BaseActivity<SignInPresenter> implements SignInContract.View {
 
@@ -87,7 +88,6 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     protected void initEventAndData() {
         String one = getString(R.string.dont_have_account);
         String two = getString(R.string.register_label);
-
         registerLabelTv.setText(Html.fromHtml(one + " &nbsp;&nbsp;&nbsp;  " + "<font color='#ffffff'><b>" + two + "</b></font>"));
         userNameEdt.requestFocus();
         userNameEdt.requestFocusFromTouch();

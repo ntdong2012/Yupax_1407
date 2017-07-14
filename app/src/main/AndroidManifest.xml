@@ -45,7 +45,6 @@
             android:name=".ui.screen.home.activity.CompanyDetailActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity android:name=".ui.screen.home.activity.RateActivity" />
-        <activity android:name=".ui.screen.login.activity.LoginActivity" />
         <activity android:name=".ui.screen.login.activity.SignInActivity" />
         <activity android:name=".ui.screen.login.activity.RegisterActivity" />
     </application>
