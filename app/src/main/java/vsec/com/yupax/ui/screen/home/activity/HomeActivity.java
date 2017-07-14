@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.AppCompatEditText;
@@ -33,9 +34,10 @@ import vsec.com.yupax.ui.screen.home.fragment.HomeFg;
 import vsec.com.yupax.ui.screen.home.fragment.NotificationFg;
 import vsec.com.yupax.ui.screen.home.fragment.PersonalFg;
 import vsec.com.yupax.ui.screen.home.fragment.SettingsFg;
-import vsec.com.yupax.ui.view.customview.CircularTextView;
-import vsec.com.yupax.utils.Common;
 import vsec.com.yupax.ui.view.adapter.CityAdapter;
+import vsec.com.yupax.ui.view.customview.CircularTextView;
+import vsec.com.yupax.ui.view.dialog.RateDialog;
+import vsec.com.yupax.utils.Common;
 
 public class HomeActivity extends BaseActivity<HomePresenter> implements HomeContract.View {
 
@@ -86,6 +88,9 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     TextView[] controlLabels;
     int currentPosition;
     CircularTextView numOfNotificationTv;
+    @BindView(R.id.floating_icon)
+    FloatingActionButton floatingActionButton;
+
 
     @Override
     protected int getLayout() {
@@ -96,6 +101,12 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     protected void initEventAndData() {
         renderView();
         initValue();
+    }
+
+    @OnClick(R.id.floating_icon)
+    void onFloatingActionClick() {
+        RateDialog dialog = new RateDialog(this);
+        dialog.show();
     }
 
 
@@ -200,6 +211,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
 
     @OnClick(R.id.setting_view)
     void onSettingClicked() {
+        floatingActionButton.setVisibility(View.GONE);
         updateActionbarForSettingView(getString(R.string.personal_label));
         updateColorForControlView(Common.CONTROL_ICON_POSITION.PERSONAL);
         FragmentTransaction ft = fm.beginTransaction();
@@ -209,6 +221,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
 
     @OnClick(R.id.personal_view)
     void onPersonalClicked() {
+        floatingActionButton.setVisibility(View.GONE);
         updateActionbarForPersonalView(getString(R.string.personal_label));
         updateColorForControlView(Common.CONTROL_ICON_POSITION.EXCHANGE);
         FragmentTransaction ft = fm.beginTransaction();
@@ -220,6 +233,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     @OnClick(R.id.logo_iv)
     void onHomeClicked() {
         updateFragmentTitleActionbarForLogo();
+        floatingActionButton.setVisibility(View.GONE);
 //        updateColorForControlView(Common.CONTROL_ICON_POSITION.EXCHANGE);
 
         FragmentTransaction ft = fm.beginTransaction();
@@ -230,6 +244,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     @OnClick(R.id.address_view)
     void onAddressClicked() {
         updateHomeActionbar();
+        floatingActionButton.setVisibility(View.VISIBLE);
         updateColorForControlView(Common.CONTROL_ICON_POSITION.ADDRESS);
 
         FragmentTransaction ft = fm.beginTransaction();
@@ -240,6 +255,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
 
     @OnClick(R.id.notification_view)
     void onNotificationClick() {
+        floatingActionButton.setVisibility(View.GONE);
         updateColorForControlView(Common.CONTROL_ICON_POSITION.NOTIFICATION);
         updateFragmentTitleActionbar(getString(R.string.notification_label));
         FragmentTransaction ft = fm.beginTransaction();

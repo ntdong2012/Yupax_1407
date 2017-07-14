@@ -25,8 +25,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.github.clans.fab.FloatingActionButton;
-import com.github.clans.fab.FloatingActionMenu;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -50,9 +48,7 @@ import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.HomeFgContract;
 import vsec.com.yupax.presenter.HomeFgPresenter;
 import vsec.com.yupax.ui.screen.home.activity.CompanyDetailActivity;
-import vsec.com.yupax.ui.screen.home.activity.RateActivity;
 import vsec.com.yupax.ui.view.adapter.LocationAdapter;
-import vsec.com.yupax.ui.view.dialog.RateDialog;
 import vsec.com.yupax.utils.ResizeAnimation;
 import vsec.com.yupax.utils.Utils;
 
@@ -91,11 +87,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     LocationAdapter locationAdapter;
     ArrayList<vsec.com.yupax.model.http.response.Location> locations;
     RecyclerView.LayoutManager layoutManager;
-    //
-//    @BindView(R.id.menu_item)
-//    FloatingActionButton menu;
-    @BindView(R.id.menu)
-    FloatingActionMenu menuTotal;
 
 
     void initLocationList() {
@@ -133,12 +124,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                 }
             }
         });
-    }
-
-    @OnClick(R.id.floating_icon)
-    void onClickRate() {
-        RateDialog dialog = new RateDialog(getActivity());
-        dialog.show();
     }
 
     @Override
@@ -200,15 +185,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         }
 
         mMapView.getMapAsync(this);
-
-
-        menuTotal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RateActivity.callRateActivity(getActivity(), new Bundle());
-//                menuTotal.close(true);
-            }
-        });
     }
 
     @Override

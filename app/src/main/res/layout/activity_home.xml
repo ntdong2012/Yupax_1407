@@ -63,13 +63,13 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/actionbar_height"
+        android:layout_alignLeft="@+id/home_fg"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/home_fg"
         android:layout_gravity="top"
         android:background="@android:color/transparent"
         app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/home_fg"
-        android:layout_alignStart="@+id/home_fg">
+        app:contentInsetStart="0dp">
 
 
         <RelativeLayout
@@ -188,6 +188,18 @@
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floating_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/home_control_ll"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/df_martin_bi"
+        android:layout_marginRight="@dimen/df_martin_bi"
+        android:scaleType="fitXY"
+        android:src="@drawable/rate_icon_mini"
+        android:visibility="visible"
+        app:fab_size="normal" />
 
     <fragment
         android:id="@+id/home_fg"

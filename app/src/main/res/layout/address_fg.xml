@@ -61,19 +61,7 @@
         android:layout_below="@id/mapView"
         android:layout_centerHorizontal="true" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floating_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="@dimen/df_martin"
-        android:layout_marginRight="@dimen/df_martin"
-        android:padding="@dimen/df_martin_bi"
-        android:scaleType="fitCenter"
-        android:src="@drawable/rate_icon"
-        android:visibility="visible"
-        app:fab_size="mini" />
+
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"

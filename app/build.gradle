@@ -32,7 +32,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.jakewharton:butterknife:8.5.1'
+    compile 'com.jakewharton:butterknife:8.7.0'
     compile 'com.android.support:design:25.3.1'
     compile 'com.mikhaellopez:circularimageview:3.0.2'
     compile 'com.android.support:recyclerview-v7:25.3.1'
@@ -52,6 +52,6 @@ dependencies {
     compile 'com.akexorcist:localizationactivity:1.1.2'
     compile 'com.github.clans:fab:1.6.4'
     testCompile 'junit:junit:4.12'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
 }
