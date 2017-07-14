@@ -96,6 +96,7 @@ Không những thế, hành khách mua vé online và thanh toán thành công v
     <string name="voucher_label">Voucher</string>
     <string name="event_label">Event</string>
     <string name="dont_have_account">You dont have account?   </string>
+    <string name="select_merchant">Select merchant</string>
 
 
 </resources>

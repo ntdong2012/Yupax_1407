@@ -25,4 +25,8 @@ public interface PreferencesHelper {
     void setLanguage(String lang);
 
     String getLanguage();
+
+    String getCurrentMerchant();
+
+    void setCurrentMerchant(String str);
 }

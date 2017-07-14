@@ -47,6 +47,7 @@
         <activity android:name=".ui.screen.home.activity.RateActivity" />
         <activity android:name=".ui.screen.login.activity.SignInActivity" />
         <activity android:name=".ui.screen.login.activity.RegisterActivity" />
+        <activity android:name=".ui.screen.login.activity.MerchantActivity"></activity>
     </application>
 
 </manifest>

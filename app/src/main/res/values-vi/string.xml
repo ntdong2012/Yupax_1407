@@ -88,6 +88,8 @@ Không những thế, hành khách mua vé online và thanh toán thành công v
     <string name="setting_label">Lựa chọn</string>
     <string name="voucher_label">Voucher</string>
     <string name="dont_have_account">Bạn chưa có tài khoản?   </string>
+
     <string name="event_label">Sự kiện</string>
+    <string name="select_merchant">Chọn đơn vị thành viên</string>
 
 </resources>

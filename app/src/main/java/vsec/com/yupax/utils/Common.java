@@ -31,6 +31,11 @@ public class Common {
         public static final String LANGUAGE = "current_language";
         public static final String LANGUAGE_VI = "lang_vi";
         public static final String LANGUAGE_EN = "lang_en";
+        public static final String CURRENT_MERCHANT = "current_merchant";
+        public static final String VIETJET_MERCHANT = "vietjet_merchant";
+        public static final String YUPAX_MERCHANT = "yupax_merchant";
+        public static final String RESUN_MERCHANT = "resun_merchant";
+
 
     }
 

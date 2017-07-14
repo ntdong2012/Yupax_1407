@@ -92,5 +92,8 @@
     <dimen name="home_action_bar_item_border_radius">15dp</dimen>
     <dimen name="notification_dialog_message_martin_top">30dp</dimen>
 
+    <dimen name="logo_martin_top">60dp</dimen>
+    <dimen name="logo_height">130dp</dimen>
+    <dimen name="select_merchant_text_size">17sp</dimen>
 
 </resources>

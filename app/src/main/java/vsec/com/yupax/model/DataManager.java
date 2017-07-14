@@ -79,6 +79,8 @@ public class DataManager implements HttpHelper, PreferencesHelper {
         return preferencesHelper.getBaseUrl();
     }
 
+
+
     @Override
     public void setLanguage(String lang) {
         preferencesHelper.setLanguage(lang);
@@ -87,6 +89,16 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public String getLanguage() {
         return preferencesHelper.getLanguage();
+    }
+
+    @Override
+    public String getCurrentMerchant() {
+        return preferencesHelper.getCurrentMerchant();
+    }
+
+    @Override
+    public void setCurrentMerchant(String str) {
+        preferencesHelper.setCurrentMerchant(str);
     }
 
 
