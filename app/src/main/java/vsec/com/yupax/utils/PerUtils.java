@@ -14,6 +14,8 @@ import android.os.Build;
 public class PerUtils {
 
     private static final int ANDROID_M_VERSION = 23;
+    public static final int REQUEST_CODE_FINE_LOCATION_PERMISSIONS = 100;
+    public static final int REQUEST_LOCATION_PERMISSIONS = 101;
 
     public static boolean isAndroidM() {
         return Build.VERSION.SDK_INT >= ANDROID_M_VERSION;

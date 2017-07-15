@@ -1,6 +1,8 @@
 package vsec.com.yupax.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -8,6 +10,7 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
+import vsec.com.yupax.R;
 import vsec.com.yupax.model.http.request.BaseRequest;
 
 /**
@@ -29,6 +32,17 @@ public class Utils {
             result = context.getResources().getDimensionPixelSize(resourceId);
         }
         return result;
+    }
+
+    public static int getMaximumMapHeight(Context context) {
+        int max = Utils.getHeightScreen(context) - Utils.getStatusBarHeight(context)
+                - Utils.dpToPx(context.getResources(), (int) context.getResources().getDimension(R.dimen.actionbar_height))
+                - Utils.dpToPx(context.getResources(), (int) context.getResources().getDimension(R.dimen.home_control_layout_height));
+        return max;
+    }
+
+    public static int dpToPx(Resources res, int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.getDisplayMetrics());
     }
 
     public static <T extends BaseRequest> T setupRequestFormat(T t){

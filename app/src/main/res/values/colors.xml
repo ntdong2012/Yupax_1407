@@ -19,4 +19,5 @@
     <color name="yelown_color">#fef14f</color>
     <color name="actionbar_item_bg_color">#a88bb7</color>
     <color name="seperate_color_for_personal_item">#f1f3f5</color>
+    <color name="time_status_color_tv">#00CC66</color>
 </resources>

@@ -1,6 +1,7 @@
 package vsec.com.yupax.ui.screen.home.fragment;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -39,7 +41,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.security.Permission;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -49,6 +53,7 @@ import vsec.com.yupax.base.contract.HomeFgContract;
 import vsec.com.yupax.presenter.HomeFgPresenter;
 import vsec.com.yupax.ui.screen.home.activity.CompanyDetailActivity;
 import vsec.com.yupax.ui.view.adapter.LocationAdapter;
+import vsec.com.yupax.utils.PerUtils;
 import vsec.com.yupax.utils.ResizeAnimation;
 import vsec.com.yupax.utils.Utils;
 
@@ -176,7 +181,7 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     void initMapView() {
         mMapView.onCreate(getBundle());
 
-        mMapView.onResume();// needed to get the map to display immediately
+        mMapView.onResume();
 
         try {
             MapsInitializer.initialize(getActivity().getApplicationContext());
@@ -204,15 +209,14 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     @OnClick(R.id.map_down_icon)
     void onMapDownClicked() {
-        animateMapView(getMaximumMapHeight());
+        animateMapView(Utils.getMaximumMapHeight(getActivity()));
     }
 
     private void animateMapView(int height) {
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mMapView.getLayoutParams();
-
         ResizeAnimation a = new ResizeAnimation(mMapView);
         a.setDuration(100);
-        a.setParams(lp.height, dpToPx(getResources(), height));
+        a.setParams(lp.height, Utils.dpToPx(getResources(), height));
         mMapView.startAnimation(a);
     }
 
@@ -220,16 +224,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         return mMapViewExpanded;
     }
 
-    public int getMaximumMapHeight() {
-        int max = Utils.getHeightScreen(getActivity()) - Utils.getStatusBarHeight(getActivity())
-                - dpToPx(getResources(), (int) getResources().getDimension(R.dimen.actionbar_height))
-                - dpToPx(getResources(), (int) getResources().getDimension(R.dimen.home_control_layout_height));
-        return max;
-    }
-
-    public int dpToPx(Resources res, int dp) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.getDisplayMetrics());
-    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -269,16 +263,86 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     }
 
+    private String[] verifyPermission() {
+        String[] pers = new String[2];
+        if (!PerUtils.hasAccessCoarseLocationPermission(getActivity()) && PerUtils.isNeverAskAgainWithAccessCoarseLocationPermission(getActivity())) {
+            pers[0] = (Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+        if (!PerUtils.hasAccessFineLocationPermission(getActivity()) && PerUtils.isNeverAskAgainWithAccessFineLocationPermission(getActivity())) {
+            pers[1] = Manifest.permission.ACCESS_FINE_LOCATION;
+        }
+        return pers;
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
+        if (verifyLocationPermission()) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    mGoogleApiClient, locationRequest, this);
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, locationRequest, this);
-
     }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case PerUtils.REQUEST_LOCATION_PERMISSIONS:
+                if (isPermissionGrantedByUser(grantResults)) {
+                    LocationServices.FusedLocationApi.requestLocationUpdates(
+                            mGoogleApiClient, locationRequest, this);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private boolean verifyFineLocationPermission() {
+        List<String> permissionNeeded = new ArrayList<String>();
+        if (!PerUtils.hasAccessFineLocationPermission(getActivity()) &&
+                !PerUtils.isNeverAskAgainWithAccessFineLocationPermission(getActivity())) {
+            permissionNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (permissionNeeded.size() > 0) {
+            this.requestPermissions(permissionNeeded.toArray(new String[permissionNeeded.size()]), PerUtils.REQUEST_CODE_FINE_LOCATION_PERMISSIONS);
+            return false;
+        }
+        return true;
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    private boolean verifyLocationPermission() {
+        List<String> permissionNeeded = new ArrayList<String>();
+        if (!PerUtils.hasAccessFineLocationPermission(getActivity()) &&
+                !PerUtils.isNeverAskAgainWithAccessFineLocationPermission(getActivity())) {
+            permissionNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+        if (!PerUtils.hasAccessFineLocationPermission(getActivity()) &&
+                !PerUtils.isNeverAskAgainWithAccessFineLocationPermission(getActivity())) {
+            permissionNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (permissionNeeded.size() > 0) {
+            this.requestPermissions(permissionNeeded.toArray(new String[permissionNeeded.size()]), PerUtils.REQUEST_LOCATION_PERMISSIONS);
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isPermissionGrantedByUser(int[] grantResults) {
+        boolean isOK = true;
+        if (grantResults.length > 0) {
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    isOK = false;
+                }
+            }
+        }
+        return isOK;
+    }
+
 
     @Override
     public void onConnectionSuspended(int i) {
