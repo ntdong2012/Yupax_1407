@@ -28,16 +28,16 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/select_merchant_text_size" />
 
-    <android.support.v7.widget.AppCompatRadioButton
+    <RadioButton
         android:id="@+id/resun_rb"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/select_merchant_tv"
         android:layout_marginLeft="@dimen/df_martin_bi"
         android:layout_marginRight="@dimen/df_martin_bi"
         android:layout_marginTop="@dimen/df_martin"
         android:buttonTint="@android:color/white"
-        android:text="Resun"
+        android:text="@string/resun_label"
         android:textColor="@android:color/white"
         android:textSize="@dimen/select_merchant_text_size" />
 
@@ -51,9 +51,9 @@
         android:layout_marginTop="@dimen/df_martin"
         android:background="@android:color/white" />
 
-    <android.support.v7.widget.AppCompatRadioButton
+    <RadioButton
         android:id="@+id/vj_rb"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/sp1"
         android:layout_marginLeft="@dimen/df_martin_bi"
@@ -61,7 +61,7 @@
         android:layout_marginTop="@dimen/df_martin"
         android:buttonTint="@android:color/white"
         android:shadowColor="@android:color/white"
-        android:text="Vietjet Air"
+        android:text="@string/vietjet_label"
         android:textColor="@android:color/white"
         android:textSize="@dimen/select_merchant_text_size" />
 
@@ -75,9 +75,9 @@
         android:layout_marginTop="@dimen/df_martin"
         android:background="@android:color/white" />
 
-    <android.support.v7.widget.AppCompatRadioButton
+    <RadioButton
         android:id="@+id/yupax_rb"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/sp2"
         android:layout_marginLeft="@dimen/df_martin_bi"
@@ -85,7 +85,7 @@
         android:layout_marginTop="@dimen/df_martin"
         android:buttonTint="@android:color/white"
         android:shadowColor="@android:color/white"
-        android:text="Yupax"
+        android:text="@string/yupax_label"
         android:textColor="@android:color/white"
         android:textSize="@dimen/select_merchant_text_size" />
 

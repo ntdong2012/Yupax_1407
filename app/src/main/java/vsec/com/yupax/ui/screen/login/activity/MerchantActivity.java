@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatRadioButton;
+import android.text.TextUtils;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 
 import butterknife.BindViews;
 import butterknife.OnCheckedChanged;
@@ -27,7 +29,7 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
 
 
     @BindViews({R.id.resun_rb, R.id.vj_rb, R.id.yupax_rb})
-    AppCompatRadioButton[] merchants;
+    RadioButton[] merchants;
     private boolean isFirstTime = false;
 
     @Override
@@ -38,58 +40,95 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
     @Override
     protected void initEventAndData() {
         String currentMerchant = mPresenter.getCurrentMerchant();
-        if (currentMerchant.contains(Common.SPF.RESUN_MERCHANT)) {
+        if (currentMerchant.contains(getString(R.string.resun_label))) {
             merchants[0].setChecked(true);
-        } else if (currentMerchant.contains(Common.SPF.VIETJET_MERCHANT)) {
+        } else if (currentMerchant.contains(getString(R.string.vietjet_label))) {
             merchants[1].setChecked(true);
         } else {
             merchants[2].setChecked(true);
         }
+
+
+        for (int i = 0; i < merchants.length; i++) {
+            merchants[i].setOnCheckedChangeListener(mOnCheck);
+        }
+
     }
 
-    @OnCheckedChanged({R.id.resun_rb, R.id.vj_rb, R.id.yupax_rb})
-    public void onRadioButtonCheckChanged(CompoundButton button, boolean checked) {
-        if (checked) {
-            switch (button.getId()) {
-                case R.id.resun_rb:
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mPresenter.setCurrentMerchant(Common.SPF.RESUN_MERCHANT);
-                            merchants[0].setChecked(true);
-                        }
-                    });
-                    break;
-                case R.id.vj_rb:
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mPresenter.setCurrentMerchant(Common.SPF.VIETJET_MERCHANT);
-                            merchants[1].setChecked(true);
-                        }
-                    });
-                    break;
-                case R.id.yupax_rb:
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mPresenter.setCurrentMerchant(Common.SPF.YUPAX_MERCHANT);
-                            merchants[2].setChecked(true);
-                        }
-                    });
-                    break;
-            }
-            if (isFirstTime) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        HomeActivity.callHomeActivity(MerchantActivity.this, new Bundle());
-                        MerchantActivity.this.finish();
-                    }
-                });
+    CompoundButton.OnCheckedChangeListener mOnCheck = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            if (isChecked) {
+                buttonView.setChecked(true);
+                if (isFirstTime) {
+                    HomeActivity.callHomeActivity(MerchantActivity.this, new Bundle());
+                }
+                String label = buttonView.getText().toString();
+                if (!TextUtils.isEmpty(label) && label.equals(getString(R.string.vietjet_label))) {
+                    mPresenter.setCurrentMerchant(getString(R.string.vietjet_label));
+                } else if (!TextUtils.isEmpty(label) && label.equals(getString(R.string.resun_label))) {
+                    mPresenter.setCurrentMerchant(getString(R.string.resun_label));
+                } else {
+                    mPresenter.setCurrentMerchant(getString(R.string.yupax_label));
+                }
+                finish();
             }
         }
-    }
+    };
+
+
+//    @OnCheckedChanged({R.id.resun_rb, R.id.vj_rb, R.id.yupax_rb})
+//    public void onRadioButtonCheckChanged(CompoundButton button, boolean checked) {
+//        if (checked) {
+//            switch (button.getId()) {
+//                case R.id.resun_rb:
+//                    merchants[0].setChecked(true);
+//                    //mPresenter.setCurrentMerchant(Common.SPF.RESUN_MERCHANT);
+////                    runOnUiThread(new Runnable() {
+////                        @Override
+////                        public void run() {
+////
+////                        }
+////                    });
+//                    break;
+//                case R.id.vj_rb:
+//                    merchants[1].setChecked(true);
+//                    //mPresenter.setCurrentMerchant(Common.SPF.VIETJET_MERCHANT);
+////                    runOnUiThread(new Runnable() {
+////                        @Override
+////                        public void run() {
+////
+////                        }
+////                    });
+//                    break;
+//                case R.id.yupax_rb:
+//                    merchants[2].setChecked(true);
+//                    //mPresenter.setCurrentMerchant(Common.SPF.YUPAX_MERCHANT);
+////                    runOnUiThread(new Runnable() {
+////                        @Override
+////                        public void run() {
+////
+////                        }
+////                    });
+//                    break;
+//            }
+//
+//            if (isFirstTime) {
+//                HomeActivity.callHomeActivity(MerchantActivity.this, new Bundle());
+//                MerchantActivity.this.finish();
+//            }
+//
+////            if (isFirstTime) {
+////                runOnUiThread(new Runnable() {
+////                    @Override
+////                    public void run() {
+////                        HomeActivity.callHomeActivity(MerchantActivity.this, new Bundle());
+////                        MerchantActivity.this.finish();
+////                    }
+////                });
+////            }
+//        }
+//    }
 
     @Override
     public void onResume() {

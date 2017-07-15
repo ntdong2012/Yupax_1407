@@ -14,10 +14,6 @@ import vsec.com.yupax.R;
 
 public class SplashActivity extends AppCompatActivity {
 
-
-    @BindView(R.id.bg_iv)
-    ImageView bgIv;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

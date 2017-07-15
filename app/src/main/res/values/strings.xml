@@ -98,6 +98,8 @@ Không những thế, hành khách mua vé online và thanh toán thành công v
     <string name="dont_have_account">You dont have account?   </string>
     <string name="select_merchant">Select merchant</string>
     <string name="rate_done_label">Confirm</string>
-
+    <string name="resun_label">Resun</string>
+    <string name="vietjet_label">Vietjet Air</string>
+    <string name="yupax_label">Yupax</string>
 
 </resources>
