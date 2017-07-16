@@ -46,7 +46,7 @@ public class Utils {
     }
 
     public static <T extends BaseRequest> T setupRequestFormat(T t){
-        t.setDeviceId("12345");
+        t.setDeviceId("abc1-gdd2-dhc3-akd3");
         t.setDeviceType("Android");
         t.setLanguage("vi");
         t.setMerchantCode("B03149B1EB2027152795");

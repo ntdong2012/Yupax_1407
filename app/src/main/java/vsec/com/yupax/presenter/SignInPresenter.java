@@ -7,8 +7,8 @@ import vsec.com.yupax.base.contract.SignInContract;
 import vsec.com.yupax.model.DataManager;
 import vsec.com.yupax.model.http.HttpHelper;
 import vsec.com.yupax.model.http.request.LoginRequest;
+import vsec.com.yupax.model.http.request.LoginResponseNew;
 import vsec.com.yupax.model.http.request.UserInfoForLogin;
-import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.utils.CommonSubscriber;
 import vsec.com.yupax.utils.RxUtil;
 import vsec.com.yupax.utils.Utils;
@@ -42,11 +42,17 @@ public class SignInPresenter extends RxPresenter<SignInContract.View> implements
         loginRequest.setUserInfo(userInfo);
 
         addSubscribe(dataManager.signIn(loginRequest)
-                .compose(RxUtil.<LoginResponse>rxSchedulerHelper())
-                .subscribeWith(new CommonSubscriber<LoginResponse>(mView) {
+                .compose(RxUtil.<LoginResponseNew>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<LoginResponseNew>(mView) {
                     @Override
-                    public void onNext(LoginResponse loginResponse) {
+                    public void onNext(LoginResponseNew loginResponse) {
                         mView.onSignInSuccess(loginResponse);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        e.printStackTrace();
                     }
                 })
         );

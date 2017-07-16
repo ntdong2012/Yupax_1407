@@ -1,7 +1,6 @@
 package vsec.com.yupax.ui.screen.login.fragment;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.widget.EditText;
 
 import butterknife.BindView;
@@ -9,14 +8,11 @@ import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.SignInContract;
-import vsec.com.yupax.model.http.response.LoginResponse;
+import vsec.com.yupax.model.http.request.LoginResponseNew;
 import vsec.com.yupax.presenter.SignInPresenter;
 import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
 import vsec.com.yupax.ui.screen.login.activity.ForgotPasswordActivity;
 import vsec.com.yupax.ui.screen.login.activity.ResendActiveCodeActivity;
-import vsec.com.yupax.utils.AnimationUtils;
-import vsec.com.yupax.utils.Common;
-import vsec.com.yupax.utils.log.DLog;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/25/17.
@@ -85,20 +81,20 @@ public class SignInFg extends BaseFragment<SignInPresenter> implements SignInCon
     }
 
     @Override
-    public void onSignInSuccess(LoginResponse loginResponse) {
-        DLog.d("onSignInSuccess");
-        try {
-            if (!TextUtils.isEmpty(loginResponse.getError().getCode()) && Integer.parseInt(loginResponse.getError().getCode())
-                    == Common.HTTP_CODE.CODE_OK) {
-                DLog.d("Token : " + loginResponse.getUserInfo().getToken());
-                mPresenter.onSavedToken(loginResponse.getUserInfo().getToken());
-                HomeActivity.callHomeActivity(getActivity(), new Bundle());
-                getActivity().finish();
-            }
-        } catch (Exception ex) {
-            AnimationUtils.shake(getActivity(), userNameEdt);
-            ex.printStackTrace();
-        }
+    public void onSignInSuccess(LoginResponseNew loginResponse) {
+//        DLog.d("onSignInSuccess");
+//        try {
+//            if (!TextUtils.isEmpty(loginResponse.getError().getCode()) && Integer.parseInt(loginResponse.getError().getCode())
+//                    == Common.HTTP_CODE.CODE_OK) {
+//                DLog.d("Token : " + loginResponse.getUserInfo().getToken());
+//                mPresenter.onSavedToken(loginResponse.getUserInfo().getToken());
+//                HomeActivity.callHomeActivity(getActivity(), new Bundle());
+//                getActivity().finish();
+//            }
+//        } catch (Exception ex) {
+//            AnimationUtils.shake(getActivity(), userNameEdt);
+//            ex.printStackTrace();
+//        }
 
     }
 
