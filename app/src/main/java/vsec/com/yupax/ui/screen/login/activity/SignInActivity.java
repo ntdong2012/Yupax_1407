@@ -7,16 +7,20 @@ import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.SignInContract;
-import vsec.com.yupax.model.http.request.LoginResponseNew;
+import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.presenter.SignInPresenter;
 import vsec.com.yupax.utils.AnimationUtils;
+import vsec.com.yupax.utils.Utils;
 import vsec.com.yupax.utils.log.DLog;
 
 public class SignInActivity extends BaseActivity<SignInPresenter> implements SignInContract.View {
@@ -28,6 +32,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     AppCompatEditText userNameEdt;
     @BindView(R.id.password_edt)
     AppCompatEditText passwordEdt;
+    @BindView(R.id.process)
+    ProgressBar progressBar;
 
 
     public static void callSignInActivity(Context context, Bundle bundle) {
@@ -58,7 +64,15 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
             return;
         }
 
+        onLoading();
         mPresenter.onSignIn(userName, passWord);
+    }
+
+    @OnEditorAction(R.id.password_edt)
+    boolean onPasswordEditorAction() {
+        Utils.hiddenSoftKeyboard(this, passwordEdt);
+        onCallLoginAction();
+        return true;
     }
 
     @OnClick(R.id.forgot_pass_tv)
@@ -72,8 +86,10 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     }
 
     @Override
-    public void onSignInSuccess(LoginResponseNew loginResponse) {
-        DLog.d("onSignInSuccess" + loginResponse.getMessage());
+    public void onSignInSuccess(LoginResponse loginResponse) {
+        onStopLoading();
+
+        DLog.d("onSignInSuccess" + loginResponse.getUserInfo().getEmail());
     }
 
     @Override
@@ -83,12 +99,12 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
     @Override
     public void onLoading() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onStopLoading() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -103,6 +119,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         registerLabelTv.setText(Html.fromHtml(one + " &nbsp;&nbsp;&nbsp;  " + "<font color='#ffffff'><b>" + two + "</b></font>"));
         userNameEdt.requestFocus();
         userNameEdt.requestFocusFromTouch();
+
 
     }
 

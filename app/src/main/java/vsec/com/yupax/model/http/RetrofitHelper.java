@@ -6,9 +6,9 @@ import io.reactivex.Flowable;
 import vsec.com.yupax.model.http.api.YupaxApis;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
-import vsec.com.yupax.model.http.request.LoginResponseNew;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
+import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.Token;
 
 /**
@@ -25,7 +25,7 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<LoginResponseNew> signIn(LoginRequest loginRequest) {
+    public Flowable<LoginResponse> signIn(LoginRequest loginRequest) {
         return yupaxApis.signIn(loginRequest);
     }
 

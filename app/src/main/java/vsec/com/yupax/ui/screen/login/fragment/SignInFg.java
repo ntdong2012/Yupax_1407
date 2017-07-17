@@ -8,7 +8,7 @@ import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.SignInContract;
-import vsec.com.yupax.model.http.request.LoginResponseNew;
+import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.presenter.SignInPresenter;
 import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
 import vsec.com.yupax.ui.screen.login.activity.ForgotPasswordActivity;
@@ -81,7 +81,7 @@ public class SignInFg extends BaseFragment<SignInPresenter> implements SignInCon
     }
 
     @Override
-    public void onSignInSuccess(LoginResponseNew loginResponse) {
+    public void onSignInSuccess(LoginResponse loginResponse) {
 //        DLog.d("onSignInSuccess");
 //        try {
 //            if (!TextUtils.isEmpty(loginResponse.getError().getCode()) && Integer.parseInt(loginResponse.getError().getCode())

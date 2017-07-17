@@ -3,9 +3,9 @@ package vsec.com.yupax.model.http;
 import io.reactivex.Flowable;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
-import vsec.com.yupax.model.http.request.LoginResponseNew;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
+import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.Token;
 
 /**
@@ -15,13 +15,13 @@ import vsec.com.yupax.model.http.response.Token;
 public interface HttpHelper {
 
     interface ServiceName {
-        public String LOGIN = "LOGIN";
+        public String LOGIN = "LOGIN_USER";
         public String CREATE_USER = "CREATE_USER";
         public String RESEND_PASSWORD = "RESEND_PASSWORD";
         public String CHANGE_PASSWORD = "CHANGE_PASSWORD";
     }
 
-    Flowable<LoginResponseNew> signIn(LoginRequest loginRequest);
+    Flowable<LoginResponse> signIn(LoginRequest loginRequest);
 
     Flowable<Token> resendPassword(ResendPasswordRequest resendPasswordRequest);
 

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
@@ -52,6 +54,13 @@ public class Utils {
         t.setMerchantCode("B03149B1EB2027152795");
         t.setSecretKey("VsecYupax@2017");
         return t;
+    }
+
+    public static void hiddenSoftKeyboard(Context context, View view){
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     public static <T> Flowable<T> createData(final T t) {

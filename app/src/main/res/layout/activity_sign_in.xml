@@ -102,6 +102,7 @@
             android:background="@android:color/transparent"
             android:ellipsize="end"
             android:hint="@string/password_hint_text"
+            android:imeOptions="actionGo"
             android:inputType="textPassword"
             android:maxLines="1"
             android:paddingLeft="@dimen/df_martin"
@@ -163,5 +164,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/register_logo_image_martin_bottom"
         android:src="@drawable/logo" />
+
+    <ProgressBar
+        android:id="@+id/process"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
 </RelativeLayout>
