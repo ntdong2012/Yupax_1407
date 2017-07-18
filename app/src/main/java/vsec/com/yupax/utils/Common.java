@@ -32,6 +32,10 @@ public class Common {
         public static final String LANGUAGE_VI = "lang_vi";
         public static final String LANGUAGE_EN = "lang_en";
         public static final String CURRENT_MERCHANT = "current_merchant";
+        public static final String LAST_NAME = "last_name";
+        public static final String FIRST_NAME = "first_name";
+        public static final String USER_EMAIL = "user_email";
+        public static final String USER_PHONE = "user_phone";
 
 
     }

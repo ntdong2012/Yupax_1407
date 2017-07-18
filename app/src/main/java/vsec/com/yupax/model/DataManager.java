@@ -8,6 +8,7 @@ import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.Token;
+import vsec.com.yupax.model.http.response.UserInfoResponse;
 import vsec.com.yupax.model.prefs.PreferencesHelper;
 
 /**
@@ -80,7 +81,6 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
 
-
     @Override
     public void setLanguage(String lang) {
         preferencesHelper.setLanguage(lang);
@@ -101,5 +101,55 @@ public class DataManager implements HttpHelper, PreferencesHelper {
         preferencesHelper.setCurrentMerchant(str);
     }
 
+    @Override
+    public void saveFirstName(String str) {
+        preferencesHelper.saveFirstName(str);
+    }
+
+    @Override
+    public String getFirstName() {
+        return preferencesHelper.getFirstName();
+    }
+
+    @Override
+    public void saveLastName(String str) {
+        preferencesHelper.saveLastName(str);
+    }
+
+    @Override
+    public String getLastName() {
+        return preferencesHelper.getLastName();
+    }
+
+    @Override
+    public void saveEmail(String email) {
+        preferencesHelper.saveEmail(email);
+    }
+
+    @Override
+    public String getEmail() {
+        return preferencesHelper.getEmail();
+    }
+
+    @Override
+    public void savePhone(String phone) {
+        preferencesHelper.savePhone(phone);
+    }
+
+    @Override
+    public String getPhone() {
+        return preferencesHelper.getPhone();
+    }
+
+
+    public void onSaveUserInfo(UserInfoResponse userInfoResponse) {
+        preferencesHelper.setUserName(userInfoResponse.getUsername());
+        preferencesHelper.setToken(userInfoResponse.getToken());
+        preferencesHelper.saveLastName(userInfoResponse.getLastName());
+        preferencesHelper.saveFirstName(userInfoResponse.getFirstName());
+        preferencesHelper.saveEmail(userInfoResponse.getEmail());
+        preferencesHelper.savePhone(userInfoResponse.getMobile());
+
+    }
 
 }

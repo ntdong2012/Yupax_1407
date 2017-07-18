@@ -9,6 +9,7 @@ import vsec.com.yupax.model.http.HttpHelper;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.UserInfoForLogin;
 import vsec.com.yupax.model.http.response.LoginResponse;
+import vsec.com.yupax.model.http.response.UserInfoResponse;
 import vsec.com.yupax.utils.CommonSubscriber;
 import vsec.com.yupax.utils.RxUtil;
 import vsec.com.yupax.utils.Utils;
@@ -61,6 +62,11 @@ public class SignInPresenter extends RxPresenter<SignInContract.View> implements
     @Override
     public void onSavedToken(String token) {
         dataManager.setToken(token);
+    }
+
+    @Override
+    public void onSaveUserInfo(UserInfoResponse userInfoResponse) {
+        dataManager.onSaveUserInfo(userInfoResponse);
     }
 
 

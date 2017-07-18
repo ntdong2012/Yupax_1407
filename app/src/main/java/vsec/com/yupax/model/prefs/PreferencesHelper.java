@@ -29,4 +29,21 @@ public interface PreferencesHelper {
     String getCurrentMerchant();
 
     void setCurrentMerchant(String str);
+
+    void saveFirstName(String str);
+
+    String getFirstName();
+
+    void saveLastName(String str);
+
+    String getLastName();
+
+    void saveEmail(String email);
+
+    String getEmail();
+
+    void savePhone(String phone);
+
+    String getPhone();
+
 }

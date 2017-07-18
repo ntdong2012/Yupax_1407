@@ -92,4 +92,44 @@ public class PreferencesHelperImpl implements PreferencesHelper {
     public void setCurrentMerchant(String str) {
         mSPrefs.edit().putString(Common.SPF.CURRENT_MERCHANT, str).apply();
     }
+
+    @Override
+    public void saveFirstName(String str) {
+        mSPrefs.edit().putString(Common.SPF.FIRST_NAME, str).apply();
+    }
+
+    @Override
+    public String getFirstName() {
+        return mSPrefs.getString(Common.SPF.FIRST_NAME, "");
+    }
+
+    @Override
+    public void saveLastName(String str) {
+        mSPrefs.edit().putString(Common.SPF.LAST_NAME, str).apply();
+    }
+
+    @Override
+    public String getLastName() {
+        return mSPrefs.getString(Common.SPF.LAST_NAME, "");
+    }
+
+    @Override
+    public void saveEmail(String email) {
+        mSPrefs.edit().putString(Common.SPF.USER_EMAIL, email).apply();
+    }
+
+    @Override
+    public String getEmail() {
+        return mSPrefs.getString(Common.SPF.USER_EMAIL, "");
+    }
+
+    @Override
+    public void savePhone(String phone) {
+        mSPrefs.edit().putString(Common.SPF.USER_PHONE, phone).apply();
+    }
+
+    @Override
+    public String getPhone() {
+        return mSPrefs.getString(Common.SPF.USER_PHONE, "");
+    }
 }
