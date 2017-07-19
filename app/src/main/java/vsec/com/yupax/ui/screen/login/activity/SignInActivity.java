@@ -88,7 +88,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @Override
     public void onSignInSuccess(LoginResponse loginResponse) {
         onStopLoading();
-        DLog.d("onSignInSuccess" + loginResponse.getUserInfo().getEmail());
+        DLog.d("onSignInSuccess " + loginResponse.getUserInfo().getToken());
         mPresenter.onSaveUserInfo(loginResponse.getUserInfo());
         this.finish();
         MerchantActivity.callMerchantActivity(this, new Bundle());

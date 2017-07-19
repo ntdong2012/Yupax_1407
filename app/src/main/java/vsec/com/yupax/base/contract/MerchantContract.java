@@ -2,6 +2,7 @@ package vsec.com.yupax.base.contract;
 
 import vsec.com.yupax.base.BasePresenter;
 import vsec.com.yupax.base.BaseView;
+import vsec.com.yupax.model.http.response.MerchantListResponse;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 7/14/17.
@@ -11,7 +12,7 @@ public interface MerchantContract {
 
     interface View extends BaseView {
 
-        void onGetNotificationSuccess();
+        void onGetMerchantListSuccess(MerchantListResponse merchantListResponse);
 
         void onLoading();
 
@@ -26,5 +27,9 @@ public interface MerchantContract {
         String getCurrentMerchant();
 
         void setCurrentMerchant(String str);
+
+        void getListMerchants();
+
+
     }
 }

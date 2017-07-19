@@ -51,7 +51,7 @@ public class Utils {
         t.setDeviceId("abc1-gdd2-dhc3-akd3");
         t.setDeviceType("Android");
         t.setLanguage("vi");
-        t.setMerchantCode("B03149B1EB2027152795");
+//        t.setMerchantCode("B03149B1EB2027152795");
         t.setSecretKey("VsecYupax@2017");
         return t;
     }

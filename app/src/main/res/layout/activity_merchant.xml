@@ -28,74 +28,90 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/select_merchant_text_size" />
 
-    <RadioButton
-        android:id="@+id/resun_rb"
+    <!--<RadioButton-->
+    <!--android:id="@+id/resun_rb"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/select_merchant_tv"-->
+    <!--android:layout_marginLeft="@dimen/df_martin_bi"-->
+    <!--android:layout_marginRight="@dimen/df_martin_bi"-->
+    <!--android:layout_marginTop="@dimen/df_martin"-->
+    <!--android:buttonTint="@android:color/white"-->
+    <!--android:text="@string/resun_label"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="@dimen/select_merchant_text_size" />-->
+
+    <!--<View-->
+    <!--android:id="@+id/sp1"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/df_separate_height"-->
+    <!--android:layout_below="@id/resun_rb"-->
+    <!--android:layout_marginLeft="@dimen/df_martin_bi"-->
+    <!--android:layout_marginRight="@dimen/df_martin_bi"-->
+    <!--android:layout_marginTop="@dimen/df_martin"-->
+    <!--android:background="@android:color/white" />-->
+
+    <!--<RadioButton-->
+    <!--android:id="@+id/vj_rb"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/sp1"-->
+    <!--android:layout_marginLeft="@dimen/df_martin_bi"-->
+    <!--android:layout_marginRight="@dimen/df_martin_bi"-->
+    <!--android:layout_marginTop="@dimen/df_martin"-->
+    <!--android:buttonTint="@android:color/white"-->
+    <!--android:shadowColor="@android:color/white"-->
+    <!--android:text="@string/vietjet_label"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="@dimen/select_merchant_text_size" />-->
+
+    <!--<View-->
+    <!--android:id="@+id/sp2"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/df_separate_height"-->
+    <!--android:layout_below="@id/vj_rb"-->
+    <!--android:layout_marginLeft="@dimen/df_martin_bi"-->
+    <!--android:layout_marginRight="@dimen/df_martin_bi"-->
+    <!--android:layout_marginTop="@dimen/df_martin"-->
+    <!--android:background="@android:color/white" />-->
+
+    <!--<RadioButton-->
+    <!--android:id="@+id/yupax_rb"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/sp2"-->
+    <!--android:layout_marginLeft="@dimen/df_martin_bi"-->
+    <!--android:layout_marginRight="@dimen/df_martin_bi"-->
+    <!--android:layout_marginTop="@dimen/df_martin"-->
+    <!--android:buttonTint="@android:color/white"-->
+    <!--android:shadowColor="@android:color/white"-->
+    <!--android:text="@string/yupax_label"-->
+    <!--android:textColor="@android:color/white"-->
+    <!--android:textSize="@dimen/select_merchant_text_size" />-->
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="@dimen/df_separate_height"-->
+    <!--android:layout_below="@id/yupax_rb"-->
+    <!--android:layout_marginLeft="@dimen/df_martin_bi"-->
+    <!--android:layout_marginRight="@dimen/df_martin_bi"-->
+    <!--android:layout_marginTop="@dimen/df_martin"-->
+    <!--android:background="@android:color/white" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/merchant_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/select_merchant_tv"
         android:layout_marginLeft="@dimen/df_martin_bi"
         android:layout_marginRight="@dimen/df_martin_bi"
-        android:layout_marginTop="@dimen/df_martin"
-        android:buttonTint="@android:color/white"
-        android:text="@string/resun_label"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/select_merchant_text_size" />
+        android:layout_marginTop="@dimen/df_martin_sm" />
 
-    <View
-        android:id="@+id/sp1"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/df_separate_height"
-        android:layout_below="@id/resun_rb"
-        android:layout_marginLeft="@dimen/df_martin_bi"
-        android:layout_marginRight="@dimen/df_martin_bi"
-        android:layout_marginTop="@dimen/df_martin"
-        android:background="@android:color/white" />
-
-    <RadioButton
-        android:id="@+id/vj_rb"
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/process"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sp1"
-        android:layout_marginLeft="@dimen/df_martin_bi"
-        android:layout_marginRight="@dimen/df_martin_bi"
-        android:layout_marginTop="@dimen/df_martin"
-        android:buttonTint="@android:color/white"
-        android:shadowColor="@android:color/white"
-        android:text="@string/vietjet_label"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/select_merchant_text_size" />
-
-    <View
-        android:id="@+id/sp2"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/df_separate_height"
-        android:layout_below="@id/vj_rb"
-        android:layout_marginLeft="@dimen/df_martin_bi"
-        android:layout_marginRight="@dimen/df_martin_bi"
-        android:layout_marginTop="@dimen/df_martin"
-        android:background="@android:color/white" />
-
-    <RadioButton
-        android:id="@+id/yupax_rb"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/sp2"
-        android:layout_marginLeft="@dimen/df_martin_bi"
-        android:layout_marginRight="@dimen/df_martin_bi"
-        android:layout_marginTop="@dimen/df_martin"
-        android:buttonTint="@android:color/white"
-        android:shadowColor="@android:color/white"
-        android:text="@string/yupax_label"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/select_merchant_text_size" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/df_separate_height"
-        android:layout_below="@id/yupax_rb"
-        android:layout_marginLeft="@dimen/df_martin_bi"
-        android:layout_marginRight="@dimen/df_martin_bi"
-        android:layout_marginTop="@dimen/df_martin"
-        android:background="@android:color/white" />
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
 </RelativeLayout>

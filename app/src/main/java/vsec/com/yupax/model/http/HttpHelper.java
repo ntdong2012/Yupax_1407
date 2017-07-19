@@ -3,9 +3,11 @@ package vsec.com.yupax.model.http;
 import io.reactivex.Flowable;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
+import vsec.com.yupax.model.http.request.MerchantListRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
+import vsec.com.yupax.model.http.response.MerchantListResponse;
 import vsec.com.yupax.model.http.response.Token;
 
 /**
@@ -19,35 +21,15 @@ public interface HttpHelper {
         public String CREATE_USER = "CREATE_USER";
         public String RESEND_PASSWORD = "RESEND_PASSWORD";
         public String CHANGE_PASSWORD = "CHANGE_PASSWORD";
+        public String LIST_MERCHANT = "LIST_MERCHANT";
     }
 
     Flowable<LoginResponse> signIn(LoginRequest loginRequest);
 
     Flowable<Token> resendPassword(ResendPasswordRequest resendPasswordRequest);
 
-
     Flowable<ChangePasswordResponse> changePassword(ChangePasswordRequest changePasswordRequest);
-//
-//    Flowable<LogResponse> getLogByType(String type);
-//
-//    Flowable<List<RoomRp>> getRooms();
-//
-//    Flowable<List<RackRp>> getRacksByRoom(String url);
-//
-//    Flowable<List<SensorRp>> getDevicesByRoom(String url);
-//
-//    Flowable<RoomDetailRp> getRoomDetail(String url);
-//
-//    Flowable<List<CamItem>> getCamsByRoom(String url);
-//
-//    Flowable<List<Command>> getCommandsByHw(String url);
-//
-//    Flowable<CommandResponse> lightControl(String url, LightRequest lightRequest);
-//
-//    Flowable<CommandResponse> doorControl(String url, DoorRq lightRequest);
-//
-//    Flowable<LogResponse> getLogByRoom(String url);
-//
-//    Flowable<Response<Void>> logout(String url);
+
+    Flowable<MerchantListResponse> getListMerchant(MerchantListRequest merchantListRequest);
 
 }

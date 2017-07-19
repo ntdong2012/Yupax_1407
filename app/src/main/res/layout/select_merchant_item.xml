@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/merchant_wrapper"
+    android:layout_height="match_parent">
+
+    <RadioButton
+        android:id="@+id/merchant_rb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sp2"
+        android:layout_marginLeft="@dimen/df_martin_bi"
+        android:layout_marginRight="@dimen/df_martin_bi"
+        android:layout_marginTop="@dimen/df_martin"
+        android:buttonTint="@android:color/white"
+        android:shadowColor="@android:color/white"
+        android:text="@string/yupax_label"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/select_merchant_text_size" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/df_separate_height"
+        android:layout_below="@id/merchant_rb"
+        android:layout_marginLeft="@dimen/df_martin_bi"
+        android:layout_marginRight="@dimen/df_martin_bi"
+        android:layout_marginTop="@dimen/df_martin"
+        android:background="@android:color/white" />
+
+</RelativeLayout>

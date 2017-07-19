@@ -4,9 +4,11 @@ import io.reactivex.Flowable;
 import vsec.com.yupax.model.http.HttpHelper;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
+import vsec.com.yupax.model.http.request.MerchantListRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
+import vsec.com.yupax.model.http.response.MerchantListResponse;
 import vsec.com.yupax.model.http.response.Token;
 import vsec.com.yupax.model.http.response.UserInfoResponse;
 import vsec.com.yupax.model.prefs.PreferencesHelper;
@@ -38,6 +40,11 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Flowable<ChangePasswordResponse> changePassword(ChangePasswordRequest changePasswordRequest) {
         return httpHelper.changePassword(changePasswordRequest);
+    }
+
+    @Override
+    public Flowable<MerchantListResponse> getListMerchant(MerchantListRequest merchantListRequest) {
+        return httpHelper.getListMerchant(merchantListRequest);
     }
 
     @Override

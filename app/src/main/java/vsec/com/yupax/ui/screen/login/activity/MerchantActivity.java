@@ -4,19 +4,24 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatRadioButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.RadioButton;
+import android.widget.ProgressBar;
 
-import butterknife.BindViews;
-import butterknife.OnCheckedChanged;
+import java.util.ArrayList;
+
+import butterknife.BindView;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.MerchantContract;
+import vsec.com.yupax.model.http.response.Merchant;
+import vsec.com.yupax.model.http.response.MerchantListResponse;
 import vsec.com.yupax.presenter.MerchantPresenter;
 import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
-import vsec.com.yupax.utils.Common;
+import vsec.com.yupax.ui.view.adapter.SelectMerchantAdapter;
 
 public class MerchantActivity extends BaseActivity<MerchantPresenter> implements MerchantContract.View {
 
@@ -28,9 +33,14 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
     }
 
 
-    @BindViews({R.id.resun_rb, R.id.vj_rb, R.id.yupax_rb})
-    RadioButton[] merchants;
     private boolean isFirstTime = false;
+    @BindView(R.id.process)
+    ProgressBar progressBar;
+    @BindView(R.id.merchant_rv)
+    RecyclerView merchantRv;
+    RecyclerView.LayoutManager layoutManager;
+    SelectMerchantAdapter merchantAdapter;
+    ArrayList<Merchant> merchants;
 
     @Override
     protected int getLayout() {
@@ -39,20 +49,20 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
 
     @Override
     protected void initEventAndData() {
-        String currentMerchant = mPresenter.getCurrentMerchant();
-        if (currentMerchant.contains(getString(R.string.resun_label))) {
-            merchants[0].setChecked(true);
-        } else if (currentMerchant.contains(getString(R.string.vietjet_label))) {
-            merchants[1].setChecked(true);
-        } else {
-            merchants[2].setChecked(true);
-        }
+        onLoading();
+        layoutManager = new LinearLayoutManager(this);
+        merchantRv.setLayoutManager(layoutManager);
 
+        merchants = new ArrayList<>();
+        merchantAdapter = new SelectMerchantAdapter(this, merchants, new SelectMerchantAdapter.IMerchantSelected() {
+            @Override
+            public void onMerchantSelected(Merchant merchant) {
 
-        for (int i = 0; i < merchants.length; i++) {
-            merchants[i].setOnCheckedChangeListener(mOnCheck);
-        }
+            }
+        });
 
+        merchantRv.setAdapter(merchantAdapter);
+        mPresenter.getListMerchants();
     }
 
     CompoundButton.OnCheckedChangeListener mOnCheck = new CompoundButton.OnCheckedChangeListener() {
@@ -76,60 +86,6 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
         }
     };
 
-
-//    @OnCheckedChanged({R.id.resun_rb, R.id.vj_rb, R.id.yupax_rb})
-//    public void onRadioButtonCheckChanged(CompoundButton button, boolean checked) {
-//        if (checked) {
-//            switch (button.getId()) {
-//                case R.id.resun_rb:
-//                    merchants[0].setChecked(true);
-//                    //mPresenter.setCurrentMerchant(Common.SPF.RESUN_MERCHANT);
-////                    runOnUiThread(new Runnable() {
-////                        @Override
-////                        public void run() {
-////
-////                        }
-////                    });
-//                    break;
-//                case R.id.vj_rb:
-//                    merchants[1].setChecked(true);
-//                    //mPresenter.setCurrentMerchant(Common.SPF.VIETJET_MERCHANT);
-////                    runOnUiThread(new Runnable() {
-////                        @Override
-////                        public void run() {
-////
-////                        }
-////                    });
-//                    break;
-//                case R.id.yupax_rb:
-//                    merchants[2].setChecked(true);
-//                    //mPresenter.setCurrentMerchant(Common.SPF.YUPAX_MERCHANT);
-////                    runOnUiThread(new Runnable() {
-////                        @Override
-////                        public void run() {
-////
-////                        }
-////                    });
-//                    break;
-//            }
-//
-//            if (isFirstTime) {
-//                HomeActivity.callHomeActivity(MerchantActivity.this, new Bundle());
-//                MerchantActivity.this.finish();
-//            }
-//
-////            if (isFirstTime) {
-////                runOnUiThread(new Runnable() {
-////                    @Override
-////                    public void run() {
-////                        HomeActivity.callHomeActivity(MerchantActivity.this, new Bundle());
-////                        MerchantActivity.this.finish();
-////                    }
-////                });
-////            }
-//        }
-//    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -141,19 +97,29 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
 
     }
 
-    @Override
-    public void onGetNotificationSuccess() {
 
+    @Override
+    public void onGetMerchantListSuccess(MerchantListResponse merchantListResponse) {
+        if (merchantListResponse != null && merchantListResponse.getErrorResponse() != null
+                && merchantListResponse.getErrorResponse().getCode().contains("200")) {
+            merchants.clear();
+            ;
+            for (int i = 0; i < merchantListResponse.getMerchants().size(); i++) {
+                merchants.add(merchantListResponse.getMerchants().get(i));
+            }
+            merchantAdapter.notifyDataSetChanged();
+        }
+        onStopLoading();
     }
 
     @Override
     public void onLoading() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onStopLoading() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
