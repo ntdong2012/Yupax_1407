@@ -31,5 +31,8 @@ public interface SignInContract {
 
         void onSaveUserInfo(UserInfoResponse userInfoResponse);
 
+        String getUserName();
+
+        String getUserEmail();
     }
 }

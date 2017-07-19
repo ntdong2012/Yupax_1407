@@ -69,5 +69,15 @@ public class SignInPresenter extends RxPresenter<SignInContract.View> implements
         dataManager.onSaveUserInfo(userInfoResponse);
     }
 
+    @Override
+    public String getUserName() {
+        return dataManager.getUserName();
+    }
+
+    @Override
+    public String getUserEmail() {
+        return dataManager.getEmail();
+    }
+
 
 }

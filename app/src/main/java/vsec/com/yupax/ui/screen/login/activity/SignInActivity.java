@@ -95,7 +95,6 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     }
 
 
-
     @Override
     public void onSignInError() {
 
@@ -123,6 +122,9 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         registerLabelTv.setText(Html.fromHtml(one + " &nbsp;&nbsp;&nbsp;  " + "<font color='#ffffff'><b>" + two + "</b></font>"));
         userNameEdt.requestFocus();
         userNameEdt.requestFocusFromTouch();
+        if (!TextUtils.isEmpty(mPresenter.getUserEmail())) {
+            userNameEdt.setText(mPresenter.getUserEmail());
+        }
 
 
     }

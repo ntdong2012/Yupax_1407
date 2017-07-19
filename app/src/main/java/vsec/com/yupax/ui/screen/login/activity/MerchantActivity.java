@@ -22,6 +22,7 @@ import vsec.com.yupax.model.http.response.MerchantListResponse;
 import vsec.com.yupax.presenter.MerchantPresenter;
 import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
 import vsec.com.yupax.ui.view.adapter.SelectMerchantAdapter;
+import vsec.com.yupax.utils.log.DLog;
 
 public class MerchantActivity extends BaseActivity<MerchantPresenter> implements MerchantContract.View {
 
@@ -57,7 +58,8 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
         merchantAdapter = new SelectMerchantAdapter(this, merchants, new SelectMerchantAdapter.IMerchantSelected() {
             @Override
             public void onMerchantSelected(Merchant merchant) {
-
+                DLog.d("onMerchantSelected");
+                HomeActivity.callHomeActivity(MerchantActivity.this, new Bundle());
             }
         });
 
@@ -103,8 +105,9 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
         if (merchantListResponse != null && merchantListResponse.getErrorResponse() != null
                 && merchantListResponse.getErrorResponse().getCode().contains("200")) {
             merchants.clear();
-            ;
+
             for (int i = 0; i < merchantListResponse.getMerchants().size(); i++) {
+                DLog.d("Merchant : " + merchantListResponse.getMerchants().get(0).getHashcode());
                 merchants.add(merchantListResponse.getMerchants().get(i));
             }
             merchantAdapter.notifyDataSetChanged();
@@ -124,6 +127,6 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
 
     @Override
     protected void initInject() {
-        getActivityComponent(false).inject(this);
+        getActivityComponent(true).inject(this);
     }
 }

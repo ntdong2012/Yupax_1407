@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
@@ -14,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import vsec.com.yupax.R;
 import vsec.com.yupax.model.http.response.Merchant;
+import vsec.com.yupax.utils.log.DLog;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 7/18/17.
@@ -48,10 +50,14 @@ public class SelectMerchantAdapter extends RecyclerView.Adapter<SelectMerchantAd
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Merchant item = merchants.get(position);
         holder.rb.setText(item.getName());
-        holder.merchantWrapper.setOnClickListener(new View.OnClickListener() {
+        holder.rb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View view) {
-                iMerchantSelected.onMerchantSelected(item);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    if (iMerchantSelected != null) {
+                        iMerchantSelected.onMerchantSelected(item);
+                    }
+                }
             }
         });
     }

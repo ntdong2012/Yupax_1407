@@ -23,6 +23,6 @@ public interface YupaxApis {
     @POST("unauth")
     Flowable<ChangePasswordResponse> changePassword(@Body ChangePasswordRequest changePasswordRequest);
 
-    @POST("unauth")
+    @POST("auth")
     Flowable<MerchantListResponse> getMerchants(@Body MerchantListRequest merchantListRequest);
 }
