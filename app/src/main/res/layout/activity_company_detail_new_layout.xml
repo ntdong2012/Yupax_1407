@@ -23,81 +23,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <RelativeLayout
-                android:id="@+id/city_layout"
-                android:layout_width="@dimen/home_city_width_size"
-                android:layout_height="@dimen/df_edt_height"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/df_martin_sm"
-                android:background="@drawable/border_action_bar_item">
-
-                <ImageView
-                    android:id="@+id/down_icon"
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/df_martin_sm"
-                    android:src="@drawable/down_icon_spinner"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/city_tv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/df_martin_sm"
-                    android:layout_marginRight="@dimen/df_martin_sm"
-                    android:layout_toLeftOf="@id/down_icon"
-                    android:gravity="center_vertical|right"
-                    android:paddingLeft="@dimen/df_martin_sm"
-                    android:paddingRight="@dimen/df_martin_sm"
-                    android:textColor="@android:color/white" />
-
-                <Spinner
-                    android:id="@+id/city_spinner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:visibility="invisible" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/search_wrapper"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/title_actionbar"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/df_martin_sm"
-                android:layout_marginRight="@dimen/df_martin_sm"
-                android:layout_toLeftOf="@id/city_layout"
-                android:background="@drawable/border_action_bar_item">
-
-                <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/search_edt"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/df_edt_height"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/df_martin_sm"
-                    android:layout_marginRight="@dimen/df_martin_sm"
-                    android:background="@android:color/transparent"
-                    android:hint="@string/you_find_label"
-                    android:paddingLeft="@dimen/df_martin_sm"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="@android:color/white"
-                    android:textSize="@dimen/actionbar_search_text_size" />
-
-                <ImageView
-                    android:layout_width="20sp"
-                    android:layout_height="20sp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/df_martin_sm"
-                    android:layout_marginRight="@dimen/df_martin"
-                    android:src="@drawable/search_icon" />
-
-            </RelativeLayout>
+                android:layout_centerInParent="true"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/actionbar_back_text_size" />
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>

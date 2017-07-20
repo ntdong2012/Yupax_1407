@@ -75,6 +75,8 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
     TextView phoneTv;
     @BindView(R.id.time_note_tv)
     TextView timeTv;
+    @BindView(R.id.title_actionbar)
+    TextView titleActionbar;
 
     private Store currentStore;
 
@@ -85,6 +87,7 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
         storeAddress.setText(store.getAddress());
         phoneTv.setText(store.getMobile());
         timeTv.setText(store.getOpenTime());
+        titleActionbar.setText(store.getName());
     }
 
 
@@ -92,7 +95,7 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMapView.onCreate(savedInstanceState);
-        mMapView.onResume();// needed to get the map to display immediately
+        mMapView.onResume();
 
         updateStoreHashcodeBrand();
         onLoading();
