@@ -4,11 +4,15 @@ import io.reactivex.Flowable;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
+import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
+import vsec.com.yupax.model.http.request.StoreDetailRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
+import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.MerchantListResponse;
+import vsec.com.yupax.model.http.response.StoreDetailResponse;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/24/2017.
@@ -25,4 +29,10 @@ public interface YupaxApis {
 
     @POST("auth")
     Flowable<MerchantListResponse> getMerchants(@Body MerchantListRequest merchantListRequest);
+
+    @POST("auth-merchant")
+    Flowable<ListStoreResponse> getListStores(@Body ListStoreRequest listStoreRequest);
+
+    @POST("auth-merchant")
+    Flowable<StoreDetailResponse> getStoreDetail(@Body StoreDetailRequest storeDetailRequest);
 }

@@ -7,21 +7,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -41,7 +36,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.security.Permission;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,12 +44,15 @@ import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.HomeFgContract;
+import vsec.com.yupax.model.http.response.ListStoreResponse;
+import vsec.com.yupax.model.http.response.Store;
 import vsec.com.yupax.presenter.HomeFgPresenter;
-import vsec.com.yupax.ui.screen.home.activity.CompanyDetailActivity;
-import vsec.com.yupax.ui.view.adapter.LocationAdapter;
+import vsec.com.yupax.ui.screen.home.activity.StoreDetailActivity;
+import vsec.com.yupax.ui.view.adapter.StoreAdapter;
 import vsec.com.yupax.utils.PerUtils;
 import vsec.com.yupax.utils.ResizeAnimation;
 import vsec.com.yupax.utils.Utils;
+import vsec.com.yupax.utils.log.DLog;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/14/17.
@@ -86,27 +83,29 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     private boolean mMapViewExpanded = false;
 
     @BindView(R.id.address_rv)
-    RecyclerView locationRv;
+    RecyclerView storeRv;
     @BindView(R.id.process)
     ProgressBar progressBar;
-    LocationAdapter locationAdapter;
-    ArrayList<vsec.com.yupax.model.http.response.Location> locations;
+    StoreAdapter storeAdapter;
+    ArrayList<Store> stores;
     RecyclerView.LayoutManager layoutManager;
 
 
     void initLocationList() {
-        locations = new ArrayList<>();
+        stores = new ArrayList<>();
         layoutManager = new LinearLayoutManager(getActivity());
-        locationRv.setLayoutManager(layoutManager);
-        locationAdapter = new LocationAdapter(getActivity(), locations, new LocationAdapter.IItemClick() {
+        storeRv.setLayoutManager(layoutManager);
+        storeAdapter = new StoreAdapter(getActivity(), stores, new StoreAdapter.IItemClick() {
             @Override
-            public void onItemClick(vsec.com.yupax.model.http.response.Location location) {
-                CompanyDetailActivity.callCompanyDetailActivity(getActivity(), new Bundle());
+            public void onItemClick(Store location) {
+                Bundle b = new Bundle();
+                b.putString("ID", location.getStoreBranchHashcode());
+                StoreDetailActivity.callStoreDetailActivity(getActivity(), b);
             }
         });
-        locationRv.setAdapter(locationAdapter);
+        storeRv.setAdapter(storeAdapter);
 
-        locationRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        storeRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -152,16 +151,8 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         tabLayout.addTab(tabLayout.newTab().setText("Đặt chuyến"));
         tabLayout.addTab(tabLayout.newTab().setText("Đặt chỗ"));
         initLocationList();
-
-        Handler handler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                Log.d("ntdong", "handleMessage");
-                onGetLocationSuccess();
-                return false;
-            }
-        });
-        handler.sendEmptyMessageDelayed(1, 2000);
+        onLoading();
+        mPresenter.getListStores("");
     }
 
     public void registerLocationReceiver() {
@@ -358,59 +349,40 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     public void onLocationChanged(Location location) {
         mLastLocation = location;
         if (mLastLocation != null) {
-            Log.d("ntdong", "lat : " + mLastLocation.getLatitude() + " Long: " + mLastLocation.getLongitude());
+            DLog.d("Lat : " + mLastLocation.getLatitude() + " Long: " + mLastLocation.getLongitude());
         } else {
-            Log.d("ntdong", "Lat long null");
+            DLog.d("Lat long null");
         }
         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent("getLocationOK"));
     }
-
-    public void onGetLocationSuccess() {
-        Log.d("ntdong", "onGetLocationSuccess");
-
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "VietJet TravelCare", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "VietJet sáng tạo SkyBoss dành riêng cho bạn", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Dịch vụ hành lý", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Dịch vụ hàng hóa", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ của chúng tôi", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ của chúng tôi", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ của chúng tôi", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-        locations.add(new vsec.com.yupax.model.http.response.Location(R.drawable.product_item_icon, "Công Ty Cổ Phần VietJet Cargo", "Tầng 12 tòa nhà Hải Âu, 39B Trường Sơn", "0.48km", "0979439395", "Giảm giá 30% cho khách hạng vàng sự dụng dịch vụ", false));
-
-        locationAdapter.notifyDataSetChanged();
-
-        if (progressBar != null) {
-            progressBar.setVisibility(View.GONE);
-        }
-    }
-
 
     @Override
     public void useLanguage(String language) {
 
     }
 
-    @Override
-    public void onGetProductItemsSuccess() {
 
+    @Override
+    public void onGetListStoreSuccess(ListStoreResponse listStoreResponse) {
+        DLog.d("onGetListStoreSuccess");
+        stores.clear();
+        if (listStoreResponse != null && listStoreResponse.getErrorResponse() != null && listStoreResponse.getErrorResponse().getCode().contains("200")) {
+            for (int i = 0; i < listStoreResponse.getStores().size(); i++) {
+                stores.add(listStoreResponse.getStores().get(i));
+            }
+        }
+        onStopLoading();
+        storeAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onLoading() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onStopLoading() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
 
@@ -418,7 +390,7 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d("ntdong", "localReceiver");
+            DLog.d("localReceiver");
             if (mGoogleMap != null && mLastLocation != null) {
                 double latitude = mLastLocation.getLatitude();
                 double longitude = mLastLocation.getLongitude();
@@ -437,6 +409,13 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                         .target(new LatLng(latitude, longitude)).zoom(12).build();
                 mGoogleMap.animateCamera(CameraUpdateFactory
                         .newCameraPosition(cameraPosition));
+                if(stores != null && stores.size()>0) {
+                    for (int i = 0; i< stores.size(); i++) {
+                        stores.get(i).setMyLat(latitude);
+                        stores.get(i).setMyLog(longitude);
+                    }
+                    storeAdapter.notifyDataSetChanged();
+                }
             }
         }
     }

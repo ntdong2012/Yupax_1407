@@ -5,6 +5,15 @@ import javax.inject.Inject;
 import vsec.com.yupax.base.RxPresenter;
 import vsec.com.yupax.base.contract.HomeFgContract;
 import vsec.com.yupax.model.DataManager;
+import vsec.com.yupax.model.http.HttpHelper;
+import vsec.com.yupax.model.http.request.ListStoreRequest;
+import vsec.com.yupax.model.http.request.LoginRequest;
+import vsec.com.yupax.model.http.request.UserInfoForLogin;
+import vsec.com.yupax.model.http.response.ListStoreResponse;
+import vsec.com.yupax.model.http.response.LoginResponse;
+import vsec.com.yupax.utils.CommonSubscriber;
+import vsec.com.yupax.utils.RxUtil;
+import vsec.com.yupax.utils.Utils;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 7/9/17.
@@ -21,7 +30,32 @@ public class HomeFgPresenter extends RxPresenter<HomeFgContract.View> implements
 
 
     @Override
-    public void getProductItems() {
+    public void getListStores(String searchKey) {
 
+        ListStoreRequest listStoreRequest = new ListStoreRequest();
+        listStoreRequest = Utils.setupRequestFormat(listStoreRequest);
+
+        listStoreRequest.setServiceName(HttpHelper.ServiceName.LIST_STORE_BRANCH);
+        listStoreRequest.setKeySearch(searchKey);
+        listStoreRequest.setPageIndex(1);
+        listStoreRequest.setPageSize(10);
+        listStoreRequest.setMerchantCode(dataManager.getCurrentMerchant());
+        listStoreRequest.setToken(dataManager.getToken());
+
+        addSubscribe(dataManager.getListStoreBrand(listStoreRequest)
+                .compose(RxUtil.<ListStoreResponse>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<ListStoreResponse>(mView) {
+                    @Override
+                    public void onNext(ListStoreResponse loginResponse) {
+                        mView.onGetListStoreSuccess(loginResponse);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        e.printStackTrace();
+                    }
+                })
+        );
     }
 }

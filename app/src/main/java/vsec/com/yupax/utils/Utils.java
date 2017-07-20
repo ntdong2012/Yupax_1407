@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
+import java.text.DecimalFormat;
+
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
 import vsec.com.yupax.R;
 import vsec.com.yupax.model.http.request.BaseRequest;
+import vsec.com.yupax.utils.log.DLog;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/14/17.
@@ -36,6 +39,33 @@ public class Utils {
         return result;
     }
 
+    public static String calculateDistance(double latOne, double logOne, double latTwo, double logTwo) {
+        int Radius = 6371;// radius of earth in Km
+
+        double dLat = Math.toRadians(latTwo - latOne);
+        double dLon = Math.toRadians(logTwo - logOne);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.cos(Math.toRadians(latOne))
+                * Math.cos(Math.toRadians(latTwo)) * Math.sin(dLon / 2)
+                * Math.sin(dLon / 2);
+        double c = 2 * Math.asin(Math.sqrt(a));
+        double valueResult = Radius * c;
+        double km = valueResult / 1;
+        DecimalFormat newFormat = new DecimalFormat("####");
+        int kmInDec = Integer.valueOf(newFormat.format(km));
+        double meter = valueResult % 1000;
+        int meterInDec = Integer.valueOf(newFormat.format(meter));
+        DLog.d("Radius Value", "" + valueResult + "   KM  " + kmInDec
+                + " Meter   " + meterInDec);
+
+        double orgin = Radius * c;
+        DLog.d("ORIGIN : " + orgin);
+        DecimalFormat result = new DecimalFormat("#.##");
+
+        return result.format(orgin);
+//        return  orgin;
+    }
+
     public static int getMaximumMapHeight(Context context) {
         int max = Utils.getHeightScreen(context) - Utils.getStatusBarHeight(context)
                 - Utils.dpToPx(context.getResources(), (int) context.getResources().getDimension(R.dimen.actionbar_height))
@@ -47,18 +77,17 @@ public class Utils {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, res.getDisplayMetrics());
     }
 
-    public static <T extends BaseRequest> T setupRequestFormat(T t){
+    public static <T extends BaseRequest> T setupRequestFormat(T t) {
         t.setDeviceId("abc1-gdd2-dhc3-akd3");
         t.setDeviceType("Android");
         t.setLanguage("vi");
-//        t.setMerchantCode("B03149B1EB2027152795");
         t.setSecretKey("VsecYupax@2017");
         return t;
     }
 
-    public static void hiddenSoftKeyboard(Context context, View view){
+    public static void hiddenSoftKeyboard(Context context, View view) {
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }

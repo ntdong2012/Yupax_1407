@@ -120,10 +120,14 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         String one = getString(R.string.dont_have_account);
         String two = getString(R.string.register_label);
         registerLabelTv.setText(Html.fromHtml(one + " &nbsp;&nbsp;&nbsp;  " + "<font color='#ffffff'><b>" + two + "</b></font>"));
-        userNameEdt.requestFocus();
-        userNameEdt.requestFocusFromTouch();
+
         if (!TextUtils.isEmpty(mPresenter.getUserEmail())) {
             userNameEdt.setText(mPresenter.getUserEmail());
+            passwordEdt.requestFocus();
+            passwordEdt.requestFocusFromTouch();
+        } else {
+            userNameEdt.requestFocus();
+            userNameEdt.requestFocusFromTouch();
         }
 
 

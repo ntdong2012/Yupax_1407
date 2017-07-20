@@ -11,7 +11,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -30,15 +35,18 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;
-import vsec.com.yupax.base.contract.CompanyContract;
-import vsec.com.yupax.presenter.CompanyPresenter;
+import vsec.com.yupax.base.contract.StoreDetailContract;
+import vsec.com.yupax.model.http.response.Store;
+import vsec.com.yupax.model.http.response.StoreDetailResponse;
+import vsec.com.yupax.presenter.StoreDetailPresenter;
+import vsec.com.yupax.utils.Utils;
 import vsec.com.yupax.utils.log.DLog;
 
-public class CompanyDetailActivity extends BaseActivity<CompanyPresenter> implements CompanyContract.View, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
+public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> implements StoreDetailContract.View, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
-    public static void callCompanyDetailActivity(Context context, Bundle bundle) {
-        Intent intent = new Intent(context, CompanyDetailActivity.class);
+    public static void callStoreDetailActivity(Context context, Bundle bundle) {
+        Intent intent = new Intent(context, StoreDetailActivity.class);
         intent.putExtra("home_data", bundle);
         context.startActivity(intent);
         ((Activity) context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
@@ -51,14 +59,54 @@ public class CompanyDetailActivity extends BaseActivity<CompanyPresenter> implem
     GoogleApiClient mGoogleApiClient;
     GoogleMap mGoogleMap;
     LocationRequest locationRequest;
+    private String storeHashcodeBrand;
+    @BindView(R.id.process)
+    ProgressBar progressBar;
+
+    @BindView(R.id.com_iv)
+    ImageView storeImv;
+    @BindView(R.id.com_name_tv)
+    TextView storeName;
+    @BindView(R.id.com_address_tv)
+    TextView storeAddress;
+    @BindView(R.id.address_value_tv)
+    TextView distanceTv;
+    @BindView(R.id.phone_value_tv)
+    TextView phoneTv;
+    @BindView(R.id.time_note_tv)
+    TextView timeTv;
+
+    private Store currentStore;
+
+    void updateStoreDetailUI(Store store) {
+        DLog.d("LOGO: " + store.getImages());
+        Glide.with(this).load("http://yupax.com" + store.getImages()).into(storeImv);
+        storeName.setText(store.getName());
+        storeAddress.setText(store.getAddress());
+        phoneTv.setText(store.getMobile());
+        timeTv.setText(store.getOpenTime());
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mMapView.onCreate(savedInstanceState);
-
         mMapView.onResume();// needed to get the map to display immediately
+
+        updateStoreHashcodeBrand();
+        onLoading();
+        mPresenter.getStoreDetail(storeHashcodeBrand);
     }
+
+    private void updateStoreHashcodeBrand() {
+        if (getIntent() != null) {
+            Bundle b = getIntent().getBundleExtra("home_data");
+            storeHashcodeBrand = b.getString("ID");
+            DLog.d("Store: " + storeHashcodeBrand);
+        }
+    }
+
 
     @Override
     public void onStart() {
@@ -121,23 +169,28 @@ public class CompanyDetailActivity extends BaseActivity<CompanyPresenter> implem
     }
 
     @Override
-    public void onGetDetailSuccess() {
-
+    public void onGetStoreDetailSuccess(StoreDetailResponse storeDetailResponse) {
+        DLog.d("onGetStoreDetailSuccess");
+        onStopLoading();
+        if (storeDetailResponse.getError().getCode().equals("200")) {
+            currentStore = storeDetailResponse.getStore();
+            updateStoreDetailUI(storeDetailResponse.getStore());
+        }
     }
 
     @Override
     public void onLoading() {
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onStopLoading() {
-
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
     protected void initInject() {
-
+        getActivityComponent(false).inject(this);
     }
 
     @Override
@@ -169,8 +222,6 @@ public class CompanyDetailActivity extends BaseActivity<CompanyPresenter> implem
         } else {
             DLog.d("Lat long null");
         }
-
-        Log.d("ntdong", "localReceiver");
         if (mGoogleMap != null && mLastLocation != null) {
             Log.d("ntdong", "localReceiver23234234234");
             double latitude = mLastLocation.getLatitude();
@@ -190,7 +241,12 @@ public class CompanyDetailActivity extends BaseActivity<CompanyPresenter> implem
                     .target(new LatLng(latitude, longitude)).zoom(12).build();
             mGoogleMap.animateCamera(CameraUpdateFactory
                     .newCameraPosition(cameraPosition));
+            if (currentStore != null) {
+                distanceTv.setText(Utils.calculateDistance(latitude, longitude, Double.parseDouble(currentStore.getLat()),
+                        Double.parseDouble(currentStore.getLg())) + " km");
+            }
         }
+        ;
     }
 
     @Override

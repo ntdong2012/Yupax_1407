@@ -3,12 +3,16 @@ package vsec.com.yupax.model;
 import io.reactivex.Flowable;
 import vsec.com.yupax.model.http.HttpHelper;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
+import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
+import vsec.com.yupax.model.http.request.StoreDetailRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
+import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.MerchantListResponse;
+import vsec.com.yupax.model.http.response.StoreDetailResponse;
 import vsec.com.yupax.model.http.response.Token;
 import vsec.com.yupax.model.http.response.UserInfoResponse;
 import vsec.com.yupax.model.prefs.PreferencesHelper;
@@ -45,6 +49,16 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Flowable<MerchantListResponse> getListMerchant(MerchantListRequest merchantListRequest) {
         return httpHelper.getListMerchant(merchantListRequest);
+    }
+
+    @Override
+    public Flowable<ListStoreResponse> getListStoreBrand(ListStoreRequest listStoreRequest) {
+        return httpHelper.getListStoreBrand(listStoreRequest);
+    }
+
+    @Override
+    public Flowable<StoreDetailResponse> getStoreDetail(StoreDetailRequest storeDetailRequest) {
+        return httpHelper.getStoreDetail(storeDetailRequest);
     }
 
     @Override

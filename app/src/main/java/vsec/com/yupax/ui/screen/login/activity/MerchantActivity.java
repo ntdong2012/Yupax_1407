@@ -60,6 +60,8 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
             public void onMerchantSelected(Merchant merchant) {
                 DLog.d("onMerchantSelected");
                 HomeActivity.callHomeActivity(MerchantActivity.this, new Bundle());
+                mPresenter.setCurrentMerchant(merchant.getHashcode());
+                finish();
             }
         });
 

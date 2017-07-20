@@ -10,6 +10,7 @@ import vsec.com.yupax.ui.screen.home.activity.ChangeProfileActivity;
 import vsec.com.yupax.ui.screen.home.activity.EventDetailActivity;
 import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
 import vsec.com.yupax.ui.screen.home.activity.RateActivity;
+import vsec.com.yupax.ui.screen.home.activity.StoreDetailActivity;
 import vsec.com.yupax.ui.screen.login.activity.LanguageActivity;
 import vsec.com.yupax.ui.screen.login.activity.MerchantActivity;
 import vsec.com.yupax.ui.screen.login.activity.RegisterActivity;
@@ -45,4 +46,6 @@ public interface ActivityComponent {
     void inject(RegisterActivity registerActivity);
 
     void inject(MerchantActivity merchantActivity);
+
+    void inject(StoreDetailActivity storeDetailActivity);
 }
