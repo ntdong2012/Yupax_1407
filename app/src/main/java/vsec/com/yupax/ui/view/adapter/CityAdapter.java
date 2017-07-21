@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import vsec.com.yupax.R;
-import vsec.com.yupax.model.http.response.City;
+import vsec.com.yupax.model.http.response.Province;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/13/17.
@@ -19,10 +19,10 @@ import vsec.com.yupax.model.http.response.City;
 public class CityAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<City> cities;
+    private ArrayList<Province> cities;
     private LayoutInflater inflater;
 
-    public CityAdapter(Context context, ArrayList<City> cities) {
+    public CityAdapter(Context context, ArrayList<Province> cities) {
         this.context = context;
         this.cities = cities;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -47,7 +47,7 @@ public class CityAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = inflater.inflate(R.layout.city_item_actionbar, viewGroup, false);
 
-        ((TextView) view.findViewById(R.id.text1)).setText(cities.get(i).getCityName());
+        ((TextView) view.findViewById(R.id.text1)).setText(cities.get(i).getName());
 
         return view;
     }

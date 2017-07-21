@@ -11,6 +11,7 @@ import vsec.com.yupax.model.http.request.MerchantListRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
 import vsec.com.yupax.model.http.response.GetCategoriesResponse;
+import vsec.com.yupax.model.http.response.GetProvincesResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.MerchantListResponse;
@@ -40,4 +41,7 @@ public interface YupaxApis {
 
     @POST("service")
     Flowable<GetCategoriesResponse> getCategories(@Body BaseRequest baseRequest);
+
+    @POST("service")
+    Flowable<GetProvincesResponse> getProvinces(@Body BaseRequest baseRequest);
 }

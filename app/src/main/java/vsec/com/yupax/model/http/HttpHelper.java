@@ -10,6 +10,7 @@ import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
 import vsec.com.yupax.model.http.response.GetCategoriesResponse;
+import vsec.com.yupax.model.http.response.GetProvincesResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.MerchantListResponse;
@@ -31,6 +32,7 @@ public interface HttpHelper {
         public String LIST_STORE_BRANCH = "LIST_STORE_BRANCH";
         public String DETAIL_STORE_BRANCH = "DETAIL_STORE_BRANCH";
         public String LIST_CATEGORY = "LIST_CATEGORY";
+        public String LIST_PROVINCE = "LIST_PROVINCE";
     }
 
     Flowable<LoginResponse> signIn(LoginRequest loginRequest);
@@ -46,5 +48,7 @@ public interface HttpHelper {
     Flowable<StoreDetailResponse> getStoreDetail(StoreDetailRequest storeDetailRequest);
 
     Flowable<GetCategoriesResponse> getCategories(BaseRequest baseRequest);
+
+    Flowable<GetProvincesResponse> getProvinces(BaseRequest baseRequest);
 
 }

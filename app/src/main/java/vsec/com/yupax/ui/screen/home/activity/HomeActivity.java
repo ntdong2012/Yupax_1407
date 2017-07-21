@@ -27,8 +27,9 @@ import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.HomeContract;
-import vsec.com.yupax.model.http.response.City;
 import vsec.com.yupax.model.http.response.GetCategoriesResponse;
+import vsec.com.yupax.model.http.response.GetProvincesResponse;
+import vsec.com.yupax.model.http.response.Province;
 import vsec.com.yupax.presenter.HomePresenter;
 import vsec.com.yupax.ui.screen.home.fragment.ExchangeFg;
 import vsec.com.yupax.ui.screen.home.fragment.HomeFg;
@@ -78,7 +79,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     ImageView backIconIv;
 
 
-    ArrayList<City> cities;
+    ArrayList<Province> cities;
     CityAdapter cityAdapter;
     FragmentManager fm;
 
@@ -129,16 +130,15 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
         cityAdapter = new CityAdapter(this, cities);
         citySpinner.setAdapter(cityAdapter);
 
-        cities.add(new City(0, "Hà nội"));
-        cities.add(new City(1, "Đà nẵng"));
-        cities.add(new City(2, "Sài gòn"));
+//        cities.add(new City(0, "Hà nội"));
+//        cities.add(new City(1, "Đà nẵng"));
+//        cities.add(new City(2, "Sài gòn"));
 
         cityAdapter.notifyDataSetChanged();
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("ntdong", "cityName: " + cities.get(i).getCityName());
-                cityTv.setText("" + cities.get(i).getCityName());
+                cityTv.setText("" + cities.get(i).getName());
             }
 
             @Override
@@ -396,6 +396,8 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
         yupaxIv.setVisibility(View.GONE);
         cityLayout.setVisibility(View.VISIBLE);
         searchWrapperRl.setVisibility(View.VISIBLE);
+
+        mPresenter.getProvinces();
     }
 
     @Override
@@ -409,10 +411,21 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     }
 
 
-
     @Override
     public void onGetCategoriesSuccess(GetCategoriesResponse getCategoriesResponse) {
 
+    }
+
+    @Override
+    public void onGetProvincesSuccess(GetProvincesResponse getProvincesResponse) {
+        if (getProvincesResponse != null && getProvincesResponse.getErrorResponse() != null
+                && getProvincesResponse.getErrorResponse().getCode().contains("200")) {
+            cities.clear();
+            for (int i = 0; i < getProvincesResponse.getProvinces().size(); i++) {
+                cities.add(getProvincesResponse.getProvinces().get(i));
+            }
+            cityAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

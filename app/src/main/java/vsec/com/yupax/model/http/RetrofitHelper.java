@@ -13,6 +13,7 @@ import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
 import vsec.com.yupax.model.http.response.GetCategoriesResponse;
+import vsec.com.yupax.model.http.response.GetProvincesResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.MerchantListResponse;
@@ -65,5 +66,10 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<GetCategoriesResponse> getCategories(BaseRequest baseRequest) {
         return yupaxApis.getCategories(baseRequest);
+    }
+
+    @Override
+    public Flowable<GetProvincesResponse> getProvinces(BaseRequest baseRequest) {
+        return yupaxApis.getProvinces(baseRequest);
     }
 }

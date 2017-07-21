@@ -8,8 +8,10 @@ import vsec.com.yupax.model.DataManager;
 import vsec.com.yupax.model.http.HttpHelper;
 import vsec.com.yupax.model.http.request.BaseRequest;
 import vsec.com.yupax.model.http.response.GetCategoriesResponse;
+import vsec.com.yupax.model.http.response.GetProvincesResponse;
 import vsec.com.yupax.utils.CommonSubscriber;
 import vsec.com.yupax.utils.RxUtil;
+import vsec.com.yupax.utils.Utils;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/24/2017.
@@ -49,6 +51,24 @@ public class HomePresenter extends RxPresenter<HomeContract.View> implements Hom
 
     @Override
     public void getProvinces() {
+        BaseRequest baseRequest= new BaseRequest();
+        baseRequest.setServiceName(HttpHelper.ServiceName.LIST_PROVINCE);
+        baseRequest = Utils.setupRequestFormat(baseRequest);
 
+        addSubscribe(dataManager.getProvinces(baseRequest)
+                .compose(RxUtil.<GetProvincesResponse>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<GetProvincesResponse>(mView) {
+                    @Override
+                    public void onNext(GetProvincesResponse loginResponse) {
+                        mView.onGetProvincesSuccess(loginResponse);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        e.printStackTrace();
+                    }
+                })
+        );
     }
 }

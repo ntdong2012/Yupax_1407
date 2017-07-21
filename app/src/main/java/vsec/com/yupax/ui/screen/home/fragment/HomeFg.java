@@ -146,16 +146,11 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     protected void initEventAndData() {
 
         initMapView();
-
-        tabLayout.addTab(tabLayout.newTab().setText("Dịch vụ chuyến bay"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tất cả"), true);
-        tabLayout.addTab(tabLayout.newTab().setText("Hàng hóa"));
-        tabLayout.addTab(tabLayout.newTab().setText("Đặt chuyến"));
-        tabLayout.addTab(tabLayout.newTab().setText("Đặt chỗ"));
-        initLocationList();
-        onLoading();
         mPresenter.getListStores("");
         mPresenter.getCategories();
+        initLocationList();
+        onLoading();
+
     }
 
     public void registerLocationReceiver() {
@@ -352,9 +347,7 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     public void onLocationChanged(Location location) {
         mLastLocation = location;
         if (mLastLocation != null) {
-            DLog.d("Lat : " + mLastLocation.getLatitude() + " Long: " + mLastLocation.getLongitude());
-        } else {
-            DLog.d("Lat long null");
+            return;
         }
         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent("getLocationOK"));
     }
@@ -396,7 +389,9 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
         if (getCategoriesResponse != null && getCategoriesResponse.getErrorResponse() != null
                 && getCategoriesResponse.getErrorResponse().getCode().contains("200")) {
-
+            for (int i = 0; i< getCategoriesResponse.getCategories().size(); i++) {
+                tabLayout.addTab(tabLayout.newTab().setText(getCategoriesResponse.getCategories().get(i).getName()));
+            }
         } else {
             Toast.makeText(getActivity(), getCategoriesResponse.getErrorResponse().getMessage(), Toast.LENGTH_SHORT).show();
         }

@@ -11,6 +11,7 @@ import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
 import vsec.com.yupax.model.http.response.GetCategoriesResponse;
+import vsec.com.yupax.model.http.response.GetProvincesResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.MerchantListResponse;
@@ -66,6 +67,11 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Flowable<GetCategoriesResponse> getCategories(BaseRequest baseRequest) {
         return httpHelper.getCategories(baseRequest);
+    }
+
+    @Override
+    public Flowable<GetProvincesResponse> getProvinces(BaseRequest baseRequest) {
+        return httpHelper.getProvinces(baseRequest);
     }
 
 

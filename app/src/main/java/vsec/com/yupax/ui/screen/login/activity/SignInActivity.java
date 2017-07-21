@@ -53,8 +53,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     void onCallLoginAction() {
         String userName = userNameEdt.getText().toString();
         String passWord = passwordEdt.getText().toString();
-
-
+        userName = "thaihoanganh.1990@gmail.com";
+        passWord = "12345678";
         if (TextUtils.isEmpty(userName)) {
             AnimationUtils.shake(this, userNameEdt);
             return;
