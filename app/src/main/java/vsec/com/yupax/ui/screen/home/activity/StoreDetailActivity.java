@@ -77,17 +77,23 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
     TextView timeTv;
     @BindView(R.id.title_actionbar)
     TextView titleActionbar;
+    @BindView(R.id.sale_tv_one)
+    TextView saleTv;
+
+    @BindView(R.id.time_status_tv)
+    TextView timeStatus;
 
     private Store currentStore;
 
     void updateStoreDetailUI(Store store) {
         DLog.d("LOGO: " + store.getImages());
-        Glide.with(this).load("http://yupax.com" + store.getImages()).into(storeImv);
+        Glide.with(this).load(store.getImages()).into(storeImv);
         storeName.setText(store.getName());
         storeAddress.setText(store.getAddress());
         phoneTv.setText(store.getMobile());
-        timeTv.setText(store.getOpenTime());
+        timeStatus.setText(store.getOpenTime());
         titleActionbar.setText(store.getName());
+        saleTv.setText("" + store.getDescription());
     }
 
 
@@ -149,7 +155,7 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
         }
     }
 
-    @OnClick(R.id.back_icon)
+    @OnClick(R.id.back_icon_iv)
     @Override
     public void onBackPressed() {
         super.onBackPressed();

@@ -16,6 +16,16 @@ public class ListStoreRequest extends BaseRequest {
     private String keySearch;
     @SerializedName("token")
     private String token;
+    @SerializedName("categoryId")
+    private int categoryId;
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
 
     public int getPageIndex() {
         return pageIndex;

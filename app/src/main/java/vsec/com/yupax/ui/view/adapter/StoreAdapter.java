@@ -1,8 +1,8 @@
 package vsec.com.yupax.ui.view.adapter;
 
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vsec.com.yupax.R;
-import vsec.com.yupax.model.http.response.Location;
 import vsec.com.yupax.model.http.response.Store;
 import vsec.com.yupax.utils.Utils;
 
@@ -61,7 +60,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         holder.locationLabelTv.setText("");
         holder.messageTv.setText("");
 
-        Glide.with(context).load("http://yupax.com" + store.getLogo()).into(holder.addressIcon);
+        Glide.with(context).load(store.getLogo()).into(holder.addressIcon);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,9 +68,16 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
             }
         });
 
+
         if (store.getMyLat() != 0 && store.getMyLog() != 0) {
             holder.locationLabelTv.setText(Utils.calculateDistance(store.getMyLat(), store.getMyLog(), Double.parseDouble(store.getLat()), Double.parseDouble(store.getLg()))
                     + " km");
+        }
+
+        if (!TextUtils.isEmpty(store.getPromotion())) {
+            holder.messageTv.setText("" + store.getPromotion());
+        } else {
+            holder.messageTv.setText("" + store.getDescription());
         }
 
     }

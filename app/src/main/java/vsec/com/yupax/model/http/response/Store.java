@@ -44,6 +44,27 @@ public class Store {
     @SerializedName("name")
     private String name;
 
+    @SerializedName("promotion")
+    private String promotion;
+    @SerializedName("description")
+    private String description;
+
+    public String getPromotion() {
+        return promotion;
+    }
+
+    public void setPromotion(String promotion) {
+        this.promotion = promotion;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getImages() {
         return images;
     }

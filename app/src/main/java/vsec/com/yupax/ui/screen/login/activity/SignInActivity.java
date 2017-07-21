@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -88,10 +89,14 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @Override
     public void onSignInSuccess(LoginResponse loginResponse) {
         onStopLoading();
-        DLog.d("onSignInSuccess " + loginResponse.getUserInfo().getToken());
-        mPresenter.onSaveUserInfo(loginResponse.getUserInfo());
-        this.finish();
-        MerchantActivity.callMerchantActivity(this, new Bundle());
+        if (loginResponse != null && loginResponse.getError().getCode().contains("200")) {
+            DLog.d("onSignInSuccess " + loginResponse.getUserInfo().getToken());
+            mPresenter.onSaveUserInfo(loginResponse.getUserInfo());
+            this.finish();
+            MerchantActivity.callMerchantActivity(this, new Bundle());
+        } else {
+            Toast.makeText(this, loginResponse.getError().getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 

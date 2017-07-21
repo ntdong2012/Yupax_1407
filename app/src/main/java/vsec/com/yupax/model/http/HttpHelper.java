@@ -1,6 +1,7 @@
 package vsec.com.yupax.model.http;
 
 import io.reactivex.Flowable;
+import vsec.com.yupax.model.http.request.BaseRequest;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
@@ -8,6 +9,7 @@ import vsec.com.yupax.model.http.request.MerchantListRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
+import vsec.com.yupax.model.http.response.GetCategoriesResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.MerchantListResponse;
@@ -28,6 +30,7 @@ public interface HttpHelper {
         public String LIST_MERCHANT = "LIST_MERCHANT";
         public String LIST_STORE_BRANCH = "LIST_STORE_BRANCH";
         public String DETAIL_STORE_BRANCH = "DETAIL_STORE_BRANCH";
+        public String LIST_CATEGORY = "LIST_CATEGORY";
     }
 
     Flowable<LoginResponse> signIn(LoginRequest loginRequest);
@@ -41,5 +44,7 @@ public interface HttpHelper {
     Flowable<ListStoreResponse> getListStoreBrand(ListStoreRequest listStoreRequest);
 
     Flowable<StoreDetailResponse> getStoreDetail(StoreDetailRequest storeDetailRequest);
+
+    Flowable<GetCategoriesResponse> getCategories(BaseRequest baseRequest);
 
 }

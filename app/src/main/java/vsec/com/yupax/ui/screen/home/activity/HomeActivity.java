@@ -28,6 +28,7 @@ import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.HomeContract;
 import vsec.com.yupax.model.http.response.City;
+import vsec.com.yupax.model.http.response.GetCategoriesResponse;
 import vsec.com.yupax.presenter.HomePresenter;
 import vsec.com.yupax.ui.screen.home.fragment.ExchangeFg;
 import vsec.com.yupax.ui.screen.home.fragment.HomeFg;
@@ -407,8 +408,15 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
         getActivityComponent(false).inject(this);
     }
 
+
+
     @Override
-    public void onGetCatalogSuccess() {
+    public void onGetCategoriesSuccess(GetCategoriesResponse getCategoriesResponse) {
+
+    }
+
+    @Override
+    public void getProvincesSuccess() {
 
     }
 

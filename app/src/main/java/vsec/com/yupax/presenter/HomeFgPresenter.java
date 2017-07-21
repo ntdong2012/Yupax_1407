@@ -6,11 +6,10 @@ import vsec.com.yupax.base.RxPresenter;
 import vsec.com.yupax.base.contract.HomeFgContract;
 import vsec.com.yupax.model.DataManager;
 import vsec.com.yupax.model.http.HttpHelper;
+import vsec.com.yupax.model.http.request.BaseRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
-import vsec.com.yupax.model.http.request.LoginRequest;
-import vsec.com.yupax.model.http.request.UserInfoForLogin;
+import vsec.com.yupax.model.http.response.GetCategoriesResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
-import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.utils.CommonSubscriber;
 import vsec.com.yupax.utils.RxUtil;
 import vsec.com.yupax.utils.Utils;
@@ -38,6 +37,7 @@ public class HomeFgPresenter extends RxPresenter<HomeFgContract.View> implements
         listStoreRequest.setServiceName(HttpHelper.ServiceName.LIST_STORE_BRANCH);
         listStoreRequest.setKeySearch(searchKey);
         listStoreRequest.setPageIndex(1);
+        listStoreRequest.setCategoryId(0);
         listStoreRequest.setPageSize(10);
         listStoreRequest.setMerchantCode(dataManager.getCurrentMerchant());
         listStoreRequest.setToken(dataManager.getToken());
@@ -57,5 +57,29 @@ public class HomeFgPresenter extends RxPresenter<HomeFgContract.View> implements
                     }
                 })
         );
+    }
+
+    @Override
+    public void getCategories() {
+        BaseRequest baseRequest = new BaseRequest();
+        baseRequest.setServiceName(HttpHelper.ServiceName.LIST_CATEGORY);
+        baseRequest = Utils.setupRequestFormat(baseRequest);
+
+        addSubscribe(dataManager.getCategories(baseRequest)
+                .compose(RxUtil.<GetCategoriesResponse>rxSchedulerHelper())
+                .subscribeWith(new CommonSubscriber<GetCategoriesResponse>(mView) {
+                    @Override
+                    public void onNext(GetCategoriesResponse loginResponse) {
+                        mView.onGetCategoriesSuccess(loginResponse);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        e.printStackTrace();
+                    }
+                })
+        );
+
     }
 }

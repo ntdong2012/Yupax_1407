@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -44,6 +45,7 @@ import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.HomeFgContract;
+import vsec.com.yupax.model.http.response.GetCategoriesResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.Store;
 import vsec.com.yupax.presenter.HomeFgPresenter;
@@ -153,6 +155,7 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         initLocationList();
         onLoading();
         mPresenter.getListStores("");
+        mPresenter.getCategories();
     }
 
     public void registerLocationReceiver() {
@@ -370,6 +373,8 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
             for (int i = 0; i < listStoreResponse.getStores().size(); i++) {
                 stores.add(listStoreResponse.getStores().get(i));
             }
+        } else {
+            Toast.makeText(getActivity(), listStoreResponse.getErrorResponse().getMessage(), Toast.LENGTH_SHORT).show();
         }
         onStopLoading();
         storeAdapter.notifyDataSetChanged();
@@ -383,6 +388,18 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     @Override
     public void onStopLoading() {
         progressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onGetCategoriesSuccess(GetCategoriesResponse getCategoriesResponse) {
+        DLog.d("onGetCategoriesSuccess");
+
+        if (getCategoriesResponse != null && getCategoriesResponse.getErrorResponse() != null
+                && getCategoriesResponse.getErrorResponse().getCode().contains("200")) {
+
+        } else {
+            Toast.makeText(getActivity(), getCategoriesResponse.getErrorResponse().getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -409,8 +426,8 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                         .target(new LatLng(latitude, longitude)).zoom(12).build();
                 mGoogleMap.animateCamera(CameraUpdateFactory
                         .newCameraPosition(cameraPosition));
-                if(stores != null && stores.size()>0) {
-                    for (int i = 0; i< stores.size(); i++) {
+                if (stores != null && stores.size() > 0) {
+                    for (int i = 0; i < stores.size(); i++) {
                         stores.get(i).setMyLat(latitude);
                         stores.get(i).setMyLog(longitude);
                     }
