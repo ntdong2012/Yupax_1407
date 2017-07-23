@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/control_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/df_martin_sm"
+        android:visibility="gone">
+
+
+        <RelativeLayout
+            android:id="@+id/sort_layout"
+            android:layout_width="@dimen/home_city_width_size"
+            android:layout_height="@dimen/df_edt_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/df_martin_sm"
+            android:background="@drawable/default_edt_border">
+
+            <ImageView
+                android:id="@+id/down_icon"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/df_martin_sm"
+                android:src="@drawable/down_arrow_button"
+                android:tint="@android:color/black"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/sort_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/down_icon"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/df_martin_sm"
+                android:textColor="@color/colorPrimary" />
+
+            <Spinner
+                android:id="@+id/sort_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/search_rl"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/df_martin_sm"
+            android:layout_marginRight="@dimen/df_martin_sm"
+            android:layout_toLeftOf="@id/sort_layout"
+            android:background="@drawable/border_search">
+
+            <ImageView
+                android:id="@+id/search_icon_iv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/df_martin_sm"
+                android:paddingBottom="@dimen/df_martin_sm"
+                android:paddingTop="@dimen/df_martin_sm"
+                android:src="@drawable/search_ico" />
+
+            <EditText
+                android:id="@+id/search_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/df_martin_sm"
+                android:layout_marginRight="@dimen/df_martin_sm"
+                android:layout_toRightOf="@id/search_icon_iv"
+                android:background="@android:color/transparent"
+                android:cursorVisible="false"
+                android:hint="@string/search_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/process"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gift_recycleview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/control_layout"
+        android:layout_marginTop="@dimen/df_martin_sm" />
+</RelativeLayout>
