@@ -10,6 +10,8 @@ import vsec.com.yupax.R;
 import vsec.com.yupax.app.YupaxApps;
 import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.ForgotPasswordContract;
+import vsec.com.yupax.model.http.response.ActiveUserResponse;
+import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.presenter.ForgotPasswordPresenter;
 
 /**
@@ -47,10 +49,19 @@ public class ForgotPasswordFg extends BaseFragment<ForgotPasswordPresenter> impl
 
     }
 
+
+
     @Override
-    public void onGetPasswordSuccess() {
+    public void onGetPasswordSuccess(BaseResponse baseResponse) {
 
     }
+
+    @Override
+    public void onActiveUserSuccess(ActiveUserResponse baseResponse) {
+
+    }
+
+
 
     @Override
     public void onLoading() {

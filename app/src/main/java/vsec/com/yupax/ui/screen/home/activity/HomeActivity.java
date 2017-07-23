@@ -6,14 +6,18 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -40,6 +44,8 @@ import vsec.com.yupax.ui.view.adapter.CityAdapter;
 import vsec.com.yupax.ui.view.customview.CircularTextView;
 import vsec.com.yupax.ui.view.dialog.RateDialog;
 import vsec.com.yupax.utils.Common;
+import vsec.com.yupax.utils.Utils;
+import vsec.com.yupax.utils.log.DLog;
 
 public class HomeActivity extends BaseActivity<HomePresenter> implements HomeContract.View {
 
@@ -93,6 +99,9 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     @BindView(R.id.floating_icon)
     FloatingActionButton floatingActionButton;
 
+    private String provinceID = "";
+    private String searchKey = "";
+
 
     @Override
     protected int getLayout() {
@@ -103,6 +112,18 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     protected void initEventAndData() {
         renderView();
         initValue();
+
+        searchEdt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    onSearchClicked();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @OnClick(R.id.floating_icon)
@@ -124,21 +145,38 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     }
 
 
+    @OnClick(R.id.search_icon_iv)
+    void onSearchClicked() {
+        Utils.hiddenSoftKeyboard(this, searchEdt);
+        searchKey = searchEdt.getText().toString();
+        if (!TextUtils.isEmpty(searchKey)) {
+            FragmentManager fm = getSupportFragmentManager();
+            Fragment f = fm.findFragmentById(R.id.home_fg);
+            if (f instanceof HomeFg) {
+                ((HomeFg) f).updateProvinceID(provinceID, searchKey);
+                searchEdt.setText("");
+            }
+        }
+    }
+
     void initRegionSpinner() {
 
         cities = new ArrayList<>();
         cityAdapter = new CityAdapter(this, cities);
         citySpinner.setAdapter(cityAdapter);
 
-//        cities.add(new City(0, "Hà nội"));
-//        cities.add(new City(1, "Đà nẵng"));
-//        cities.add(new City(2, "Sài gòn"));
-
         cityAdapter.notifyDataSetChanged();
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cityTv.setText("" + cities.get(i).getName());
+                provinceID = cities.get(i).getId();
+                DLog.d("ProvinceID: " + provinceID);
+                FragmentManager fm = getSupportFragmentManager();
+                Fragment f = fm.findFragmentById(R.id.home_fg);
+                if (f instanceof HomeFg) {
+                    ((HomeFg) f).updateProvinceID(provinceID, searchKey);
+                }
             }
 
             @Override

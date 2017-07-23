@@ -33,6 +33,10 @@ public interface SignInContract {
 
         String getUserName();
 
+        void onSaveLoginState(boolean isSaved);
+
         String getUserEmail();
+
+        boolean getSaveLoginState();
     }
 }

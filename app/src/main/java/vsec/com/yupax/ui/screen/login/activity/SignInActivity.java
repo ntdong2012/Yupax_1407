@@ -9,6 +9,7 @@ import android.text.Html;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     AppCompatEditText passwordEdt;
     @BindView(R.id.process)
     ProgressBar progressBar;
+    @BindView(R.id.save_login_states_radio_btn)
+    RadioButton saveLoginStateRb;
 
 
     public static void callSignInActivity(Context context, Bundle bundle) {
@@ -53,8 +56,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     void onCallLoginAction() {
         String userName = userNameEdt.getText().toString();
         String passWord = passwordEdt.getText().toString();
-        userName = "thaihoanganh.1990@gmail.com";
-        passWord = "12345678";
+//        userName = "thaihoanganh.1990@gmail.com";
+//        passWord = "12345678";
         if (TextUtils.isEmpty(userName)) {
             AnimationUtils.shake(this, userNameEdt);
             return;
@@ -92,6 +95,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
         if (loginResponse != null && loginResponse.getError().getCode().contains("200")) {
             DLog.d("onSignInSuccess " + loginResponse.getUserInfo().getToken());
             mPresenter.onSaveUserInfo(loginResponse.getUserInfo());
+            mPresenter.onSaveLoginState(saveLoginStateRb.isChecked());
             this.finish();
             MerchantActivity.callMerchantActivity(this, new Bundle());
         } else {
@@ -122,6 +126,13 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
     @Override
     protected void initEventAndData() {
+
+        boolean isSaveLogin = mPresenter.getSaveLoginState();
+        if (isSaveLogin) {
+            MerchantActivity.callMerchantActivity(this, new Bundle());
+            this.finish();
+        }
+
         String one = getString(R.string.dont_have_account);
         String two = getString(R.string.register_label);
         registerLabelTv.setText(Html.fromHtml(one + " &nbsp;&nbsp;&nbsp;  " + "<font color='#ffffff'><b>" + two + "</b></font>"));
@@ -135,8 +146,20 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
             userNameEdt.requestFocusFromTouch();
         }
 
+        saveLoginStateRb.setChecked(isChecked);
+
+//        saveLoginStateRb.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                isChecked = !isChecked;
+//                saveLoginStateRb.setChecked(isChecked);
+//            }
+//        });
 
     }
+
+    boolean isChecked = false;
+
 
     @Override
     protected void initInject() {

@@ -137,14 +137,18 @@
                     android:layout_marginRight="@dimen/df_martin_sm"
                     android:background="@android:color/transparent"
                     android:hint="@string/you_find_label"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1"
                     android:paddingLeft="@dimen/df_martin_sm"
                     android:textColor="@android:color/white"
                     android:textColorHint="@android:color/white"
                     android:textSize="@dimen/actionbar_search_text_size" />
 
                 <ImageView
-                    android:layout_width="20sp"
-                    android:layout_height="20sp"
+                    android:id="@+id/search_icon_iv"
+                    android:layout_width="@dimen/search_icon_size"
+                    android:layout_height="@dimen/search_icon_size"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/df_martin_sm"

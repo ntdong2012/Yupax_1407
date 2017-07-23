@@ -48,7 +48,8 @@
         android:layout_above="@id/register_btn"
         android:layout_marginBottom="@dimen/register_button_martin_top"
         android:layout_marginLeft="@dimen/register_item_martin_left_right"
-        android:layout_marginRight="@dimen/register_item_martin_left_right">
+        android:layout_marginRight="@dimen/register_item_martin_left_right"
+        android:visibility="gone">
 
 
         <ImageView
@@ -225,5 +226,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/register_logo_image_martin_bottom"
         android:src="@drawable/logo" />
+
+    <ProgressBar
+        android:id="@+id/process"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
 </RelativeLayout>

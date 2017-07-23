@@ -75,8 +75,18 @@ public class SignInPresenter extends RxPresenter<SignInContract.View> implements
     }
 
     @Override
+    public void onSaveLoginState(boolean isSaved) {
+        dataManager.saveLoginState(isSaved);
+    }
+
+    @Override
     public String getUserEmail() {
         return dataManager.getEmail();
+    }
+
+    @Override
+    public boolean getSaveLoginState() {
+        return dataManager.getSaveLoginState();
     }
 
 

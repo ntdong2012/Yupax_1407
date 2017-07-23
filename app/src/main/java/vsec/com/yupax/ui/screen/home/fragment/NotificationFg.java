@@ -1,7 +1,5 @@
 package vsec.com.yupax.ui.screen.home.fragment;
 
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,7 +11,8 @@ import butterknife.BindView;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.NotificationContract;
-import vsec.com.yupax.model.http.response.NotificationItem;
+import vsec.com.yupax.model.http.response.ListNewsResponse;
+import vsec.com.yupax.model.http.response.News;
 import vsec.com.yupax.presenter.NotificationPresenter;
 import vsec.com.yupax.ui.view.adapter.NotificationAdapter;
 import vsec.com.yupax.ui.view.dialog.NotificationDialog;
@@ -34,15 +33,22 @@ public class NotificationFg extends BaseFragment<NotificationPresenter> implemen
 
     NotificationAdapter notificationAdapter;
     RecyclerView.LayoutManager layoutManager;
-    ArrayList<NotificationItem> notificationItems;
+    ArrayList<News> newses;
 
 
     void initAdapter() {
-        notificationItems = new ArrayList<>();
-        notificationAdapter = new NotificationAdapter(getActivity(), notificationItems, new NotificationAdapter.INotificationClicked() {
+        newses = new ArrayList<>();
+        notificationAdapter = new NotificationAdapter(getActivity(), newses, new NotificationAdapter.INotificationClicked() {
             @Override
-            public void onNotificationClicked(NotificationItem notificationItem) {
-                NotificationDialog notificationDialog = new NotificationDialog(getActivity(), "Chào thai hoang anh - Bạn đã được thăng hạng vàng. Hãy duy trì hạng của bạn để nhận nhiều ưu đãi");
+            public void onNotificationClicked(News notificationItem) {
+                NotificationDialog notificationDialog = new NotificationDialog(getActivity(),
+                        "Chào thai hoang anh - Bạn đã được thăng hạng vàng. Hãy duy trì hạng của bạn để nhận nhiều ưu đãi",
+                        new NotificationDialog.INotificationCloseEvent() {
+                            @Override
+                            public void onNotificationClose() {
+
+                            }
+                        });
                 notificationDialog.show();
             }
         });
@@ -64,41 +70,8 @@ public class NotificationFg extends BaseFragment<NotificationPresenter> implemen
     @Override
     protected void initEventAndData() {
         initAdapter();
-
-        Handler handler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                onStopLoading();
-                updateNotification();
-                return false;
-            }
-        });
-        handler.sendEmptyMessageDelayed(1, 3000);
-    }
-
-    void updateNotification() {
-        NotificationItem item = new NotificationItem();
-        item.setMessage("Chào thai hoang anh - Bạn đã được thăng hạng vàng. Hãy duy trì hạng của bạn để nhận nhiều ưu đãi");
-        item.setDate("17:29 23/05/2017");
-        item.setRead(true);
-        item.setTitle("Thông báo");
-        notificationItems.add(item);
-
-        NotificationItem item2 = new NotificationItem();
-        item2.setMessage("Chào thai hoang anh - Bạn đã được thăng hạng vàng. Hãy duy trì hạng của bạn để nhận nhiều ưu đãi");
-        item2.setDate("17:29 23/05/2017");
-        item2.setTitle("Thông báo");
-        item2.setRead(false);
-
-        notificationItems.add(item2);
-
-        NotificationItem item3 = new NotificationItem();
-        item3.setMessage("Chào thai hoang anh - Bạn đã được thăng hạng vàng. Hãy duy trì hạng của bạn để nhận nhiều ưu đãi");
-        item3.setRead(false);
-        item3.setTitle("Quà liền tay, trúng ngay Yupax plus");
-        item3.setDate("17:29 23/05/2017");
-        notificationItems.add(item3);
-        notificationAdapter.notifyDataSetChanged();
+        onLoading();
+        mPresenter.onGetNotification();
     }
 
     @Override
@@ -107,8 +80,15 @@ public class NotificationFg extends BaseFragment<NotificationPresenter> implemen
     }
 
     @Override
-    public void onGetNotificationSuccess() {
-
+    public void onGetNotificationSuccess(ListNewsResponse listNewsResponse) {
+        if (listNewsResponse != null && listNewsResponse.getError().getCode().contains("200")) {
+            newses.clear();
+            for (int i = 0; i < listNewsResponse.getNewses().size(); i++) {
+                newses.add(listNewsResponse.getNewses().get(i));
+            }
+            notificationAdapter.notifyDataSetChanged();
+            onStopLoading();
+        }
     }
 
     @Override

@@ -53,25 +53,33 @@
         android:textColor="@android:color/background_dark"
         android:textSize="@dimen/login_btn_text_size" />
 
-    <RadioButton
-        android:id="@+id/save_login_states_radio_btn"
+    <RadioGroup
+        android:id="@+id/save_login_state_rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/login_btn"
-        android:layout_marginBottom="@dimen/df_martin"
-        android:layout_marginLeft="@dimen/register_item_martin_left_right"
-        android:layout_marginRight="@dimen/register_item_martin_left_right"
-        android:buttonTint="@android:color/white"
-        android:text="@string/register_login_state"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/df_text_size" />
+        android:layout_above="@id/login_btn">
+
+        <RadioButton
+            android:id="@+id/save_login_states_radio_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/login_btn"
+            android:layout_marginBottom="@dimen/df_martin"
+            android:layout_marginLeft="@dimen/register_item_martin_left_right"
+            android:layout_marginRight="@dimen/register_item_martin_left_right"
+            android:buttonTint="@android:color/white"
+            android:text="@string/register_login_state"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/df_text_size" />
+
+    </RadioGroup>
 
 
     <RelativeLayout
         android:id="@+id/password_wrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/register_wrapper_height"
-        android:layout_above="@id/save_login_states_radio_btn"
+        android:layout_above="@id/save_login_state_rg"
         android:layout_marginBottom="@dimen/df_martin_bi"
         android:layout_marginLeft="@dimen/register_item_martin_left_right"
         android:layout_marginRight="@dimen/register_item_martin_left_right">

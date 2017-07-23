@@ -97,5 +97,6 @@
     <dimen name="logo_height">130dp</dimen>
     <dimen name="select_merchant_text_size">17sp</dimen>
     <dimen name="rate_border_radius">20dp</dimen>
+    <dimen name="search_icon_size">20dp</dimen>
 
 </resources>

@@ -93,13 +93,16 @@ Không những thế, hành khách mua vé online và thanh toán thành công v
     <string name="register_email_hint_text">Email or phone number</string>
     <string name="forgot_pass_btn_text">Get new password</string>
     <string name="setting_label">Setting</string>
-    <string name="voucher_label">Voucher</string>
-    <string name="event_label">Event</string>
+    <string name="sale_label">Voucher</string>
+    <string name="news_label">Event</string>
     <string name="dont_have_account">You dont have account?   </string>
     <string name="select_merchant">Select merchant</string>
     <string name="rate_done_label">Confirm</string>
     <string name="resun_label">Resun</string>
     <string name="vietjet_label">Vietjet Air</string>
     <string name="yupax_label">Yupax</string>
+    <string name="active_code_guide">Please input the active code number which was send to your registered email</string>
+    <string name="active_code_hint">Active code</string>
+    <string name="active_account_label">Active account</string>
 
 </resources>

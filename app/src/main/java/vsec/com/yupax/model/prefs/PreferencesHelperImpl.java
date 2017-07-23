@@ -132,4 +132,14 @@ public class PreferencesHelperImpl implements PreferencesHelper {
     public String getPhone() {
         return mSPrefs.getString(Common.SPF.USER_PHONE, "");
     }
+
+    @Override
+    public void saveLoginState(boolean isSave) {
+        mSPrefs.edit().putBoolean(Common.SPF.SAVE_LOGIN_STATE, isSave).apply();
+    }
+
+    @Override
+    public boolean getSaveLoginState() {
+        return mSPrefs.getBoolean(Common.SPF.SAVE_LOGIN_STATE, false);
+    }
 }

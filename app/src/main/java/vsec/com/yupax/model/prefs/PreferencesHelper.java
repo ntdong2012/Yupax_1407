@@ -46,4 +46,8 @@ public interface PreferencesHelper {
 
     String getPhone();
 
+    void saveLoginState(boolean isSave);
+
+    boolean getSaveLoginState();
+
 }

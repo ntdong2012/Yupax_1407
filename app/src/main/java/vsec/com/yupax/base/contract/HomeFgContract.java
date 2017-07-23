@@ -2,6 +2,7 @@ package vsec.com.yupax.base.contract;
 
 import vsec.com.yupax.base.BasePresenter;
 import vsec.com.yupax.base.BaseView;
+import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.model.http.response.GetCategoriesResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 
@@ -22,13 +23,17 @@ public interface HomeFgContract {
 
         void onGetCategoriesSuccess(GetCategoriesResponse getCategoriesResponse);
 
+        void onRegisterUserToMerchantSuccess(BaseResponse baseResponse);
+
     }
 
     interface Presenter extends BasePresenter<View> {
 
-        void getListStores(String searchKey);
+        void getListStores(String searchKey, int categoryId, String provinceId);
 
         void getCategories();
+
+        void onRegisterUserToMerchant();
 
 
     }

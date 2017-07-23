@@ -45,6 +45,7 @@ import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.HomeFgContract;
+import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.model.http.response.GetCategoriesResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.Store;
@@ -92,6 +93,16 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     ArrayList<Store> stores;
     RecyclerView.LayoutManager layoutManager;
 
+    private int currentCategoryId;
+    private String currentProvinceId;
+    private String keySearch = "";
+
+
+    public void updateProvinceID(String provinceID, String searchKey) {
+        currentProvinceId = provinceID;
+        this.keySearch = searchKey;
+        mPresenter.getListStores(keySearch, currentCategoryId, currentProvinceId);
+    }
 
     void initLocationList() {
         stores = new ArrayList<>();
@@ -146,8 +157,10 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     protected void initEventAndData() {
 
         initMapView();
-        mPresenter.getListStores("");
         mPresenter.getCategories();
+        currentCategoryId = 0;
+        currentProvinceId = "01";
+        mPresenter.getListStores("", currentCategoryId, currentProvinceId);
         initLocationList();
         onLoading();
 
@@ -368,6 +381,10 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
             }
         } else {
             Toast.makeText(getActivity(), listStoreResponse.getErrorResponse().getMessage(), Toast.LENGTH_SHORT).show();
+            DLog.d(listStoreResponse.getErrorResponse().getMessage());
+            if (listStoreResponse.getErrorResponse().getCode().contains("327")) {
+                mPresenter.onRegisterUserToMerchant();
+            }
         }
         onStopLoading();
         storeAdapter.notifyDataSetChanged();
@@ -389,11 +406,39 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
         if (getCategoriesResponse != null && getCategoriesResponse.getErrorResponse() != null
                 && getCategoriesResponse.getErrorResponse().getCode().contains("200")) {
-            for (int i = 0; i< getCategoriesResponse.getCategories().size(); i++) {
+            for (int i = 0; i < getCategoriesResponse.getCategories().size(); i++) {
                 tabLayout.addTab(tabLayout.newTab().setText(getCategoriesResponse.getCategories().get(i).getName()));
+                tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        int position = tab.getPosition();
+                        DLog.d("Category Position : " + position);
+                        currentCategoryId = position;
+                        mPresenter.getListStores("", position, currentProvinceId);
+                    }
+
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+
+                    }
+
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+
+                    }
+                });
             }
         } else {
             Toast.makeText(getActivity(), getCategoriesResponse.getErrorResponse().getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRegisterUserToMerchantSuccess(BaseResponse baseResponse) {
+        if (baseResponse != null && baseResponse.getErrorResponse().getCode().contains("200")) {
+            mPresenter.getListStores(keySearch, currentCategoryId, currentProvinceId);
+        } else {
+            DLog.d(baseResponse.getErrorResponse().getMessage());
         }
     }
 

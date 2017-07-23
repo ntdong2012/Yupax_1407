@@ -2,21 +2,29 @@ package vsec.com.yupax.model;
 
 import io.reactivex.Flowable;
 import vsec.com.yupax.model.http.HttpHelper;
+import vsec.com.yupax.model.http.request.ActiveUserRequest;
 import vsec.com.yupax.model.http.request.BaseRequest;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
+import vsec.com.yupax.model.http.request.CreateUserRequest;
+import vsec.com.yupax.model.http.request.GetPromotionRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
+import vsec.com.yupax.model.http.request.NewsRequest;
+import vsec.com.yupax.model.http.request.RegisterUserToMerchantRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
+import vsec.com.yupax.model.http.response.ActiveUserResponse;
+import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
 import vsec.com.yupax.model.http.response.GetCategoriesResponse;
+import vsec.com.yupax.model.http.response.GetPromotionsResponse;
 import vsec.com.yupax.model.http.response.GetProvincesResponse;
+import vsec.com.yupax.model.http.response.ListNewsResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.MerchantListResponse;
 import vsec.com.yupax.model.http.response.StoreDetailResponse;
-import vsec.com.yupax.model.http.response.Token;
 import vsec.com.yupax.model.http.response.UserInfoResponse;
 import vsec.com.yupax.model.prefs.PreferencesHelper;
 
@@ -40,7 +48,7 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public Flowable<Token> resendPassword(ResendPasswordRequest resendPasswordRequest) {
+    public Flowable<BaseResponse> resendPassword(ResendPasswordRequest resendPasswordRequest) {
         return httpHelper.resendPassword(resendPasswordRequest);
     }
 
@@ -72,6 +80,26 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Flowable<GetProvincesResponse> getProvinces(BaseRequest baseRequest) {
         return httpHelper.getProvinces(baseRequest);
+    }
+
+    @Override
+    public Flowable<ListNewsResponse> getNews(NewsRequest newsRequest) {
+        return httpHelper.getNews(newsRequest);
+    }
+
+    @Override
+    public Flowable<BaseResponse> registerUser(CreateUserRequest createUserRequest) {
+        return httpHelper.registerUser(createUserRequest);
+    }
+
+    @Override
+    public Flowable<ActiveUserResponse> activeUser(ActiveUserRequest activeUserRequest) {
+        return httpHelper.activeUser(activeUserRequest);
+    }
+
+    @Override
+    public Flowable<BaseResponse> registerUserToMerchant(RegisterUserToMerchantRequest registerUserToMerchantRequest) {
+        return httpHelper.registerUserToMerchant(registerUserToMerchantRequest);
     }
 
 
@@ -176,6 +204,21 @@ public class DataManager implements HttpHelper, PreferencesHelper {
         return preferencesHelper.getPhone();
     }
 
+    @Override
+    public void saveLoginState(boolean isSave) {
+        preferencesHelper.saveLoginState(isSave);
+    }
+
+    @Override
+    public boolean getSaveLoginState() {
+        return preferencesHelper.getSaveLoginState();
+    }
+
+
+    @Override
+    public Flowable<GetPromotionsResponse> getPromotions(GetPromotionRequest getPromotionRequest) {
+        return httpHelper.getPromotions(getPromotionRequest);
+    }
 
     public void onSaveUserInfo(UserInfoResponse userInfoResponse) {
         preferencesHelper.setUserName(userInfoResponse.getUsername());

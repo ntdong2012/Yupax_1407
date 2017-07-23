@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vsec.com.yupax.R;
-import vsec.com.yupax.model.http.response.NotificationItem;
+import vsec.com.yupax.model.http.response.News;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/12/2017.
@@ -23,15 +23,15 @@ import vsec.com.yupax.model.http.response.NotificationItem;
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<NotificationItem> notificationItems;
+    private ArrayList<News> notificationItems;
     private INotificationClicked iNotificationClicked;
 
     public interface INotificationClicked {
-        void onNotificationClicked(NotificationItem notificationItem);
+        void onNotificationClicked(News notificationItem);
     }
 
 
-    public NotificationAdapter(Context context, ArrayList<NotificationItem> notificationItems,
+    public NotificationAdapter(Context context, ArrayList<News> notificationItems,
                                INotificationClicked iNotificationClicked) {
         this.context = context;
         this.notificationItems = notificationItems;
@@ -47,9 +47,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final NotificationItem item = notificationItems.get(position);
-        holder.notificationMessageTv.setText("" + item.getMessage());
-        holder.notificationDateTv.setText(item.getDate());
+        final News item = notificationItems.get(position);
+        holder.notificationMessageTv.setText("" + item.getDescription());
+//        holder.notificationDateTv.setText(item.getDate());
         holder.notificationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,13 +57,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             }
         });
 
-        if (item.isRead()) {
-            holder.unreadIv.setVisibility(View.VISIBLE);
-        } else {
-            holder.unreadIv.setVisibility(View.INVISIBLE);
-        }
+//        if (item.isRead()) {
+//            holder.unreadIv.setVisibility(View.VISIBLE);
+//        } else {
+//            holder.unreadIv.setVisibility(View.INVISIBLE);
+//        }
 
-        holder.notificationTitleTv.setText(item.getTitle());
+        holder.notificationTitleTv.setText(item.getName());
     }
 
     @Override

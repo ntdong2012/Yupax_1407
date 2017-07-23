@@ -29,7 +29,12 @@ public class ResendActiveCodeActivity extends BaseActivity<ResendActiveCodePrese
 
     @OnClick(R.id.resend_active_code_btn)
     void onResendActiveCodeClick() {
-        NotificationDialog notificationDialog = new NotificationDialog(this, getString(R.string.notification_resend_message_success));
+        NotificationDialog notificationDialog = new NotificationDialog(this, getString(R.string.notification_resend_message_success), new NotificationDialog.INotificationCloseEvent() {
+            @Override
+            public void onNotificationClose() {
+
+            }
+        });
         notificationDialog.show();
     }
 

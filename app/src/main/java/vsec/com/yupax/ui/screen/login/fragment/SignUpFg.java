@@ -3,6 +3,7 @@ package vsec.com.yupax.ui.screen.login.fragment;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.SignUpContract;
+import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.presenter.SignUpPresenter;
 
 /**
@@ -21,7 +22,7 @@ public class SignUpFg extends BaseFragment<SignUpPresenter> implements SignUpCon
     }
 
     @Override
-    public void onSignUpSuccess() {
+    public void onSignUpSuccess(BaseResponse baseResponse) {
 
     }
 

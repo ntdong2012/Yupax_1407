@@ -36,6 +36,8 @@ public class Common {
         public static final String FIRST_NAME = "first_name";
         public static final String USER_EMAIL = "user_email";
         public static final String USER_PHONE = "user_phone";
+        public static final String SAVE_LOGIN_STATE = "save_login_state";
+
 
 
     }

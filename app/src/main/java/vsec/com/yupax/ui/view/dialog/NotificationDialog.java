@@ -23,10 +23,17 @@ public class NotificationDialog extends Dialog {
     private Context context;
     private String message;
 
-    public NotificationDialog(Context context, String message) {
+    public interface INotificationCloseEvent {
+        void onNotificationClose();
+    }
+
+    private INotificationCloseEvent iNotificationCloseEvent;
+
+    public NotificationDialog(Context context, String message, INotificationCloseEvent iNotificationCloseEvent) {
         super(context);
         this.context = context;
         this.message = message;
+        this.iNotificationCloseEvent = iNotificationCloseEvent;
     }
 
     public NotificationDialog(@NonNull Context context) {
@@ -52,6 +59,7 @@ public class NotificationDialog extends Dialog {
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                iNotificationCloseEvent.onNotificationClose();
                 NotificationDialog.this.dismiss();
             }
         });

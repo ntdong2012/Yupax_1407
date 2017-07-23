@@ -43,10 +43,10 @@ public class ExchangeFg extends SimpleFragment {
 
     private void setupViewPager(ViewPager viewPager) {
         fgViewPaperAdapter = new ViewPagerAdapter(getChildFragmentManager());
-        NowEventFg signInFragment = new NowEventFg();
-        OnGoingEventFg signUpFragment = new OnGoingEventFg();
-        fgViewPaperAdapter.addFragment(signInFragment, getResources().getString(R.string.voucher_label));
-        fgViewPaperAdapter.addFragment(signUpFragment, getResources().getString(R.string.event_label));
+        PromotionFg signInFragment = new PromotionFg();
+        NewsFg signUpFragment = new NewsFg();
+        fgViewPaperAdapter.addFragment(signInFragment, getResources().getString(R.string.sale_label));
+        fgViewPaperAdapter.addFragment(signUpFragment, getResources().getString(R.string.news_label));
         viewPager.setAdapter(fgViewPaperAdapter);
 
     }
@@ -85,12 +85,12 @@ public class ExchangeFg extends SimpleFragment {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             if (position == 0) {
-                NowEventFg fragment = (NowEventFg) super.instantiateItem(container,
+                PromotionFg fragment = (PromotionFg) super.instantiateItem(container,
                         position);
                 container.setTag("myView" + position);
                 return fragment;
             } else if (position == 1) {
-                OnGoingEventFg fragment = (OnGoingEventFg) super.instantiateItem(container,
+                NewsFg fragment = (NewsFg) super.instantiateItem(container,
                         position);
                 container.setTag("myView" + position);
                 return fragment;

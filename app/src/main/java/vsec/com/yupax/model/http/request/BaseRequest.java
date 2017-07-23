@@ -12,7 +12,18 @@ public class BaseRequest {
     private String deviceId;
     private String deviceType;
     private String serviceName;
+    private String provinceId;
 
+
+
+
+    public String getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(String provinceId) {
+        this.provinceId = provinceId;
+    }
 
     public String getLanguage() {
         return language;
