@@ -8,6 +8,7 @@ import vsec.com.yupax.model.http.request.ActiveUserRequest;
 import vsec.com.yupax.model.http.request.BaseRequest;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
 import vsec.com.yupax.model.http.request.CreateUserRequest;
+import vsec.com.yupax.model.http.request.GetNewsRequest;
 import vsec.com.yupax.model.http.request.GetPromotionRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
@@ -83,7 +84,7 @@ public class RetrofitHelper implements HttpHelper {
     }
 
     @Override
-    public Flowable<ListNewsResponse> getNews(NewsRequest newsRequest) {
+    public Flowable<ListNewsResponse> getNews(GetNewsRequest newsRequest) {
         return yupaxApis.getNews(newsRequest);
     }
 

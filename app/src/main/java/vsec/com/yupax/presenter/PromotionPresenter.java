@@ -45,4 +45,9 @@ public class PromotionPresenter extends RxPresenter<PromotionContract.View> impl
                 })
         );
     }
+
+    @Override
+    public void saveToken(String token) {
+        mDataManager.setToken(token);
+    }
 }

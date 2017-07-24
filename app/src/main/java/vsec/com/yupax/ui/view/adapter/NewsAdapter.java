@@ -9,31 +9,33 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import vsec.com.yupax.R;
-import vsec.com.yupax.model.http.response.Charity;
+import vsec.com.yupax.model.http.response.News;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/14/17.
  */
 
-public class CharityAdapter extends RecyclerView.Adapter<CharityAdapter.ViewHolder> {
+public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<Charity> charities;
+    private ArrayList<News> news;
 
     public interface IEventClicked {
-        void onEventClicked(Charity charity);
+        void onEventClicked(News charity);
     }
 
     public IEventClicked iEventClicked;
 
-    public CharityAdapter(Context context, ArrayList<Charity> charities, IEventClicked iEventClicked) {
+    public NewsAdapter(Context context, ArrayList<News> news, IEventClicked iEventClicked) {
         this.context = context;
-        this.charities = charities;
+        this.news = news;
         this.iEventClicked = iEventClicked;
     }
 
@@ -47,20 +49,22 @@ public class CharityAdapter extends RecyclerView.Adapter<CharityAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        final Charity charity = charities.get(position);
+        final News aNew = news.get(position);
 
-        holder.name.setText("" + charity.getName());
+        holder.name.setText("" + aNew.getName());
         holder.eventView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iEventClicked.onEventClicked(charity);
+                iEventClicked.onEventClicked(aNew);
             }
         });
+        Glide.with(context).load(aNew.getImages()).into(holder.charityIcon);
+
     }
 
     @Override
     public int getItemCount() {
-        return charities.size();
+        return news.size();
     }
 
     @Override

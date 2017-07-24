@@ -5,6 +5,7 @@ import vsec.com.yupax.model.http.request.ActiveUserRequest;
 import vsec.com.yupax.model.http.request.BaseRequest;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
 import vsec.com.yupax.model.http.request.CreateUserRequest;
+import vsec.com.yupax.model.http.request.GetNewsRequest;
 import vsec.com.yupax.model.http.request.GetPromotionRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
@@ -64,7 +65,7 @@ public interface HttpHelper {
 
     Flowable<GetProvincesResponse> getProvinces(BaseRequest baseRequest);
 
-    Flowable<ListNewsResponse> getNews(NewsRequest newsRequest);
+    Flowable<ListNewsResponse> getNews(GetNewsRequest getNewsRequest);
 
     Flowable<BaseResponse> registerUser(CreateUserRequest createUserRequest);
 

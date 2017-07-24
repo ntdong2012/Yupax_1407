@@ -22,6 +22,7 @@ import vsec.com.yupax.model.http.response.MerchantListResponse;
 import vsec.com.yupax.presenter.MerchantPresenter;
 import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
 import vsec.com.yupax.ui.view.adapter.SelectMerchantAdapter;
+import vsec.com.yupax.utils.ToastUtils;
 import vsec.com.yupax.utils.log.DLog;
 
 public class MerchantActivity extends BaseActivity<MerchantPresenter> implements MerchantContract.View {
@@ -69,27 +70,6 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
         mPresenter.getListMerchants();
     }
 
-    CompoundButton.OnCheckedChangeListener mOnCheck = new CompoundButton.OnCheckedChangeListener() {
-        @Override
-        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked) {
-                buttonView.setChecked(true);
-                if (isFirstTime) {
-                    HomeActivity.callHomeActivity(MerchantActivity.this, new Bundle());
-                }
-                String label = buttonView.getText().toString();
-                if (!TextUtils.isEmpty(label) && label.equals(getString(R.string.vietjet_label))) {
-                    mPresenter.setCurrentMerchant(getString(R.string.vietjet_label));
-                } else if (!TextUtils.isEmpty(label) && label.equals(getString(R.string.resun_label))) {
-                    mPresenter.setCurrentMerchant(getString(R.string.resun_label));
-                } else {
-                    mPresenter.setCurrentMerchant(getString(R.string.yupax_label));
-                }
-                finish();
-            }
-        }
-    };
-
     @Override
     public void onResume() {
         super.onResume();
@@ -107,12 +87,16 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
         if (merchantListResponse != null && merchantListResponse.getErrorResponse() != null
                 && merchantListResponse.getErrorResponse().getCode().contains("200")) {
             merchants.clear();
-
             for (int i = 0; i < merchantListResponse.getMerchants().size(); i++) {
                 DLog.d("Merchant : " + merchantListResponse.getMerchants().get(0).getHashcode());
                 merchants.add(merchantListResponse.getMerchants().get(i));
             }
             merchantAdapter.notifyDataSetChanged();
+        } else {
+            ToastUtils.shortShow(merchantListResponse.getErrorResponse().getMessage());
+            mPresenter.setToken("");
+            SignInActivity.callSignInActivity(this, new Bundle());
+            this.finish();
         }
         onStopLoading();
     }

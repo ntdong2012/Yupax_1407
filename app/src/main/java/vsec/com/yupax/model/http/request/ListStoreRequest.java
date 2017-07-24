@@ -18,6 +18,10 @@ public class ListStoreRequest extends BaseRequest {
     private String token;
     @SerializedName("categoryId")
     private int categoryId;
+    @SerializedName("latitude")
+    private String latitude;
+    @SerializedName("longitude")
+    private String longitude;
 
     public int getCategoryId() {
         return categoryId;
@@ -57,5 +61,21 @@ public class ListStoreRequest extends BaseRequest {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }

@@ -71,5 +71,10 @@ public class MerchantPresenter extends RxPresenter<MerchantContract.View> implem
         );
     }
 
+    @Override
+    public void setToken(String token) {
+        dataManager.setToken(token);
+    }
+
 
 }

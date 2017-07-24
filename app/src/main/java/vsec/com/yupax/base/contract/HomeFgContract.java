@@ -29,12 +29,13 @@ public interface HomeFgContract {
 
     interface Presenter extends BasePresenter<View> {
 
-        void getListStores(String searchKey, int categoryId, String provinceId);
+        void getListStores(String lat, String log, String searchKey, int categoryId, String provinceId);
 
         void getCategories();
 
         void onRegisterUserToMerchant();
 
+        void saveToken(String token);
 
     }
 }

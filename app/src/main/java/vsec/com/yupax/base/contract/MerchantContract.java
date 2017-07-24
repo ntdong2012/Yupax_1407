@@ -30,6 +30,8 @@ public interface MerchantContract {
 
         void getListMerchants();
 
+        void setToken(String token);
+
 
     }
 }

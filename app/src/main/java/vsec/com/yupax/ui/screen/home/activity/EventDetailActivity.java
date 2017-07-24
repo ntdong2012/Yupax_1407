@@ -55,7 +55,7 @@ public class EventDetailActivity extends BaseActivity<EventDetailPresenter> impl
         getActivityComponent(false).inject(this);
     }
 
-    @OnClick(R.id.back_tv)
+    @OnClick(R.id.back_icon)
     @Override
     public void onBackPressed() {
         super.onBackPressed();

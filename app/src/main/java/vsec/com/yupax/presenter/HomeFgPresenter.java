@@ -31,7 +31,7 @@ public class HomeFgPresenter extends RxPresenter<HomeFgContract.View> implements
 
 
     @Override
-    public void getListStores(String searchKey, int categoryId, String provinceId) {
+    public void getListStores(String lat, String log, String searchKey, int categoryId, String provinceId) {
 
         mView.onLoading();
         ListStoreRequest listStoreRequest = new ListStoreRequest();
@@ -42,6 +42,8 @@ public class HomeFgPresenter extends RxPresenter<HomeFgContract.View> implements
         listStoreRequest.setPageIndex(1);
         listStoreRequest.setCategoryId(categoryId);
         listStoreRequest.setProvinceId(provinceId);
+        listStoreRequest.setLatitude(lat);
+        listStoreRequest.setLongitude(log);
         listStoreRequest.setPageSize(10);
         listStoreRequest.setMerchantCode(dataManager.getCurrentMerchant());
         listStoreRequest.setToken(dataManager.getToken());
@@ -110,5 +112,10 @@ public class HomeFgPresenter extends RxPresenter<HomeFgContract.View> implements
                     }
                 })
         );
+    }
+
+    @Override
+    public void saveToken(String token) {
+        dataManager.setToken(token);
     }
 }

@@ -34,15 +34,15 @@ public class NotificationPresenter extends RxPresenter<NotificationContract.View
         nr.setPageSize(10);
         nr.setServiceName(HttpHelper.ServiceName.LIST_NEWS);
 
-        addSubscribe(mDataManager.getNews(nr)
-                .compose(RxUtil.<ListNewsResponse>rxSchedulerHelper())
-                .subscribeWith(new CommonSubscriber<ListNewsResponse>(mView) {
-                    @Override
-                    public void onNext(ListNewsResponse listNewsResponse) {
-                        mView.onGetNotificationSuccess(listNewsResponse);
-                    }
-                })
-        );
+//        addSubscribe(mDataManager.getNews(nr)
+//                .compose(RxUtil.<ListNewsResponse>rxSchedulerHelper())
+//                .subscribeWith(new CommonSubscriber<ListNewsResponse>(mView) {
+//                    @Override
+//                    public void onNext(ListNewsResponse listNewsResponse) {
+//                        mView.onGetNotificationSuccess(listNewsResponse);
+//                    }
+//                })
+//        );
 
 
     }

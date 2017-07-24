@@ -6,6 +6,7 @@ import dagger.Component;
 import vsec.com.yupax.di.module.FragmentModule;
 import vsec.com.yupax.di.scope.FragmentScope;
 import vsec.com.yupax.ui.screen.home.fragment.HomeFg;
+import vsec.com.yupax.ui.screen.home.fragment.NewsFg;
 import vsec.com.yupax.ui.screen.home.fragment.NotificationFg;
 import vsec.com.yupax.ui.screen.home.fragment.PersonalFg;
 import vsec.com.yupax.ui.screen.home.fragment.PromotionFg;
@@ -43,4 +44,6 @@ public interface FragmentComponent {
     void inject(PromotionFg promotionFg);
 
     void inject(SettingsFg settingsFg);
+
+    void inject(NewsFg newsFg);
 }

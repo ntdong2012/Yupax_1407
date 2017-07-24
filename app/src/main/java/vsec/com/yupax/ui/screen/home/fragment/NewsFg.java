@@ -1,92 +1,96 @@
 package vsec.com.yupax.ui.screen.home.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import vsec.com.yupax.R;
-import vsec.com.yupax.base.BaseFg;
-import vsec.com.yupax.model.http.response.Charity;
+import vsec.com.yupax.base.BaseFragment;
+import vsec.com.yupax.base.contract.NewContract;
+import vsec.com.yupax.model.http.response.ListNewsResponse;
+import vsec.com.yupax.model.http.response.News;
+import vsec.com.yupax.presenter.NewsPresenter;
 import vsec.com.yupax.ui.screen.home.activity.EventDetailActivity;
-import vsec.com.yupax.ui.view.adapter.CharityAdapter;
+import vsec.com.yupax.ui.view.adapter.NewsAdapter;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/13/17.
  */
 
-public class NewsFg extends BaseFg  {
+public class NewsFg extends BaseFragment<NewsPresenter> implements NewContract.View {
 
 
     View rootView;
     @BindView(R.id.process)
     ProgressBar progressBar;
     @BindView(R.id.charity_rv)
-    RecyclerView charityRv;
+    RecyclerView newsRv;
     @BindView(R.id.empty_layout)
     RelativeLayout emptyView;
-    CharityAdapter charityAdapter;
+    NewsAdapter newsAdapter;
     RecyclerView.LayoutManager layoutManager;
-    ArrayList<Charity> charities;
+    ArrayList<News> news;
 
     public NewsFg() {
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.charity_fg, container, false);
-        ButterKnife.bind(this, rootView);
-        return rootView;
+    protected void initInject() {
+        getFragmentComponent().inject(this);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    protected int getLayoutId() {
+        return R.layout.charity_fg;
+    }
 
-        charities = new ArrayList<>();
+    @Override
+    protected void initEventAndData() {
+        news = new ArrayList<>();
         layoutManager = new GridLayoutManager(getActivity(), 2);
-        charityRv.setLayoutManager(layoutManager);
-        charityAdapter = new CharityAdapter(getActivity(), charities, new CharityAdapter.IEventClicked() {
+        newsRv.setLayoutManager(layoutManager);
+        newsAdapter = new NewsAdapter(getActivity(), news, new NewsAdapter.IEventClicked() {
             @Override
-            public void onEventClicked(Charity charity) {
+            public void onEventClicked(News charity) {
                 EventDetailActivity.callEventDetail(getActivity(), new Bundle());
             }
         });
 
-        charityRv.setAdapter(charityAdapter);
+        newsRv.setAdapter(newsAdapter);
+        mPresenter.getNews();
+    }
 
 
-        Handler handler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message message) {
-                onLoadCharitySuccess();
-                return false;
+    @Override
+    public void useLanguage(String language) {
+
+    }
+
+    @Override
+    public void onGetNewsSuccess(ListNewsResponse listNewsResponse) {
+        onStopLoading();
+        if (listNewsResponse != null && listNewsResponse.getError().getCode().contains("200")) {
+            news.clear();
+            for (int i = 0; i < listNewsResponse.getNewses().size(); i++) {
+                news.add(listNewsResponse.getNewses().get(i));
             }
-        });
-
-        handler.sendEmptyMessageDelayed(1, 4000);
+            newsAdapter.notifyDataSetChanged();
+        }
     }
 
-
-    public void onLoadCharitySuccess() {
-        charities.add(new Charity("Hoi chu thap do"));
-        charities.add(new Charity("Hoi chu thap do"));
-        charities.add(new Charity("Hoi chu thap do"));
-        charityAdapter.notifyDataSetChanged();
-
+    @Override
+    public void onLoading() {
+        progressBar.setVisibility(View.VISIBLE);
     }
 
-
+    @Override
+    public void onStopLoading() {
+        if (progressBar != null) progressBar.setVisibility(View.GONE);
+    }
 }

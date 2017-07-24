@@ -51,6 +51,7 @@ import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.Store;
 import vsec.com.yupax.presenter.HomeFgPresenter;
 import vsec.com.yupax.ui.screen.home.activity.StoreDetailActivity;
+import vsec.com.yupax.ui.screen.login.activity.SignInActivity;
 import vsec.com.yupax.ui.view.adapter.StoreAdapter;
 import vsec.com.yupax.utils.PerUtils;
 import vsec.com.yupax.utils.ResizeAnimation;
@@ -102,7 +103,11 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         currentProvinceId = provinceID;
         this.keySearch = searchKey;
         storeRv.setVisibility(View.GONE);
-        mPresenter.getListStores(keySearch, currentCategoryId, currentProvinceId);
+        if (mLastLocation != null) {
+            mPresenter.getListStores(""+mLastLocation.getLatitude(),""+ mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
+        } else {
+            mPresenter.getListStores("","", keySearch, currentCategoryId, currentProvinceId);
+        }
     }
 
     void initLocationList() {
@@ -161,7 +166,11 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         mPresenter.getCategories();
         currentCategoryId = 0;
         currentProvinceId = "01";
-        mPresenter.getListStores("", currentCategoryId, currentProvinceId);
+        if (mLastLocation != null) {
+            mPresenter.getListStores(""+mLastLocation.getLatitude(),""+ mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
+        } else {
+            mPresenter.getListStores("","", keySearch, currentCategoryId, currentProvinceId);
+        }
         initLocationList();
         onLoading();
 
@@ -385,6 +394,11 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
             DLog.d(listStoreResponse.getErrorResponse().getMessage());
             if (listStoreResponse.getErrorResponse().getCode().contains("327")) {
                 mPresenter.onRegisterUserToMerchant();
+            } else if (listStoreResponse.getErrorResponse().getCode().contains("203")) {
+                mPresenter.saveToken("");
+                SignInActivity.callSignInActivity(getActivity(), new Bundle());
+                getActivity().finish();
+                return;
             }
         }
         onStopLoading();
@@ -416,7 +430,11 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                         int position = tab.getPosition();
                         DLog.d("Category Position : " + position);
                         currentCategoryId = position;
-                        mPresenter.getListStores("", position, currentProvinceId);
+                        if (mLastLocation != null) {
+                            mPresenter.getListStores(""+mLastLocation.getLatitude(),""+ mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
+                        } else {
+                            mPresenter.getListStores("","", keySearch, position, currentProvinceId);
+                        }
                     }
 
                     @Override
@@ -438,7 +456,11 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     @Override
     public void onRegisterUserToMerchantSuccess(BaseResponse baseResponse) {
         if (baseResponse != null && baseResponse.getErrorResponse().getCode().contains("200")) {
-            mPresenter.getListStores(keySearch, currentCategoryId, currentProvinceId);
+            if (mLastLocation != null) {
+                mPresenter.getListStores(""+mLastLocation.getLatitude(),""+ mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
+            } else {
+                mPresenter.getListStores("","", keySearch, currentCategoryId, currentProvinceId);
+            }
         } else {
             DLog.d(baseResponse.getErrorResponse().getMessage());
         }
@@ -474,6 +496,12 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                         stores.get(i).setMyLog(longitude);
                     }
                     storeAdapter.notifyDataSetChanged();
+                }
+
+                if (mLastLocation != null) {
+                    mPresenter.getListStores(""+mLastLocation.getLatitude(),""+ mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
+                } else {
+                    mPresenter.getListStores("","", keySearch, currentCategoryId, currentProvinceId);
                 }
             }
         }

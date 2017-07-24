@@ -59,28 +59,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-
-            <TextView
-                android:id="@+id/user_group_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/df_martin"
-                android:layout_marginTop="@dimen/df_martin_sm"
-                android:text="Don vi thanh vien: " />
-
-            <TextView
-                android:id="@+id/user_team_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/user_group_tv"
-                android:layout_marginLeft="@dimen/df_martin"
-                android:text="Don vi thanh vien: " />
-
             <RelativeLayout
                 android:id="@+id/first_name_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/user_team_tv"
                 android:layout_marginTop="@dimen/df_martin"
                 android:background="@android:color/white">
 

@@ -21,6 +21,7 @@ import vsec.com.yupax.model.http.response.GetPromotionsResponse;
 import vsec.com.yupax.model.http.response.Promotion;
 import vsec.com.yupax.presenter.PromotionPresenter;
 import vsec.com.yupax.ui.screen.home.activity.EventDetailActivity;
+import vsec.com.yupax.ui.screen.login.activity.SignInActivity;
 import vsec.com.yupax.ui.view.adapter.PromotionAdapter;
 import vsec.com.yupax.utils.ToastUtils;
 import vsec.com.yupax.utils.log.DLog;
@@ -123,6 +124,12 @@ public class PromotionFg extends BaseFragment<PromotionPresenter> implements Pro
         } else {
             ToastUtils.shortShow(getPromotionsResponse.getErrorResponse().getMessage());
             DLog.d(getPromotionsResponse.getErrorResponse().getMessage());
+            if(getPromotionsResponse.getErrorResponse().getCode().contains("203")) {
+                SignInActivity.callSignInActivity(getActivity(), new Bundle());
+                mPresenter.saveToken("");
+                getActivity().finish();
+                return;
+            }
         }
         onStopLoading();
     }
@@ -134,6 +141,7 @@ public class PromotionFg extends BaseFragment<PromotionPresenter> implements Pro
 
     @Override
     public void onStopLoading() {
+        if(progressBar != null)
         progressBar.setVisibility(View.GONE);
     }
 }
