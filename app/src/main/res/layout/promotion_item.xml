@@ -19,11 +19,10 @@
             android:id="@+id/event_icon"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginLeft="@dimen/df_martin_sm"
-            android:layout_marginRight="@dimen/df_martin_sm"
-            android:layout_marginTop="@dimen/df_martin_sm"
             android:scaleType="fitXY"
-            android:src="@drawable/hoi_thao" />
+            android:layout_alignParentTop="true"
+            android:layout_alignLeft="@+id/event_name_tv"
+            android:layout_alignStart="@+id/event_name_tv" />
 
 
         <TextView
@@ -81,9 +80,9 @@
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:inputType="text"
-                android:paddingRight="@dimen/df_martin_ssm"
-                android:layout_marginLeft="@dimen/df_martin_sm"
-                android:text="Điểm quy đổi : 68383"
+                android:paddingRight="@dimen/df_martin_sm"
+                android:layout_marginLeft="@dimen/df_martin_ssm"
+                android:text=""
                 android:textColor="@color/vj_red_color"
                 android:textSize="@dimen/gift_item_message_text_size" />
 
@@ -112,9 +111,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/event_message_tv"
                 android:layout_gravity="center_vertical"
-                android:paddingRight="@dimen/df_martin_ssm"
-                android:layout_marginLeft="@dimen/df_martin_sm"
-                android:text="Số lượng còn lại : 1"
+                android:paddingRight="@dimen/df_martin_sm"
+                android:layout_marginLeft="@dimen/df_martin_ssm"
+                android:text=""
                 android:textSize="@dimen/gift_item_message_text_size" />
         </LinearLayout>
 

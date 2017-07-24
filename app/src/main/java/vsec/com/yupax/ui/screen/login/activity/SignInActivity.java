@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,8 +57,6 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     void onCallLoginAction() {
         String userName = userNameEdt.getText().toString();
         String passWord = passwordEdt.getText().toString();
-//        userName = "thaihoanganh.1990@gmail.com";
-//        passWord = "12345678";
         if (TextUtils.isEmpty(userName)) {
             AnimationUtils.shake(this, userNameEdt);
             return;
@@ -128,7 +127,9 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     protected void initEventAndData() {
 
         boolean isSaveLogin = mPresenter.getSaveLoginState();
-        if (isSaveLogin) {
+        String token = mPresenter.getToken();
+        DLog.d("Is save login : " + isSaveLogin + " Token: " + token);
+        if (isSaveLogin && !TextUtils.isEmpty(token)) {
             MerchantActivity.callMerchantActivity(this, new Bundle());
             this.finish();
         }
@@ -148,16 +149,23 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
         saveLoginStateRb.setChecked(isChecked);
 
-//        saveLoginStateRb.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                isChecked = !isChecked;
-//                saveLoginStateRb.setChecked(isChecked);
-//            }
-//        });
+        saveLoginStateRb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (saveLoginStateRb.isChecked()) {
+                    if (!flagmale) {
+                        saveLoginStateRb.setChecked(true);
+                        flagmale = true;
+                    } else {
+                        flagmale = false;
+                        saveLoginStateRb.setChecked(false);
+                    }
+                }
+            }
+        });
 
     }
-
+    private boolean flagmale = false;
     boolean isChecked = false;
 
 

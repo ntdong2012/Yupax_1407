@@ -149,14 +149,14 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     void onSearchClicked() {
         Utils.hiddenSoftKeyboard(this, searchEdt);
         searchKey = searchEdt.getText().toString();
-        if (!TextUtils.isEmpty(searchKey)) {
-            FragmentManager fm = getSupportFragmentManager();
-            Fragment f = fm.findFragmentById(R.id.home_fg);
-            if (f instanceof HomeFg) {
-                ((HomeFg) f).updateProvinceID(provinceID, searchKey);
-                searchEdt.setText("");
-            }
+
+        FragmentManager fm = getSupportFragmentManager();
+        Fragment f = fm.findFragmentById(R.id.home_fg);
+        if (f instanceof HomeFg) {
+            ((HomeFg) f).updateProvinceID(provinceID, searchKey);
+            searchEdt.setText("");
         }
+
     }
 
     void initRegionSpinner() {

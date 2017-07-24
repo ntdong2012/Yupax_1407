@@ -38,5 +38,7 @@ public interface SignInContract {
         String getUserEmail();
 
         boolean getSaveLoginState();
+
+        String getToken();
     }
 }

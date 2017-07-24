@@ -101,6 +101,7 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     public void updateProvinceID(String provinceID, String searchKey) {
         currentProvinceId = provinceID;
         this.keySearch = searchKey;
+        storeRv.setVisibility(View.GONE);
         mPresenter.getListStores(keySearch, currentCategoryId, currentProvinceId);
     }
 
@@ -387,6 +388,7 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
             }
         }
         onStopLoading();
+        storeRv.setVisibility(View.VISIBLE);
         storeAdapter.notifyDataSetChanged();
     }
 

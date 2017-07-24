@@ -89,5 +89,10 @@ public class SignInPresenter extends RxPresenter<SignInContract.View> implements
         return dataManager.getSaveLoginState();
     }
 
+    @Override
+    public String getToken() {
+        return dataManager.getToken();
+    }
+
 
 }
