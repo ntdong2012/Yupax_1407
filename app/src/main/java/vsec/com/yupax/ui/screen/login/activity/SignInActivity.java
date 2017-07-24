@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -147,7 +146,7 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
             userNameEdt.requestFocusFromTouch();
         }
 
-        saveLoginStateRb.setChecked(isChecked);
+        saveLoginStateRb.setChecked(isSaveLogin);
 
         saveLoginStateRb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,7 +165,6 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
     }
     private boolean flagmale = false;
-    boolean isChecked = false;
 
 
     @Override

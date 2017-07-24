@@ -9,6 +9,7 @@ import vsec.com.yupax.ui.screen.home.fragment.HomeFg;
 import vsec.com.yupax.ui.screen.home.fragment.NotificationFg;
 import vsec.com.yupax.ui.screen.home.fragment.PersonalFg;
 import vsec.com.yupax.ui.screen.home.fragment.PromotionFg;
+import vsec.com.yupax.ui.screen.home.fragment.SettingsFg;
 import vsec.com.yupax.ui.screen.home.fragment.TransactionFg;
 import vsec.com.yupax.ui.screen.login.fragment.ForgotPasswordFg;
 import vsec.com.yupax.ui.screen.login.fragment.SignInFg;
@@ -40,4 +41,6 @@ public interface FragmentComponent {
     void inject(PersonalFg personalFg);
 
     void inject(PromotionFg promotionFg);
+
+    void inject(SettingsFg settingsFg);
 }

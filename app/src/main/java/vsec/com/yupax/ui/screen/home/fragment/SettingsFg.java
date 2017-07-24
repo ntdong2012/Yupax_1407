@@ -8,17 +8,19 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.OnClick;
 import vsec.com.yupax.R;
-import vsec.com.yupax.base.SimpleFragment;
-import vsec.com.yupax.ui.screen.login.activity.SignInActivity;
+import vsec.com.yupax.base.BaseFragment;
+import vsec.com.yupax.base.contract.SettingContract;
+import vsec.com.yupax.presenter.SettingPresenter;
 import vsec.com.yupax.ui.screen.home.activity.ChangePasswordActivity;
 import vsec.com.yupax.ui.screen.home.activity.ChangeProfileActivity;
 import vsec.com.yupax.ui.screen.home.activity.HistoryTransactionActivity;
+import vsec.com.yupax.ui.screen.login.activity.SignInActivity;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/12/2017.
  */
 
-public class SettingsFg extends SimpleFragment {
+public class SettingsFg extends BaseFragment<SettingPresenter> implements SettingContract.View {
 
 
     @BindView(R.id.change_password_layout)
@@ -102,7 +104,33 @@ public class SettingsFg extends SimpleFragment {
 
     @OnClick(R.id.logout_app_layout)
     void onLogout() {
+        mPresenter.logout();
         SignInActivity.callSignInActivity(getActivity(), new Bundle());
         getActivity().finish();
+    }
+
+    @Override
+    public void useLanguage(String language) {
+
+    }
+
+    @Override
+    public void onLogoutSuccess() {
+
+    }
+
+    @Override
+    public void onLoading() {
+
+    }
+
+    @Override
+    public void onStopLoading() {
+
+    }
+
+    @Override
+    protected void initInject() {
+        getFragmentComponent().inject(this);
     }
 }
