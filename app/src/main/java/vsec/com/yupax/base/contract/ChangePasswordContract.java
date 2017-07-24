@@ -23,5 +23,7 @@ public interface ChangePasswordContract {
     interface Presenter extends BasePresenter<View> {
 
         void onChangePassword(String password, String newPassword);
+
+        void setToken(String token);
     }
 }

@@ -34,10 +34,11 @@ public class ChangePasswordPresenter extends RxPresenter<ChangePasswordContract.
         changePasswordRequest = Utils.setupRequestFormat(changePasswordRequest);
 
         changePasswordRequest.setToken(mDataManager.getToken());
+        changePasswordRequest.setMerchantCode(mDataManager.getCurrentMerchant());
         changePasswordRequest.setServiceName(HttpHelper.ServiceName.CHANGE_PASSWORD);
 
         UserInfoChangePassword userInfo = new UserInfoChangePassword();
-        userInfo.setPassword(password);
+        userInfo.setPasswordOld(password);
         userInfo.setPasswordNew(newPassword);
         userInfo.setPasswordNewConfirm(newPassword);
 
@@ -53,5 +54,10 @@ public class ChangePasswordPresenter extends RxPresenter<ChangePasswordContract.
                 })
         );
 
+    }
+
+    @Override
+    public void setToken(String token) {
+        mDataManager.setToken(token);
     }
 }

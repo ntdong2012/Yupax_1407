@@ -9,6 +9,7 @@ import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.ChangeProfileContract;
+import vsec.com.yupax.model.http.response.GetProvincesResponse;
 import vsec.com.yupax.presenter.ChangeProfilePresenter;
 
 public class ChangeProfileActivity extends BaseActivity<ChangeProfilePresenter> implements ChangeProfileContract.View {
@@ -52,6 +53,11 @@ public class ChangeProfileActivity extends BaseActivity<ChangeProfilePresenter> 
 
     @Override
     public void onLoading() {
+
+    }
+
+    @Override
+    public void onGetProvincesSuccess(GetProvincesResponse getProvincesResponse) {
 
     }
 

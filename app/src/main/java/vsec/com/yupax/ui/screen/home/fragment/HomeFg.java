@@ -368,10 +368,10 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     @Override
     public void onLocationChanged(Location location) {
-        mLastLocation = location;
         if (mLastLocation != null) {
             return;
         }
+        mLastLocation = location;
         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent("getLocationOK"));
     }
 

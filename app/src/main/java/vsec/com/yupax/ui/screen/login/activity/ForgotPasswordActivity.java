@@ -61,6 +61,7 @@ public class ForgotPasswordActivity extends BaseActivity<ForgotPasswordPresenter
     void onHandleForgotPasswordAction() {
 
         String email = emailEdt.getText().toString();
+        email = email.trim();
         if (TextUtils.isEmpty(email)) {
             AnimationUtils.shake(this, emailEdt);
             return;
@@ -108,6 +109,9 @@ public class ForgotPasswordActivity extends BaseActivity<ForgotPasswordPresenter
             @Override
             public void onNotificationClose() {
                 DLog.d("onNotificationClose");
+                mPresenter.onSaveToken("");
+                SignInActivity.callSignInActivity(ForgotPasswordActivity.this, new Bundle());
+                ForgotPasswordActivity.this.finish();
             }
         });
         dialog.show();

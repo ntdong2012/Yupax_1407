@@ -6,14 +6,14 @@ package vsec.com.yupax.model.http.response;
 
 public class ChangePasswordResponse {
 
-    private Error error;
+    private ErrorResponse error;
     private String serviceName;
 
-    public Error getError() {
+    public ErrorResponse getError() {
         return error;
     }
 
-    public void setError(Error error) {
+    public void setError(ErrorResponse error) {
         this.error = error;
     }
 

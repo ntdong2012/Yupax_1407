@@ -12,10 +12,10 @@ import vsec.com.yupax.model.http.request.GetPromotionRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
-import vsec.com.yupax.model.http.request.NewsRequest;
 import vsec.com.yupax.model.http.request.RegisterUserToMerchantRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
+import vsec.com.yupax.model.http.request.UserInfoChangeRequest;
 import vsec.com.yupax.model.http.response.ActiveUserResponse;
 import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
@@ -38,8 +38,12 @@ public interface YupaxApis {
     Flowable<LoginResponse> signIn(@Body LoginRequest loginRequest);
 
 
-    @POST("unauth")
+    @POST("auth-merchant")
     Flowable<ChangePasswordResponse> changePassword(@Body ChangePasswordRequest changePasswordRequest);
+
+    @POST("auth-merchant")
+    Flowable<BaseResponse> updateUserInfo(@Body UserInfoChangeRequest userInfoChangeRequest);
+
 
     @POST("auth")
     Flowable<MerchantListResponse> getMerchants(@Body MerchantListRequest merchantListRequest);

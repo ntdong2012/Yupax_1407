@@ -22,6 +22,12 @@ public interface SettingContract {
     interface Presenter extends BasePresenter<View> {
 
         void logout();
+
+        String getEmail();
+
+        String getNumberPhone();
+
+        String getUserName();
     }
 
 }

@@ -8,7 +8,7 @@ public class UserInfoChangePassword {
 
     private String passwordNew;
     private String passwordNewConfirm;
-    private String password;
+    private String passwordOld;
 
     public String getPasswordNew() {
         return passwordNew;
@@ -26,11 +26,11 @@ public class UserInfoChangePassword {
         this.passwordNewConfirm = passwordNewConfirm;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordOld() {
+        return passwordOld;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordOld(String passwordOld) {
+        this.passwordOld = passwordOld;
     }
 }

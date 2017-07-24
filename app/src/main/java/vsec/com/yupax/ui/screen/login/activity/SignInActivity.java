@@ -54,8 +54,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
     @OnClick(R.id.login_btn)
     void onCallLoginAction() {
-        String userName = userNameEdt.getText().toString();
-        String passWord = passwordEdt.getText().toString();
+        String userName = userNameEdt.getText().toString().trim();
+        String passWord = passwordEdt.getText().toString().trim();
         if (TextUtils.isEmpty(userName)) {
             AnimationUtils.shake(this, userNameEdt);
             return;

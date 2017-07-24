@@ -13,10 +13,10 @@ import vsec.com.yupax.model.http.request.GetPromotionRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
-import vsec.com.yupax.model.http.request.NewsRequest;
 import vsec.com.yupax.model.http.request.RegisterUserToMerchantRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
+import vsec.com.yupax.model.http.request.UserInfoChangeRequest;
 import vsec.com.yupax.model.http.response.ActiveUserResponse;
 import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
@@ -40,6 +40,11 @@ public class RetrofitHelper implements HttpHelper {
     @Inject
     public RetrofitHelper(YupaxApis yupaxApis) {
         this.yupaxApis = yupaxApis;
+    }
+
+    @Override
+    public Flowable<BaseResponse> updateUserInfo(UserInfoChangeRequest userInfoChangeRequest) {
+        return yupaxApis.updateUserInfo(userInfoChangeRequest);
     }
 
     @Override

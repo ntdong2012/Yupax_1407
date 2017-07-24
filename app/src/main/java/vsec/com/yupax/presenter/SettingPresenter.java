@@ -26,5 +26,20 @@ public class SettingPresenter extends RxPresenter<SettingContract.View> implemen
         mDataManager.setToken("");
     }
 
+    @Override
+    public String getEmail() {
+        return mDataManager.getEmail();
+    }
+
+    @Override
+    public String getNumberPhone() {
+        return mDataManager.getPhone();
+    }
+
+    @Override
+    public String getUserName() {
+        return mDataManager.getPhone();
+    }
+
 
 }

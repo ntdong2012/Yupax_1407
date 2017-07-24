@@ -40,6 +40,13 @@ public class SettingsFg extends BaseFragment<SettingPresenter> implements Settin
     @BindView(R.id.logout_app_layout)
     View logoutLayout;
 
+    @BindView(R.id.name_tv)
+    TextView nameTv;
+    @BindView(R.id.email_tv)
+    TextView emailTv;
+    @BindView(R.id.phone_tv)
+    TextView phoneTv;
+
     @Override
     protected int getLayoutId() {
         return R.layout.setting_fg_layout;
@@ -85,6 +92,9 @@ public class SettingsFg extends BaseFragment<SettingPresenter> implements Settin
         ((View) logoutLayout.findViewById(R.id.view_sp)).setVisibility(View.GONE);
 
 
+        nameTv.setText(mPresenter.getUserName());
+        phoneTv.setText(mPresenter.getNumberPhone());
+        emailTv.setText(mPresenter.getEmail());
     }
 
     @OnClick(R.id.history_transaction_layout)

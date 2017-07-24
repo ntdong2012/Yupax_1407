@@ -10,10 +10,10 @@ import vsec.com.yupax.model.http.request.GetPromotionRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
-import vsec.com.yupax.model.http.request.NewsRequest;
 import vsec.com.yupax.model.http.request.RegisterUserToMerchantRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
+import vsec.com.yupax.model.http.request.UserInfoChangeRequest;
 import vsec.com.yupax.model.http.response.ActiveUserResponse;
 import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
@@ -47,7 +47,11 @@ public interface HttpHelper {
         public String ACTIVE_USER = "ACTIVE_USER";
         public String CREATE_USER_DETAIL = "CREATE_USER_DETAIL";
         public String LIST_PROMOTION = "LIST_PROMOTION";
+        public String UPDATE_INFO_USER = "UPDATE_INFO_USER";
     }
+
+    Flowable<BaseResponse> updateUserInfo(UserInfoChangeRequest userInfoChangeRequest);
+
 
     Flowable<LoginResponse> signIn(LoginRequest loginRequest);
 

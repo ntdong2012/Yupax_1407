@@ -95,5 +95,10 @@ Không những thế, hành khách mua vé online và thanh toán thành công v
     <string name="active_code_guide">Xin hãy nhập mã số đã được gửi về email đăng kí của bạn</string>
     <string name="active_code_hint">Mã kích hoạt</string>
     <string name="active_account_label">Kích hoạt tài khoản</string>
+    <string name="change_pass_success">Bạn đã thay đổi mật khẩu!</string>
 
+
+    <string name="resun_label">Resun</string>
+    <string name="vietjet_label">Vietjet Air</string>
+    <string name="yupax_label">Yupax</string>
 </resources>

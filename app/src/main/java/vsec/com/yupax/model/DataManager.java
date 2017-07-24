@@ -11,10 +11,10 @@ import vsec.com.yupax.model.http.request.GetPromotionRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
-import vsec.com.yupax.model.http.request.NewsRequest;
 import vsec.com.yupax.model.http.request.RegisterUserToMerchantRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
+import vsec.com.yupax.model.http.request.UserInfoChangeRequest;
 import vsec.com.yupax.model.http.response.ActiveUserResponse;
 import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
@@ -41,6 +41,11 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     public DataManager(HttpHelper httpHelper, PreferencesHelper preferencesHelper) {
         this.httpHelper = httpHelper;
         this.preferencesHelper = preferencesHelper;
+    }
+
+    @Override
+    public Flowable<BaseResponse> updateUserInfo(UserInfoChangeRequest userInfoChangeRequest) {
+        return httpHelper.updateUserInfo(userInfoChangeRequest);
     }
 
     @Override
