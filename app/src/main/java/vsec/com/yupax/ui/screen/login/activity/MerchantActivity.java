@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 
 import java.util.ArrayList;
@@ -61,7 +59,8 @@ public class MerchantActivity extends BaseActivity<MerchantPresenter> implements
             public void onMerchantSelected(Merchant merchant) {
                 DLog.d("onMerchantSelected");
                 HomeActivity.callHomeActivity(MerchantActivity.this, new Bundle());
-                mPresenter.setCurrentMerchant(merchant.getHashcode());
+                mPresenter.setCurrentMerchantCode(merchant.getHashcode());
+                mPresenter.setCurrentMerchantName(merchant.getName());
                 finish();
             }
         });

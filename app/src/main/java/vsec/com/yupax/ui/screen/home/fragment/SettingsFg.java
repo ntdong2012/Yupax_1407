@@ -10,11 +10,13 @@ import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseFragment;
 import vsec.com.yupax.base.contract.SettingContract;
+import vsec.com.yupax.model.http.response.GetUserInfoResponse;
 import vsec.com.yupax.presenter.SettingPresenter;
 import vsec.com.yupax.ui.screen.home.activity.ChangePasswordActivity;
 import vsec.com.yupax.ui.screen.home.activity.ChangeProfileActivity;
 import vsec.com.yupax.ui.screen.home.activity.HistoryTransactionActivity;
 import vsec.com.yupax.ui.screen.login.activity.SignInActivity;
+import vsec.com.yupax.utils.ToastUtils;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/12/2017.
@@ -39,6 +41,9 @@ public class SettingsFg extends BaseFragment<SettingPresenter> implements Settin
     View changePersonalLayout;
     @BindView(R.id.logout_app_layout)
     View logoutLayout;
+
+    @BindView(R.id.group_tv)
+    TextView merchantTv;
 
     @BindView(R.id.name_tv)
     TextView nameTv;
@@ -95,6 +100,8 @@ public class SettingsFg extends BaseFragment<SettingPresenter> implements Settin
         nameTv.setText(mPresenter.getUserName());
         phoneTv.setText(mPresenter.getNumberPhone());
         emailTv.setText(mPresenter.getEmail());
+        mPresenter.getUserInfo();
+        merchantTv.setText(mPresenter.getMerchantName());
     }
 
     @OnClick(R.id.history_transaction_layout)
@@ -132,6 +139,16 @@ public class SettingsFg extends BaseFragment<SettingPresenter> implements Settin
     @Override
     public void onLoading() {
 
+    }
+
+    @Override
+    public void onGetUserInfoSuccess(GetUserInfoResponse getUserInfoResponse) {
+        if (getUserInfoResponse != null && getUserInfoResponse.getErrorResponse() != null && getUserInfoResponse.getErrorResponse().getCode().contains("200")) {
+            nameTv.setText("" + getUserInfoResponse.getUserInfoChange().getFirstName() + " " +
+                    getUserInfoResponse.getUserInfoChange().getLastName());
+        } else {
+            ToastUtils.shortShow(getUserInfoResponse.getErrorResponse().getMessage());
+        }
     }
 
     @Override

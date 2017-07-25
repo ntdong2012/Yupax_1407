@@ -33,7 +33,7 @@ public class NewsPresenter  extends RxPresenter<NewContract.View> implements New
         nr.setPageIndex(1);
         nr.setPageSize(10);
         nr.setToken(mDataManager.getToken());
-        nr.setMerchantCode(mDataManager.getCurrentMerchant());
+        nr.setMerchantCode(mDataManager.getCurrentMerchantCode());
         nr.setServiceName(HttpHelper.ServiceName.LIST_NEWS);
 
         addSubscribe(mDataManager.getNews(nr)

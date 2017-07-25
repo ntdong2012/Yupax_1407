@@ -84,13 +84,23 @@ public class PreferencesHelperImpl implements PreferencesHelper {
     }
 
     @Override
-    public String getCurrentMerchant() {
-        return mSPrefs.getString(Common.SPF.CURRENT_MERCHANT, "");
+    public String getCurrentMerchantCode() {
+        return mSPrefs.getString(Common.SPF.CURRENT_MERCHANT_CODE, "");
     }
 
     @Override
-    public void setCurrentMerchant(String str) {
-        mSPrefs.edit().putString(Common.SPF.CURRENT_MERCHANT, str).apply();
+    public void setCurrentMerchantCode(String str) {
+        mSPrefs.edit().putString(Common.SPF.CURRENT_MERCHANT_CODE, str).apply();
+    }
+
+    @Override
+    public void setCurrentMerchantName(String str) {
+        mSPrefs.edit().putString(Common.SPF.CURRENT_MERCHANT_NAME, str).apply();
+    }
+
+    @Override
+    public String getCurrentMerchantName() {
+        return mSPrefs.getString(Common.SPF.CURRENT_MERCHANT_NAME, "");
     }
 
     @Override

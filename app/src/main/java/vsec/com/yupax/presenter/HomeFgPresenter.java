@@ -45,7 +45,7 @@ public class HomeFgPresenter extends RxPresenter<HomeFgContract.View> implements
         listStoreRequest.setLatitude(lat);
         listStoreRequest.setLongitude(log);
         listStoreRequest.setPageSize(10);
-        listStoreRequest.setMerchantCode(dataManager.getCurrentMerchant());
+        listStoreRequest.setMerchantCode(dataManager.getCurrentMerchantCode());
         listStoreRequest.setToken(dataManager.getToken());
 
         addSubscribe(dataManager.getListStoreBrand(listStoreRequest)
@@ -94,7 +94,7 @@ public class HomeFgPresenter extends RxPresenter<HomeFgContract.View> implements
         RegisterUserToMerchantRequest registerUserToMerchantRequest = new RegisterUserToMerchantRequest();
         registerUserToMerchantRequest = Utils.setupRequestFormat(registerUserToMerchantRequest);
         registerUserToMerchantRequest.setToken(dataManager.getToken());
-        registerUserToMerchantRequest.setMerchantCode(dataManager.getCurrentMerchant());
+        registerUserToMerchantRequest.setMerchantCode(dataManager.getCurrentMerchantCode());
         registerUserToMerchantRequest.setServiceName(HttpHelper.ServiceName.CREATE_USER_DETAIL);
 
         addSubscribe(dataManager.registerUserToMerchant(registerUserToMerchantRequest)

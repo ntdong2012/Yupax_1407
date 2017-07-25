@@ -2,6 +2,7 @@ package vsec.com.yupax.base.contract;
 
 import vsec.com.yupax.base.BasePresenter;
 import vsec.com.yupax.base.BaseView;
+import vsec.com.yupax.model.http.response.GetUserInfoResponse;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 7/24/17.
@@ -14,6 +15,8 @@ public interface SettingContract {
         void onLogoutSuccess();
 
         void onLoading();
+
+        void onGetUserInfoSuccess(GetUserInfoResponse getUserInfoResponse);
 
         void onStopLoading();
 
@@ -28,6 +31,12 @@ public interface SettingContract {
         String getNumberPhone();
 
         String getUserName();
+
+        String getMerchantName();
+
+        void getUserInfo();
+
+
     }
 
 }

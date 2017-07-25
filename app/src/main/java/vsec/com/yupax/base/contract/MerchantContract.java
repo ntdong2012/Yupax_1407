@@ -24,9 +24,11 @@ public interface MerchantContract {
 
         void onGetNotification();
 
-        String getCurrentMerchant();
+        String getCurrentMerchantCode();
 
-        void setCurrentMerchant(String str);
+        void setCurrentMerchantCode(String str);
+
+        void setCurrentMerchantName(String str);
 
         void getListMerchants();
 

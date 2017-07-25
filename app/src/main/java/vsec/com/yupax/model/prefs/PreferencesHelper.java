@@ -26,9 +26,13 @@ public interface PreferencesHelper {
 
     String getLanguage();
 
-    String getCurrentMerchant();
+    String getCurrentMerchantCode();
 
-    void setCurrentMerchant(String str);
+    void setCurrentMerchantCode(String str);
+
+    void setCurrentMerchantName(String str);
+
+    String getCurrentMerchantName();
 
     void saveFirstName(String str);
 

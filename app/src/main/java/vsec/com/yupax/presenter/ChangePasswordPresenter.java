@@ -34,7 +34,7 @@ public class ChangePasswordPresenter extends RxPresenter<ChangePasswordContract.
         changePasswordRequest = Utils.setupRequestFormat(changePasswordRequest);
 
         changePasswordRequest.setToken(mDataManager.getToken());
-        changePasswordRequest.setMerchantCode(mDataManager.getCurrentMerchant());
+        changePasswordRequest.setMerchantCode(mDataManager.getCurrentMerchantCode());
         changePasswordRequest.setServiceName(HttpHelper.ServiceName.CHANGE_PASSWORD);
 
         UserInfoChangePassword userInfo = new UserInfoChangePassword();

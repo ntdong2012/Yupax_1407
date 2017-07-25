@@ -31,7 +31,8 @@ public class Common {
         public static final String LANGUAGE = "current_language";
         public static final String LANGUAGE_VI = "lang_vi";
         public static final String LANGUAGE_EN = "lang_en";
-        public static final String CURRENT_MERCHANT = "current_merchant";
+        public static final String CURRENT_MERCHANT_CODE = "current_merchant_code";
+        public static final String CURRENT_MERCHANT_NAME = "current_merchant_name";
         public static final String LAST_NAME = "last_name";
         public static final String FIRST_NAME = "first_name";
         public static final String USER_EMAIL = "user_email";

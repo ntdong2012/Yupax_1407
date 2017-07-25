@@ -32,13 +32,18 @@ public class MerchantPresenter extends RxPresenter<MerchantContract.View> implem
     }
 
     @Override
-    public String getCurrentMerchant() {
-        return dataManager.getCurrentMerchant();
+    public String getCurrentMerchantCode() {
+        return dataManager.getCurrentMerchantCode();
     }
 
     @Override
-    public void setCurrentMerchant(String str) {
-        dataManager.setCurrentMerchant(str);
+    public void setCurrentMerchantCode(String str) {
+        dataManager.setCurrentMerchantCode(str);
+    }
+
+    @Override
+    public void setCurrentMerchantName(String str) {
+        dataManager.setCurrentMerchantName(str);
     }
 
     @Override

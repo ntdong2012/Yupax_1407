@@ -7,9 +7,7 @@ import vsec.com.yupax.base.contract.StoreDetailContract;
 import vsec.com.yupax.model.DataManager;
 import vsec.com.yupax.model.http.HttpHelper;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
-import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.StoreDetailResponse;
-import vsec.com.yupax.utils.Common;
 import vsec.com.yupax.utils.CommonSubscriber;
 import vsec.com.yupax.utils.RxUtil;
 import vsec.com.yupax.utils.Utils;
@@ -32,7 +30,7 @@ public class StoreDetailPresenter extends RxPresenter<StoreDetailContract.View> 
         StoreDetailRequest storeDetailRequest = new StoreDetailRequest();
         storeDetailRequest = Utils.setupRequestFormat(storeDetailRequest);
         storeDetailRequest.setToken(dataManager.getToken());
-        storeDetailRequest.setMerchantCode(dataManager.getCurrentMerchant());
+        storeDetailRequest.setMerchantCode(dataManager.getCurrentMerchantCode());
         storeDetailRequest.setStoreBranchHashcode(storeID);
         storeDetailRequest.setServiceName(HttpHelper.ServiceName.DETAIL_STORE_BRANCH);
         addSubscribe(dataManager.getStoreDetail(storeDetailRequest)

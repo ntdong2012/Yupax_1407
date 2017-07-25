@@ -32,7 +32,7 @@ public class PromotionPresenter extends RxPresenter<PromotionContract.View> impl
         getPromotionRequest.setServiceName(HttpHelper.ServiceName.LIST_PROMOTION);
         getPromotionRequest = Utils.setupRequestFormat(getPromotionRequest);
         getPromotionRequest.setPageIndex(1);
-        getPromotionRequest.setMerchantCode(mDataManager.getCurrentMerchant());
+        getPromotionRequest.setMerchantCode(mDataManager.getCurrentMerchantCode());
         getPromotionRequest.setToken(mDataManager.getToken());
         getPromotionRequest.setPageSize(10);
         addSubscribe(mDataManager.getPromotions(getPromotionRequest)

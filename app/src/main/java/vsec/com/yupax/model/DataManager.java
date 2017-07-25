@@ -6,7 +6,6 @@ import vsec.com.yupax.model.http.request.ActiveUserRequest;
 import vsec.com.yupax.model.http.request.BaseRequest;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
 import vsec.com.yupax.model.http.request.CreateUserRequest;
-import vsec.com.yupax.model.http.request.GetDistrictRequest;
 import vsec.com.yupax.model.http.request.GetNewsRequest;
 import vsec.com.yupax.model.http.request.GetPromotionRequest;
 import vsec.com.yupax.model.http.request.GetUserInfoRequest;
@@ -170,13 +169,23 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     }
 
     @Override
-    public String getCurrentMerchant() {
-        return preferencesHelper.getCurrentMerchant();
+    public String getCurrentMerchantCode() {
+        return preferencesHelper.getCurrentMerchantCode();
     }
 
     @Override
-    public void setCurrentMerchant(String str) {
-        preferencesHelper.setCurrentMerchant(str);
+    public void setCurrentMerchantCode(String str) {
+        preferencesHelper.setCurrentMerchantCode(str);
+    }
+
+    @Override
+    public void setCurrentMerchantName(String str) {
+        preferencesHelper.setCurrentMerchantName(str);
+    }
+
+    @Override
+    public String getCurrentMerchantName() {
+        return preferencesHelper.getCurrentMerchantName();
     }
 
     @Override

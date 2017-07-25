@@ -7,8 +7,6 @@ import vsec.com.yupax.base.contract.ChangeProfileContract;
 import vsec.com.yupax.model.DataManager;
 import vsec.com.yupax.model.http.HttpHelper;
 import vsec.com.yupax.model.http.request.BaseRequest;
-import vsec.com.yupax.model.http.request.ChangePasswordRequest;
-import vsec.com.yupax.model.http.request.GetDistrictRequest;
 import vsec.com.yupax.model.http.request.GetUserInfoRequest;
 import vsec.com.yupax.model.http.request.UserInfoChange;
 import vsec.com.yupax.model.http.request.UserInfoChangeRequest;
@@ -48,7 +46,7 @@ public class ChangeProfilePresenter extends RxPresenter<ChangeProfileContract.Vi
         c.setDateOfBirth(""+dateOfBirth);
         UserInfoChangeRequest ui = new UserInfoChangeRequest();
         ui.setToken(manager.getToken());
-        ui.setMerchantCode(manager.getCurrentMerchant());
+        ui.setMerchantCode(manager.getCurrentMerchantCode());
         ui = Utils.setupRequestFormat(ui);
         ui.setServiceName(HttpHelper.ServiceName.UPDATE_INFO_USER);
         ui.setUserInfo(c);
@@ -105,7 +103,7 @@ public class ChangeProfilePresenter extends RxPresenter<ChangeProfileContract.Vi
     public void getUserInfo() {
         GetUserInfoRequest guir = new GetUserInfoRequest();
         guir.setToken(manager.getToken());
-        guir.setMerchantCode(manager.getCurrentMerchant());
+        guir.setMerchantCode(manager.getCurrentMerchantCode());
         guir = Utils.setupRequestFormat(guir);
         guir.setServiceName(HttpHelper.ServiceName.GET_USER_INFO);
         mView.onLoading();
