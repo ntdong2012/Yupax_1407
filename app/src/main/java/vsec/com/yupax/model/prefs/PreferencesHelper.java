@@ -50,4 +50,10 @@ public interface PreferencesHelper {
 
     boolean getSaveLoginState();
 
+//    String getAddress();
+//    String getBirthDay();
+//    String getProvince();
+//    String getDistrict();
+//    String get
+
 }

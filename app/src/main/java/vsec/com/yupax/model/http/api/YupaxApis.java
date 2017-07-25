@@ -7,8 +7,10 @@ import vsec.com.yupax.model.http.request.ActiveUserRequest;
 import vsec.com.yupax.model.http.request.BaseRequest;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
 import vsec.com.yupax.model.http.request.CreateUserRequest;
+import vsec.com.yupax.model.http.request.GetDistrictRequest;
 import vsec.com.yupax.model.http.request.GetNewsRequest;
 import vsec.com.yupax.model.http.request.GetPromotionRequest;
+import vsec.com.yupax.model.http.request.GetUserInfoRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
@@ -20,8 +22,10 @@ import vsec.com.yupax.model.http.response.ActiveUserResponse;
 import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
 import vsec.com.yupax.model.http.response.GetCategoriesResponse;
+import vsec.com.yupax.model.http.response.GetDistrictResponse;
 import vsec.com.yupax.model.http.response.GetPromotionsResponse;
 import vsec.com.yupax.model.http.response.GetProvincesResponse;
+import vsec.com.yupax.model.http.response.GetUserInfoResponse;
 import vsec.com.yupax.model.http.response.ListNewsResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
@@ -62,10 +66,17 @@ public interface YupaxApis {
     Flowable<GetCategoriesResponse> getCategories(@Body BaseRequest baseRequest);
 
     @POST("service")
+    Flowable<GetDistrictResponse> getDistricts(@Body BaseRequest getDistrictRequest);
+
+    @POST("service")
     Flowable<GetProvincesResponse> getProvinces(@Body BaseRequest baseRequest);
 
     @POST("auth-merchant")
     Flowable<ListNewsResponse> getNews(@Body GetNewsRequest getNewsRequest);
+
+    @POST("auth-merchant")
+    Flowable<GetUserInfoResponse> getUserInfo(@Body GetUserInfoRequest getUserInfoRequest);
+
 
     @POST("auth-merchant")
     Flowable<GetPromotionsResponse> getPromotions(@Body GetPromotionRequest getPromotionRequest);

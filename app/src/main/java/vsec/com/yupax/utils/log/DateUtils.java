@@ -163,4 +163,19 @@ public class DateUtils {
     public static String converTimeFromLong(long minisecond) {
         return new SimpleDateFormat("MM/dd/yyyy hh:mm").format(new Date(minisecond));
     }
+
+    public static String converTimeFromLongForBirthDay(long minisecond) {
+        return new SimpleDateFormat("dd/MM/yyyy").format(new Date(minisecond));
+    }
+    public static Long convertTimeFromString(String time) {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = null;
+        try {
+            date = sdf.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long millis = date.getTime();
+        return millis;
+    }
 }

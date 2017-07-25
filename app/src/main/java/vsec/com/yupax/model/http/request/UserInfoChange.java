@@ -12,7 +12,25 @@ public class UserInfoChange {
     private String provinceId;
     private String districtId;
     private String address;
-    private double dateOfBirth;
+    private String dateOfBirth;
+    private String email;
+    private String mobile;
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -62,11 +80,11 @@ public class UserInfoChange {
         this.address = address;
     }
 
-    public double getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(double dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 }

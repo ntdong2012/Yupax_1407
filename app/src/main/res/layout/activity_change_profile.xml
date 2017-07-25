@@ -92,7 +92,7 @@
                     android:paddingLeft="@dimen/df_martin"
                     android:paddingRight="@dimen/df_martin_sm"
                     android:paddingTop="@dimen/profile_layout_padding_top_bottom"
-                    android:text="Thai"
+                    android:text=""
                     android:textColor="@color/df_text_color"
                     android:textSize="@dimen/df_text_size" />
 
@@ -137,7 +137,7 @@
                     android:paddingLeft="@dimen/df_martin"
                     android:paddingRight="@dimen/df_martin_sm"
                     android:paddingTop="@dimen/profile_layout_padding_top_bottom"
-                    android:text=" Hoang Anh"
+                    android:text=" "
                     android:textColor="@color/df_text_color"
                     android:textSize="@dimen/df_text_size" />
 
@@ -177,12 +177,13 @@
                     android:ellipsize="end"
                     android:gravity="right"
                     android:inputType="text"
+                    android:enabled="false"
                     android:maxLines="1"
                     android:paddingBottom="@dimen/profile_layout_padding_top_bottom"
                     android:paddingLeft="@dimen/df_martin"
                     android:paddingRight="@dimen/df_martin_sm"
                     android:paddingTop="@dimen/profile_layout_padding_top_bottom"
-                    android:text=" anhth19"
+                    android:text=" "
                     android:textColor="@color/df_text_color"
                     android:textSize="@dimen/df_text_size" />
 
@@ -225,9 +226,10 @@
                     android:maxLines="1"
                     android:paddingBottom="@dimen/profile_layout_padding_top_bottom"
                     android:paddingLeft="@dimen/df_martin"
+                    android:enabled="false"
                     android:paddingRight="@dimen/df_martin_sm"
                     android:paddingTop="@dimen/profile_layout_padding_top_bottom"
-                    android:text=" anhth19@gmail.com"
+                    android:text=" "
                     android:textColor="@color/df_text_color"
                     android:textSize="@dimen/df_text_size" />
 
@@ -273,7 +275,7 @@
                     android:paddingLeft="@dimen/df_martin"
                     android:paddingRight="@dimen/df_martin_sm"
                     android:paddingTop="@dimen/profile_layout_padding_top_bottom"
-                    android:text=" 097943242"
+                    android:text=" "
                     android:textColor="@color/df_text_color"
                     android:textSize="@dimen/df_text_size" />
             </RelativeLayout>
@@ -297,7 +299,7 @@
                     android:textColor="@color/df_text_color"
                     android:textSize="@dimen/df_text_size" />
 
-                <EditText
+                <TextView
                     android:id="@+id/birthday_value_edt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -312,7 +314,7 @@
                     android:paddingLeft="@dimen/df_martin"
                     android:paddingRight="@dimen/df_martin_sm"
                     android:paddingTop="@dimen/profile_layout_padding_top_bottom"
-                    android:text=" DD/MM/YYYY"
+                    android:text=" "
                     android:textColor="@color/df_text_color"
                     android:textSize="@dimen/df_text_size" />
 
@@ -356,14 +358,14 @@
                     segmentedgroup:sc_corner_radius="@dimen/df_martin">
 
                     <RadioButton
-                        android:id="@+id/button21"
+                        android:id="@+id/male_rb"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/male_label" />
 
                     <RadioButton
-                        android:id="@+id/button22"
+                        android:id="@+id/female_rb"
                         style="@style/RadioButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -476,9 +478,18 @@
                     android:paddingLeft="@dimen/df_martin"
                     android:paddingRight="@dimen/df_martin_sm"
                     android:paddingTop="@dimen/profile_layout_padding_top_bottom"
-                    android:text=" Hanoi"
+                    android:text=" "
                     android:textColor="@color/df_text_color"
                     android:textSize="@dimen/df_text_size" />
+
+                <Spinner
+                    android:id="@+id/city_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/city_right_icon"
+                    android:layout_toRightOf="@id/city_label"
+                    android:visibility="invisible"></Spinner>
 
                 <View
                     android:layout_width="match_parent"
@@ -531,9 +542,18 @@
                     android:paddingLeft="@dimen/df_martin"
                     android:paddingRight="@dimen/df_martin_sm"
                     android:paddingTop="@dimen/profile_layout_padding_top_bottom"
-                    android:text=" Cau giay"
+                    android:text=" "
                     android:textColor="@color/df_text_color"
                     android:textSize="@dimen/df_text_size" />
+
+                <Spinner
+                    android:id="@+id/district_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/district_right_icon"
+                    android:layout_toRightOf="@id/district_label"
+                    android:visibility="invisible"></Spinner>
 
                 <View
                     android:layout_width="match_parent"
@@ -577,7 +597,7 @@
                     android:paddingLeft="@dimen/df_martin"
                     android:paddingRight="@dimen/df_martin_sm"
                     android:paddingTop="@dimen/profile_layout_padding_top_bottom"
-                    android:text=" So 1 Pham Van Bach"
+                    android:text=""
                     android:textColor="@color/df_text_color"
                     android:textSize="@dimen/df_text_size" />
             </RelativeLayout>
@@ -599,5 +619,12 @@
                 android:textSize="@dimen/df_btn_text_size" />
         </RelativeLayout>
     </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/process"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
 </RelativeLayout>

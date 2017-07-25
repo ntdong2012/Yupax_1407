@@ -16,13 +16,13 @@ import vsec.com.yupax.model.http.response.Province;
  * Created by nguyenthanhdong0109@gmail.com on 5/13/17.
  */
 
-public class CityAdapter extends BaseAdapter {
+public class ProvinceAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Province> cities;
     private LayoutInflater inflater;
 
-    public CityAdapter(Context context, ArrayList<Province> cities) {
+    public ProvinceAdapter(Context context, ArrayList<Province> cities) {
         this.context = context;
         this.cities = cities;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -5,8 +5,10 @@ import vsec.com.yupax.model.http.request.ActiveUserRequest;
 import vsec.com.yupax.model.http.request.BaseRequest;
 import vsec.com.yupax.model.http.request.ChangePasswordRequest;
 import vsec.com.yupax.model.http.request.CreateUserRequest;
+import vsec.com.yupax.model.http.request.GetDistrictRequest;
 import vsec.com.yupax.model.http.request.GetNewsRequest;
 import vsec.com.yupax.model.http.request.GetPromotionRequest;
+import vsec.com.yupax.model.http.request.GetUserInfoRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
@@ -18,8 +20,10 @@ import vsec.com.yupax.model.http.response.ActiveUserResponse;
 import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.model.http.response.ChangePasswordResponse;
 import vsec.com.yupax.model.http.response.GetCategoriesResponse;
+import vsec.com.yupax.model.http.response.GetDistrictResponse;
 import vsec.com.yupax.model.http.response.GetPromotionsResponse;
 import vsec.com.yupax.model.http.response.GetProvincesResponse;
+import vsec.com.yupax.model.http.response.GetUserInfoResponse;
 import vsec.com.yupax.model.http.response.ListNewsResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
@@ -48,10 +52,11 @@ public interface HttpHelper {
         public String CREATE_USER_DETAIL = "CREATE_USER_DETAIL";
         public String LIST_PROMOTION = "LIST_PROMOTION";
         public String UPDATE_INFO_USER = "UPDATE_INFO_USER";
+        public String GET_USER_INFO = "GET_USER_INFO";
+        public String LIST_DISTRICT = "LIST_DISTRICT";
     }
 
     Flowable<BaseResponse> updateUserInfo(UserInfoChangeRequest userInfoChangeRequest);
-
 
     Flowable<LoginResponse> signIn(LoginRequest loginRequest);
 
@@ -67,6 +72,8 @@ public interface HttpHelper {
 
     Flowable<GetCategoriesResponse> getCategories(BaseRequest baseRequest);
 
+    Flowable<GetUserInfoResponse> getUserInfo(GetUserInfoRequest getUserInfoRequest);
+
     Flowable<GetProvincesResponse> getProvinces(BaseRequest baseRequest);
 
     Flowable<ListNewsResponse> getNews(GetNewsRequest getNewsRequest);
@@ -78,5 +85,6 @@ public interface HttpHelper {
     Flowable<BaseResponse> registerUserToMerchant(RegisterUserToMerchantRequest registerUserToMerchantRequest);
 
     Flowable<GetPromotionsResponse> getPromotions(GetPromotionRequest getPromotionRequest);
+    Flowable<GetDistrictResponse> getDistricts(BaseRequest getDistrictRequest);
 
 }

@@ -38,7 +38,7 @@ public class SettingPresenter extends RxPresenter<SettingContract.View> implemen
 
     @Override
     public String getUserName() {
-        return mDataManager.getPhone();
+        return mDataManager.getUserName();
     }
 
 

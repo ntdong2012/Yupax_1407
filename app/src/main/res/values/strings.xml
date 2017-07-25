@@ -105,5 +105,6 @@ Không những thế, hành khách mua vé online và thanh toán thành công v
     <string name="active_code_guide">Please input the active code number which was send to your registered email</string>
     <string name="active_code_hint">Active code</string>
     <string name="active_account_label">Active account</string>
+    <string name="update_profile_success">Update profile successfully!</string>
 
 </resources>

@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -40,7 +39,7 @@ import vsec.com.yupax.ui.screen.home.fragment.HomeFg;
 import vsec.com.yupax.ui.screen.home.fragment.NotificationFg;
 import vsec.com.yupax.ui.screen.home.fragment.PersonalFg;
 import vsec.com.yupax.ui.screen.home.fragment.SettingsFg;
-import vsec.com.yupax.ui.view.adapter.CityAdapter;
+import vsec.com.yupax.ui.view.adapter.ProvinceAdapter;
 import vsec.com.yupax.ui.view.customview.CircularTextView;
 import vsec.com.yupax.ui.view.dialog.RateDialog;
 import vsec.com.yupax.utils.Common;
@@ -86,7 +85,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
 
 
     ArrayList<Province> cities;
-    CityAdapter cityAdapter;
+    ProvinceAdapter provinceAdapter;
     FragmentManager fm;
 
     @BindView(R.id.yupax_imageview_actionbar)
@@ -162,10 +161,10 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     void initRegionSpinner() {
 
         cities = new ArrayList<>();
-        cityAdapter = new CityAdapter(this, cities);
-        citySpinner.setAdapter(cityAdapter);
+        provinceAdapter = new ProvinceAdapter(this, cities);
+        citySpinner.setAdapter(provinceAdapter);
 
-        cityAdapter.notifyDataSetChanged();
+        provinceAdapter.notifyDataSetChanged();
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -462,7 +461,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
             for (int i = 0; i < getProvincesResponse.getProvinces().size(); i++) {
                 cities.add(getProvincesResponse.getProvinces().get(i));
             }
-            cityAdapter.notifyDataSetChanged();
+            provinceAdapter.notifyDataSetChanged();
         }
     }
 
