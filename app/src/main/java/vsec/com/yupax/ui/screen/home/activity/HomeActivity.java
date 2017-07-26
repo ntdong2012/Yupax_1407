@@ -272,7 +272,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     void onHomeClicked() {
         updateFragmentTitleActionbarForLogo();
         floatingActionButton.setVisibility(View.GONE);
-//        updateColorForControlView(Common.CONTROL_ICON_POSITION.EXCHANGE);
+        updateColorForControlView(Common.CONTROL_ICON_POSITION.LOGO_IV);
 
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.home_fg, new ExchangeFg());
@@ -305,8 +305,12 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
         if (newPosition == currentPosition) {
             return;
         }
-        controlLabels[currentPosition].setTextColor(getResources().getColor(R.color.df_text_color));
-        controlLabels[newPosition].setTextColor(getResources().getColor(R.color.vj_red_color));
+        if (currentPosition != Common.CONTROL_ICON_POSITION.LOGO_IV) {
+            controlLabels[currentPosition].setTextColor(getResources().getColor(R.color.df_text_color));
+        }
+        if (newPosition != Common.CONTROL_ICON_POSITION.LOGO_IV) {
+            controlLabels[newPosition].setTextColor(getResources().getColor(R.color.vj_red_color));
+        }
         switch (newPosition) {
             case Common.CONTROL_ICON_POSITION.ADDRESS:
                 controlIcons[newPosition].setImageDrawable(getResources().getDrawable(R.drawable.home_icon_bottombar));

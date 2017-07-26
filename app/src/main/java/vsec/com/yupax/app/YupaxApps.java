@@ -36,8 +36,8 @@ public class YupaxApps extends Application {
         initFont();
         instance = this;
 
-        crashHandler = new CrashHandler(this);
-        CrashHandler.init(crashHandler);
+//        crashHandler = new CrashHandler(this);
+//        CrashHandler.init(crashHandler);
 
     }
 

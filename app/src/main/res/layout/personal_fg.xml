@@ -37,7 +37,7 @@
                 android:layout_above="@id/id_tv"
                 android:layout_marginBottom="4dp"
                 android:gravity="center_horizontal"
-                android:text="MR Luong Dep trai"
+                android:text=""
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"

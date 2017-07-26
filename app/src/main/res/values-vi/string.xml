@@ -102,4 +102,7 @@ Không những thế, hành khách mua vé online và thanh toán thành công v
     <string name="vietjet_label">Vietjet Air</string>
     <string name="yupax_label">Yupax</string>
     <string name="update_profile_success">Cập nhật thông tin tài khoản thành công!</string>
+
+    <string name="mr_label">Ông</string>
+    <string name="ms_label">Bà</string>
 </resources>

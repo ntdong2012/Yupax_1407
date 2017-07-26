@@ -106,5 +106,7 @@ Không những thế, hành khách mua vé online và thanh toán thành công v
     <string name="active_code_hint">Active code</string>
     <string name="active_account_label">Active account</string>
     <string name="update_profile_success">Update profile successfully!</string>
+    <string name="mr_label">Mr</string>
+    <string name="ms_label">Ms</string>
 
 </resources>

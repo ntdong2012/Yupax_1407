@@ -20,6 +20,7 @@ public class Common {
         public static int NOTIFICATION = 1;
         public static int EXCHANGE = 2;
         public static int PERSONAL = 3;
+        public static int LOGO_IV = 4;
     }
 
     public interface SPF {
