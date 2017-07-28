@@ -101,7 +101,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/merchant_rv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/select_merchant_tv"
         android:layout_marginLeft="@dimen/df_martin_bi"
         android:layout_marginRight="@dimen/df_martin_bi"

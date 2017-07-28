@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,6 +54,7 @@ import vsec.com.yupax.presenter.HomeFgPresenter;
 import vsec.com.yupax.ui.screen.home.activity.StoreDetailActivity;
 import vsec.com.yupax.ui.screen.login.activity.SignInActivity;
 import vsec.com.yupax.ui.view.adapter.StoreAdapter;
+import vsec.com.yupax.ui.view.dialog.RateDialog;
 import vsec.com.yupax.utils.PerUtils;
 import vsec.com.yupax.utils.ResizeAnimation;
 import vsec.com.yupax.utils.Utils;
@@ -104,11 +106,13 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         this.keySearch = searchKey;
         storeRv.setVisibility(View.GONE);
         if (mLastLocation != null) {
-            mPresenter.getListStores(""+mLastLocation.getLatitude(),""+ mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
+            mPresenter.getListStores("" + mLastLocation.getLatitude(), "" + mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
         } else {
-            mPresenter.getListStores("","", keySearch, currentCategoryId, currentProvinceId);
+            mPresenter.getListStores("", "", keySearch, currentCategoryId, currentProvinceId);
         }
     }
+
+
 
     void initLocationList() {
         stores = new ArrayList<>();
@@ -167,9 +171,9 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         currentCategoryId = 0;
         currentProvinceId = "01";
         if (mLastLocation != null) {
-            mPresenter.getListStores(""+mLastLocation.getLatitude(),""+ mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
+            mPresenter.getListStores("" + mLastLocation.getLatitude(), "" + mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
         } else {
-            mPresenter.getListStores("","", keySearch, currentCategoryId, currentProvinceId);
+            mPresenter.getListStores("", "", keySearch, currentCategoryId, currentProvinceId);
         }
         initLocationList();
         onLoading();
@@ -394,7 +398,8 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
             DLog.d(listStoreResponse.getErrorResponse().getMessage());
             if (listStoreResponse.getErrorResponse().getCode().contains("327")) {
                 mPresenter.onRegisterUserToMerchant();
-            } else if (listStoreResponse.getErrorResponse().getCode().contains("203")) {
+            } else if (listStoreResponse.getErrorResponse().getCode().contains("203") ||
+                    listStoreResponse.getErrorResponse().getCode().contains("305")) {
                 mPresenter.saveToken("");
                 SignInActivity.callSignInActivity(getActivity(), new Bundle());
                 getActivity().finish();
@@ -431,9 +436,9 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                         DLog.d("Category Position : " + position);
                         currentCategoryId = position;
                         if (mLastLocation != null) {
-                            mPresenter.getListStores(""+mLastLocation.getLatitude(),""+ mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
+                            mPresenter.getListStores("" + mLastLocation.getLatitude(), "" + mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
                         } else {
-                            mPresenter.getListStores("","", keySearch, position, currentProvinceId);
+                            mPresenter.getListStores("", "", keySearch, position, currentProvinceId);
                         }
                     }
 
@@ -457,9 +462,9 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     public void onRegisterUserToMerchantSuccess(BaseResponse baseResponse) {
         if (baseResponse != null && baseResponse.getErrorResponse().getCode().contains("200")) {
             if (mLastLocation != null) {
-                mPresenter.getListStores(""+mLastLocation.getLatitude(),""+ mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
+                mPresenter.getListStores("" + mLastLocation.getLatitude(), "" + mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
             } else {
-                mPresenter.getListStores("","", keySearch, currentCategoryId, currentProvinceId);
+                mPresenter.getListStores("", "", keySearch, currentCategoryId, currentProvinceId);
             }
         } else {
             DLog.d(baseResponse.getErrorResponse().getMessage());
@@ -499,9 +504,9 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                 }
 
                 if (mLastLocation != null) {
-                    mPresenter.getListStores(""+mLastLocation.getLatitude(),""+ mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
+                    mPresenter.getListStores("" + mLastLocation.getLatitude(), "" + mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
                 } else {
-                    mPresenter.getListStores("","", keySearch, currentCategoryId, currentProvinceId);
+                    mPresenter.getListStores("", "", keySearch, currentCategoryId, currentProvinceId);
                 }
             }
         }

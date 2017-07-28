@@ -95,12 +95,18 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     TextView[] controlLabels;
     int currentPosition;
     CircularTextView numOfNotificationTv;
-    @BindView(R.id.floating_icon)
-    FloatingActionButton floatingActionButton;
+
 
     private String provinceID = "";
     private String searchKey = "";
 
+    private HomeFg mHomeFg;
+    private NotificationFg mNotificationFg;
+    private SettingsFg mSettingFg;
+    private PersonalFg mPersonalFg;
+    private ExchangeFg mExchangeFg;
+    @BindView(R.id.floating_icon)
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected int getLayout() {
@@ -123,6 +129,16 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
                 return false;
             }
         });
+
+        updateHomeActionbar();
+        updateColorForControlView(Common.CONTROL_ICON_POSITION.ADDRESS);
+
+        FragmentTransaction ft = fm.beginTransaction();
+        if (mHomeFg == null) {
+            mHomeFg = new HomeFg();
+        }
+        ft.replace(R.id.home_fg, mHomeFg);
+        ft.commit();
     }
 
     @OnClick(R.id.floating_icon)
@@ -244,60 +260,90 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
 
     void initValue() {
         fm = getSupportFragmentManager();
-        currentPosition = 0;
+        currentPosition = Common.CONTROL_ICON_POSITION.ADDRESS;
     }
 
     @OnClick(R.id.setting_view)
     void onSettingClicked() {
-        floatingActionButton.setVisibility(View.GONE);
+        if (currentPosition == Common.CONTROL_ICON_POSITION.PERSONAL) {
+            return;
+        }
         updateActionbarForSettingView(getString(R.string.personal_label));
         updateColorForControlView(Common.CONTROL_ICON_POSITION.PERSONAL);
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.home_fg, new SettingsFg());
+        floatingActionButton.hide();
+        if (mSettingFg == null) {
+            mSettingFg = new SettingsFg();
+        }
+
+        ft.replace(R.id.home_fg, mSettingFg);
         ft.commit();
     }
 
     @OnClick(R.id.personal_view)
     void onPersonalClicked() {
-        floatingActionButton.setVisibility(View.GONE);
+        if (currentPosition == Common.CONTROL_ICON_POSITION.EXCHANGE) {
+            return;
+        }
         updateActionbarForPersonalView(getString(R.string.personal_label));
         updateColorForControlView(Common.CONTROL_ICON_POSITION.EXCHANGE);
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.home_fg, new PersonalFg());
+        if (mPersonalFg == null) {
+            mPersonalFg = new PersonalFg();
+        }
+        floatingActionButton.hide();
+        ft.replace(R.id.home_fg, mPersonalFg);
         ft.commit();
 
     }
 
     @OnClick(R.id.logo_iv)
     void onHomeClicked() {
+        if (currentPosition == Common.CONTROL_ICON_POSITION.LOGO_IV) {
+            return;
+        }
         updateFragmentTitleActionbarForLogo();
-        floatingActionButton.setVisibility(View.GONE);
         updateColorForControlView(Common.CONTROL_ICON_POSITION.LOGO_IV);
 
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.home_fg, new ExchangeFg());
+        if (mExchangeFg == null) {
+            mExchangeFg = new ExchangeFg();
+        }
+        floatingActionButton.hide();
+        ft.replace(R.id.home_fg, mExchangeFg);
         ft.commit();
     }
 
     @OnClick(R.id.address_view)
     void onAddressClicked() {
+        if (currentPosition == Common.CONTROL_ICON_POSITION.ADDRESS) {
+            return;
+        }
         updateHomeActionbar();
-        floatingActionButton.setVisibility(View.VISIBLE);
         updateColorForControlView(Common.CONTROL_ICON_POSITION.ADDRESS);
-
+        floatingActionButton.show();
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.home_fg, new HomeFg());
+        if (mHomeFg == null) {
+            mHomeFg = new HomeFg();
+        }
+        ft.replace(R.id.home_fg, mHomeFg);
         ft.commit();
 
     }
 
     @OnClick(R.id.notification_view)
     void onNotificationClick() {
-        floatingActionButton.setVisibility(View.GONE);
+        if (currentPosition == Common.CONTROL_ICON_POSITION.NOTIFICATION) {
+            return;
+        }
         updateColorForControlView(Common.CONTROL_ICON_POSITION.NOTIFICATION);
         updateFragmentTitleActionbar(getString(R.string.notification_label));
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.home_fg, new NotificationFg());
+        if (mNotificationFg == null) {
+            mNotificationFg = new NotificationFg();
+        }
+        floatingActionButton.hide();
+        ft.replace(R.id.home_fg, mNotificationFg);
         ft.commit();
     }
 
