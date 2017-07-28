@@ -50,9 +50,9 @@ public class PersonalFg extends BaseFragment<PersonalPresenter> implements Perso
             String gender = user.getGender();
             if (!TextUtils.isEmpty(gender)) {
                 if (gender.contains("FEMALE")) {
-                    name = getString(R.string.mr_label) + " " + name;
-                } else {
                     name = getString(R.string.ms_label) + " " + name;
+                } else {
+                    name = getString(R.string.mr_label) + " " + name;
                 }
             }
             nameTv.setText(name);
