@@ -8,9 +8,9 @@
     <application
         android:name=".app.YupaxApps"
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/logo_icon_small"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo"
+        android:roundIcon="@drawable/logo_icon_small"
         android:supportsRtl="true"
         android:theme="@style/LoginTheme">
         <meta-data
