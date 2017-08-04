@@ -19,6 +19,7 @@ import android.widget.ExpandableListAdapter;
 
 import vsec.com.yupax.R;
 import vsec.com.yupax.model.http.response.Rate;
+import vsec.com.yupax.model.http.response.RateAnswer;
 import vsec.com.yupax.utils.log.DLog;
 
 
@@ -52,6 +53,11 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
     public class CheckListener implements OnCheckedChangeListener {
 
         long pos;
+        int groupPosition;
+
+        public CheckListener(int groupPosition) {
+            this.groupPosition = groupPosition;
+        }
 
         public void setPosition(long p) {
             pos = p;
@@ -60,25 +66,26 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
         @Override
         public void onCheckedChanged(CompoundButton buttonView,
                                      boolean isChecked) {
-            Log.i("checkListenerChanged", String.valueOf(pos) + ":" + String.valueOf(isChecked));
-            checkboxMap.put(pos, isChecked);
-            if (isChecked == true) check_string_array[(int) pos] = "true";
-            else check_string_array[(int) pos] = "false";
-            // save checkbox state of each group
-            SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-            SharedPreferences.Editor preferencesEditor = settings.edit();
-            preferencesEditor.putString(String.valueOf((int) pos), check_string_array[(int) pos]);
-            preferencesEditor.commit();
+            DLog.d(String.valueOf(pos) + ":" + String.valueOf(isChecked));
+
+            int totalChil = getChildrenCount(groupPosition);
+
+            for (int i = 0; i < totalChil; i++) {
+                if (i != pos) {
+                    buttonView.setChecked(false);
+                }
+            }
         }
+
     }
 
-    public String getChild(int groupPosition, int childPosition) {
+    public RateAnswer getChild(int groupPosition, int childPosition) {
         DLog.d("getChild");
-        return rates.get(groupPosition).getQuestions().get(childPosition).getQuestion();
+        return rates.get(groupPosition).getQuestions().get(childPosition);
     }
 
     public long getChildId(int groupPosition, int childPosition) {
-        DLog.d("getChildId " + groupPosition + " " +  childPosition);
+        DLog.d("getChildId " + groupPosition + " " + childPosition);
         return childPosition;
     }
 
@@ -87,15 +94,30 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
         return rates.get(groupPosition).getQuestions().size();
     }
 
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        DLog.d("getChildView ");
+    public View getChildView(final int groupPosition, int childPosition, boolean isLastChild, final View convertView, ViewGroup parent) {
         View v = convertView;
-        String child = getChild(groupPosition, childPosition);
+        final RateAnswer child = getChild(groupPosition, childPosition);
         int id_res = 0;
         if (child != null) {
             v = vi.inflate(CHILD_ITEM_RESOURCE, null);
-            RateViewHolder holder = new RateViewHolder(v);
-            holder.text.setText(Html.fromHtml(child));
+            final RateViewHolder holder = new RateViewHolder(v);
+            holder.text.setText(Html.fromHtml(child.getQuestion()));
+            holder.imageview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int totalChil = getChildrenCount(groupPosition);
+                    if (child.isChecked()) {
+                        child.setChecked(false);
+                        holder.imageview.setImageDrawable(context.getResources().getDrawable(R.drawable.radio_box_20));
+                    } else {
+                        child.setChecked(true);
+                        holder.imageview.setImageDrawable(context.getResources().getDrawable(R.drawable.radio_box_act_20));
+                    }
+
+
+
+                }
+            });
         }
         return v;
     }

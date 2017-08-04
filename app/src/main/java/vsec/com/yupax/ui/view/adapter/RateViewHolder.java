@@ -19,6 +19,6 @@ public class RateViewHolder {
 
     public RateViewHolder(View v) {
         this.text = (TextView) v.findViewById(R.id.text1);
-//        this.imageview = (ImageView) v.findViewById(R.id.image1);
+        this.imageview = (ImageView) v.findViewById(R.id.image_cb);
     }
 }

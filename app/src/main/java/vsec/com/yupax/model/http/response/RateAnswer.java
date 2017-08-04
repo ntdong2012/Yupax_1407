@@ -10,6 +10,8 @@ public class RateAnswer {
     private String questionId;
     private String question;
 
+    private boolean isChecked;
+
     public RateAnswer(String question) {
         this.question = question;
     }
@@ -32,6 +34,14 @@ public class RateAnswer {
 
     public String getQuestion() {
         return question;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 
     public void setQuestion(String question) {
