@@ -12,6 +12,7 @@ import vsec.com.yupax.model.http.request.GetUserInfoRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
+import vsec.com.yupax.model.http.request.RateAnswerListRequest;
 import vsec.com.yupax.model.http.request.RateRequest;
 import vsec.com.yupax.model.http.request.RegisterUserToMerchantRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
@@ -57,6 +58,7 @@ public interface HttpHelper {
         public String GET_USER_INFO = "GET_USER_INFO";
         public String LIST_DISTRICT = "LIST_DISTRICT";
         public String SURVEY_LIST = "SURVEY_LIST";
+        public String SURVEY_QUESTION = "SURVEY_QUESTION";
     }
 
     Flowable<BaseResponse> updateUserInfo(UserInfoChangeRequest userInfoChangeRequest);
@@ -90,5 +92,6 @@ public interface HttpHelper {
     Flowable<GetPromotionsResponse> getPromotions(GetPromotionRequest getPromotionRequest);
     Flowable<GetDistrictResponse> getDistricts(BaseRequest getDistrictRequest);
     Flowable<RateQuestionResponse> getRateQuestionList(RateRequest rateRequest);
+    Flowable<BaseResponse> sendRateAnswers(RateAnswerListRequest rateAnswerListRequest);
 
 }

@@ -102,20 +102,20 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
             v = vi.inflate(CHILD_ITEM_RESOURCE, null);
             final RateViewHolder holder = new RateViewHolder(v);
             holder.text.setText(Html.fromHtml(child.getQuestion()));
+            if (child.isChecked()) {
+                holder.imageview.setImageDrawable(context.getResources().getDrawable(R.drawable.radio_box_act_20));
+            } else {
+                holder.imageview.setImageDrawable(context.getResources().getDrawable(R.drawable.radio_box_20));
+            }
             holder.imageview.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int totalChil = getChildrenCount(groupPosition);
-                    if (child.isChecked()) {
-                        child.setChecked(false);
-                        holder.imageview.setImageDrawable(context.getResources().getDrawable(R.drawable.radio_box_20));
-                    } else {
-                        child.setChecked(true);
-                        holder.imageview.setImageDrawable(context.getResources().getDrawable(R.drawable.radio_box_act_20));
+                    for (int i = 0; i < totalChil; i++) {
+                        getChild(groupPosition, i).setChecked(false);
                     }
-
-
-
+                    child.setChecked(true);
+                    SampleExpandableListAdapter.this.notifyDataSetChanged();
                 }
             });
         }

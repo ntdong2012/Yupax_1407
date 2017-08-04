@@ -24,6 +24,9 @@ public class Rate {
         this.questions = questions;
     }
 
+    public Rate() {
+    }
+
     public String getHashcode() {
         return hashcode;
     }

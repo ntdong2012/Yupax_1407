@@ -16,6 +16,9 @@ public class RateAnswer {
         this.question = question;
     }
 
+    public RateAnswer() {
+    }
+
     public String getHashcode() {
         return hashcode;
     }

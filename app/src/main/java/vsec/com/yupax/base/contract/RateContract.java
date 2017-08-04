@@ -1,7 +1,11 @@
 package vsec.com.yupax.base.contract;
 
+import java.util.ArrayList;
+
 import vsec.com.yupax.base.BasePresenter;
 import vsec.com.yupax.base.BaseView;
+import vsec.com.yupax.model.http.response.BaseResponse;
+import vsec.com.yupax.model.http.response.Rate;
 import vsec.com.yupax.model.http.response.RateQuestionResponse;
 
 /**
@@ -14,6 +18,8 @@ public interface RateContract {
 
         void getRateQuestionSuccess(RateQuestionResponse rateQuestionResponse);
 
+        void sendRateAnswersSuccess(BaseResponse baseResponse);
+
         void onLoading();
 
         void onStopLoading();
@@ -23,5 +29,7 @@ public interface RateContract {
     interface Presenter extends BasePresenter<View> {
 
         void getRateQuestions();
+
+        void sendRateAnswer(ArrayList<Rate> rates);
     }
 }

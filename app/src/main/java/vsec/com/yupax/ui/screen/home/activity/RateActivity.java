@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.RateContract;
+import vsec.com.yupax.model.http.response.BaseResponse;
 import vsec.com.yupax.model.http.response.Rate;
 import vsec.com.yupax.model.http.response.RateAnswer;
 import vsec.com.yupax.model.http.response.RateQuestionResponse;
@@ -79,11 +81,24 @@ public class RateActivity extends BaseActivity<RatePresenter> implements RateCon
 
     }
 
+    @OnClick(R.id.confirm_btn)
+    void onAnswerRequest() {
+        if(rates != null && rates.size()>0) {
+            mPresenter.sendRateAnswer(rates);
+        } else {
+            this.finish();
+        }
+    }
+
+    @Override
+    public void sendRateAnswersSuccess(BaseResponse baseResponse) {
+        DLog.d("sendRateAnswersSuccess");
+        this.finish();
+    }
 
     @Override
     public void getRateQuestionSuccess(RateQuestionResponse rQr) {
-        DLog.d("getRateQuestionSuccess");
-        if(rQr != null && rQr.getErrorResponse().getCode().equals("200")) {
+       if(rQr != null && rQr.getErrorResponse().getCode().equals("200")) {
             rates.clear();
             for (int i = 0; i< rQr.getRates().size(); i++) {
                 rates.add(rQr.getRates().get(i));
