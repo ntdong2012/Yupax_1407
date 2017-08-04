@@ -143,8 +143,7 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
 
     @OnClick(R.id.floating_icon)
     void onFloatingActionClick() {
-        RateDialog dialog = new RateDialog(this);
-        dialog.show();
+        RateActivity.callRateActivity(this, new Bundle());
     }
 
 
@@ -186,7 +185,6 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 cityTv.setText("" + cities.get(i).getName());
                 provinceID = cities.get(i).getId();
-                DLog.d("ProvinceID: " + provinceID);
                 FragmentManager fm = getSupportFragmentManager();
                 Fragment f = fm.findFragmentById(R.id.home_fg);
                 if (f instanceof HomeFg) {

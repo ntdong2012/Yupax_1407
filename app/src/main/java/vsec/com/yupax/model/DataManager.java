@@ -12,6 +12,7 @@ import vsec.com.yupax.model.http.request.GetUserInfoRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
+import vsec.com.yupax.model.http.request.RateRequest;
 import vsec.com.yupax.model.http.request.RegisterUserToMerchantRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
@@ -28,6 +29,7 @@ import vsec.com.yupax.model.http.response.ListNewsResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.MerchantListResponse;
+import vsec.com.yupax.model.http.response.RateQuestionResponse;
 import vsec.com.yupax.model.http.response.StoreDetailResponse;
 import vsec.com.yupax.model.http.response.UserInfoResponse;
 import vsec.com.yupax.model.prefs.PreferencesHelper;
@@ -247,6 +249,11 @@ public class DataManager implements HttpHelper, PreferencesHelper {
     @Override
     public Flowable<GetDistrictResponse> getDistricts(BaseRequest getDistrictRequest) {
         return httpHelper.getDistricts(getDistrictRequest);
+    }
+
+    @Override
+    public Flowable<RateQuestionResponse> getRateQuestionList(RateRequest rateRequest) {
+        return httpHelper.getRateQuestionList(rateRequest);
     }
 
     public void onSaveUserInfo(UserInfoResponse userInfoResponse) {

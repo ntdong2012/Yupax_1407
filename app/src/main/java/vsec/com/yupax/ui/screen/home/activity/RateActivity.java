@@ -8,14 +8,17 @@ import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.RateContract;
+import vsec.com.yupax.model.http.response.Rate;
 import vsec.com.yupax.model.http.response.RateAnswer;
-import vsec.com.yupax.model.http.response.RateQuestion;
+import vsec.com.yupax.model.http.response.RateQuestionResponse;
 import vsec.com.yupax.presenter.RatePresenter;
 import vsec.com.yupax.ui.view.adapter.SampleExpandableListAdapter;
+import vsec.com.yupax.utils.log.DLog;
 
 public class RateActivity extends BaseActivity<RatePresenter> implements RateContract.View {
 
@@ -23,55 +26,25 @@ public class RateActivity extends BaseActivity<RatePresenter> implements RateCon
         Intent intent = new Intent(context, RateActivity.class);
         intent.putExtra("home_data", bundle);
         context.startActivity(intent);
-        ((Activity) context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
+//        ((Activity) context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
     }
 
-
-    @OnClick(R.id.back_tv)
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.left_in, R.anim.right_out);
-    }
-
-    private Context context;
-    private static final String[][] data = {{"audia4", "audiq7", "audir8"}, {"bmwm6", "bmwx6"}, {"ferrarienzo", "ferrarif430", "ferrarif430italia"}};
-    private ExpandableListView expandableListView;
+    @BindView(R.id.expandableListView1)
+    ExpandableListView expandableListView;
+    SampleExpandableListAdapter rateAdapter;
+    ArrayList<Rate> rates;
 
 
     @Override
     protected int getLayout() {
-        return R.layout.activity_rate;
+        return R.layout.rate_layout;
     }
 
     @Override
     protected void initEventAndData() {
-
-        RateAnswer r = new RateAnswer("Rất tốt");
-        RateAnswer r1 = new RateAnswer("Tốt");
-        RateAnswer r2 = new RateAnswer("Rất rất tốt");
-
-        ArrayList<RateAnswer> rateAnswers = new ArrayList<>();
-        rateAnswers.add(r);
-        rateAnswers.add(r1);
-        rateAnswers.add(r2);
-
-
-        RateQuestion q = new RateQuestion("Bạn có hài lòng với dịch vụ mặt đất của chúng tôi", rateAnswers);
-        RateQuestion q2 = new RateQuestion("Bạn có hài lòng với dịch vụ hành lý của chúng tôi", rateAnswers);
-        RateQuestion q3 = new RateQuestion("Bạn có hài lòng với dịch vụ sân bay của chúng tôi", rateAnswers);
-        RateQuestion q4 = new RateQuestion("Bạn có hài lòng với dịch vụ máy bay của chúng tôi", rateAnswers);
-
-
-        ArrayList<RateQuestion> rateQuestions = new ArrayList<>();
-        rateQuestions.add(q);
-        rateQuestions.add(q2);
-        rateQuestions.add(q3);
-        rateQuestions.add(q4);
-
-        expandableListView = (ExpandableListView) findViewById(R.id.expandableListView1);
-        expandableListView.setAdapter(new SampleExpandableListAdapter(context, this, rateQuestions));
-
+        rates = new ArrayList<>();
+        rateAdapter = new SampleExpandableListAdapter(this, rates);
+        expandableListView.setAdapter(rateAdapter);
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             int previousGroup = -1;
 
@@ -83,6 +56,22 @@ public class RateActivity extends BaseActivity<RatePresenter> implements RateCon
             }
         });
 
+        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            int previousGroup = -1;
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+//                if (groupPosition != previousGroup)
+//                    expandableListView.collapseGroup(previousGroup);
+//                previousGroup = groupPosition;
+            }
+        });
+        DLog.d("Rate Question size: " + rates.size());
+        for (int i = 0; i < rates.size(); i++) {
+            expandableListView.expandGroup(i);
+        }
+
+        mPresenter.getRateQuestions();
     }
 
     @Override
@@ -90,8 +79,20 @@ public class RateActivity extends BaseActivity<RatePresenter> implements RateCon
 
     }
 
+
     @Override
-    public void getRateQuestionSuccess() {
+    public void getRateQuestionSuccess(RateQuestionResponse rQr) {
+        DLog.d("getRateQuestionSuccess");
+        if(rQr != null && rQr.getErrorResponse().getCode().equals("200")) {
+            rates.clear();
+            for (int i = 0; i< rQr.getRates().size(); i++) {
+                rates.add(rQr.getRates().get(i));
+            }
+            rateAdapter.notifyDataSetChanged();
+            for (int i = 0; i < rates.size(); i++) {
+                expandableListView.expandGroup(i);
+            }
+        }
 
     }
 

@@ -6,17 +6,35 @@ package vsec.com.yupax.model.http.response;
 
 public class RateAnswer {
 
-    private String rateAnswer;
+    private String hashcode;
+    private String questionId;
+    private String question;
 
-    public RateAnswer(String rateAnswer) {
-        this.rateAnswer = rateAnswer;
+    public RateAnswer(String question) {
+        this.question = question;
     }
 
-    public String getRateAnswer() {
-        return rateAnswer;
+    public String getHashcode() {
+        return hashcode;
     }
 
-    public void setRateAnswer(String rateAnswer) {
-        this.rateAnswer = rateAnswer;
+    public void setHashcode(String hashcode) {
+        this.hashcode = hashcode;
+    }
+
+    public String getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(String questionId) {
+        this.questionId = questionId;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 }

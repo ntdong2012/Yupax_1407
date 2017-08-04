@@ -8,7 +8,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class BaseResponse {
 
-
     @SerializedName("error")
     private ErrorResponse errorResponse;
     @SerializedName("serviceName")

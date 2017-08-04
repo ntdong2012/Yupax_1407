@@ -15,6 +15,7 @@ import vsec.com.yupax.model.http.request.GetUserInfoRequest;
 import vsec.com.yupax.model.http.request.ListStoreRequest;
 import vsec.com.yupax.model.http.request.LoginRequest;
 import vsec.com.yupax.model.http.request.MerchantListRequest;
+import vsec.com.yupax.model.http.request.RateRequest;
 import vsec.com.yupax.model.http.request.RegisterUserToMerchantRequest;
 import vsec.com.yupax.model.http.request.ResendPasswordRequest;
 import vsec.com.yupax.model.http.request.StoreDetailRequest;
@@ -31,6 +32,7 @@ import vsec.com.yupax.model.http.response.ListNewsResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.model.http.response.MerchantListResponse;
+import vsec.com.yupax.model.http.response.RateQuestionResponse;
 import vsec.com.yupax.model.http.response.StoreDetailResponse;
 
 /**
@@ -125,5 +127,10 @@ public class RetrofitHelper implements HttpHelper {
     @Override
     public Flowable<GetDistrictResponse> getDistricts(BaseRequest getDistrictRequest) {
         return yupaxApis.getDistricts(getDistrictRequest);
+    }
+
+    @Override
+    public Flowable<RateQuestionResponse> getRateQuestionList(RateRequest rateRequest) {
+        return yupaxApis.getRateQuestionList(rateRequest);
     }
 }

@@ -44,7 +44,9 @@
         <activity
             android:name=".ui.screen.home.activity.StoreDetailActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.screen.home.activity.RateActivity" />
+        <activity
+            android:name=".ui.screen.home.activity.RateActivity"
+            android:theme="@style/Theme.AppCompat.Translucent" />
         <activity android:name=".ui.screen.login.activity.SignInActivity" />
         <activity android:name=".ui.screen.login.activity.RegisterActivity" />
         <activity android:name=".ui.screen.login.activity.MerchantActivity"></activity>

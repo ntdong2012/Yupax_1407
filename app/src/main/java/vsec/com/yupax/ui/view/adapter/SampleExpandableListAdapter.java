@@ -3,7 +3,6 @@ package vsec.com.yupax.ui.view.adapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -19,7 +18,8 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ExpandableListAdapter;
 
 import vsec.com.yupax.R;
-import vsec.com.yupax.model.http.response.RateQuestion;
+import vsec.com.yupax.model.http.response.Rate;
+import vsec.com.yupax.utils.log.DLog;
 
 
 /**
@@ -30,7 +30,6 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
     public Context context;
     CheckBox checkBox;
     private LayoutInflater vi;
-    //    private String[][] data;
     int _objInt;
     public static Boolean checked[] = new Boolean[1];
 
@@ -39,19 +38,15 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
     private static final int CHILD_ITEM_RESOURCE = R.layout.child_item;
     public String[] check_string_array;
 
-    private ArrayList<RateQuestion> rateQuestions;
+    private ArrayList<Rate> rates;
 
-    public SampleExpandableListAdapter(Context context, Activity activity, ArrayList<RateQuestion> rateQuestions) {
-        this.rateQuestions = rateQuestions;
+    public SampleExpandableListAdapter(Context context, ArrayList<Rate> rates) {
+        this.rates = rates;
         this.context = context;
-        vi = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        _objInt = rateQuestions.size();
+        vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        _objInt = rates.size();
         check_string_array = new String[_objInt];
-        popolaCheckMap();
-    }
 
-    public void popolaCheckMap() {
     }
 
     public class CheckListener implements OnCheckedChangeListener {
@@ -78,18 +73,22 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
     }
 
     public String getChild(int groupPosition, int childPosition) {
-        return rateQuestions.get(groupPosition).getAnswers().get(childPosition).getRateAnswer();
+        DLog.d("getChild");
+        return rates.get(groupPosition).getQuestions().get(childPosition).getQuestion();
     }
 
     public long getChildId(int groupPosition, int childPosition) {
+        DLog.d("getChildId " + groupPosition + " " +  childPosition);
         return childPosition;
     }
 
     public int getChildrenCount(int groupPosition) {
-        return rateQuestions.get(groupPosition).getAnswers().size();
+        DLog.d("Answer sise: " + rates.get(groupPosition).getQuestions().size());
+        return rates.get(groupPosition).getQuestions().size();
     }
 
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        DLog.d("getChildView ");
         View v = convertView;
         String child = getChild(groupPosition, childPosition);
         int id_res = 0;
@@ -106,11 +105,13 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
     }
 
     public int getGroupCount() {
-        return rateQuestions.size();
+        DLog.d("getGroupCount " + rates.size());
+        return rates.size();
     }
 
 
     public long getGroupId(int groupPosition) {
+        DLog.d("getGroupId: " + groupPosition);
         return groupPosition;
     }
 
@@ -122,12 +123,12 @@ public class SampleExpandableListAdapter extends BaseExpandableListAdapter imple
         long group_id = getGroupId(groupPosition);
 
         group = "" + (group_id + 1) + ".";
-
+        DLog.d("getGroupView : " + group);
         if (group != null) {
             v = vi.inflate(GROUP_ITEM_RESOURCE, null);
             RateGroupViewHolder holder = new RateGroupViewHolder(v);
             holder.num.setText(Html.fromHtml(group));
-            holder.question.setText(rateQuestions.get(groupPosition).getQuestion());
+            holder.question.setText(rates.get(groupPosition).getAnswer());
         }
         return v;
     }

@@ -14,8 +14,11 @@ import android.widget.ExpandableListView;
 import java.util.ArrayList;
 
 import vsec.com.yupax.R;
+import vsec.com.yupax.base.contract.RateContract;
+import vsec.com.yupax.model.http.response.Rate;
 import vsec.com.yupax.model.http.response.RateAnswer;
-import vsec.com.yupax.model.http.response.RateQuestion;
+import vsec.com.yupax.model.http.response.RateQuestionResponse;
+import vsec.com.yupax.presenter.RatePresenter;
 import vsec.com.yupax.ui.view.adapter.SampleExpandableListAdapter;
 import vsec.com.yupax.utils.log.DLog;
 
@@ -23,12 +26,12 @@ import vsec.com.yupax.utils.log.DLog;
  * Created by ntdong2012 on 7/14/2017.
  */
 
-public class RateDialog extends AppCompatDialog {
+public class RateDialog extends AppCompatDialog{
 
     private Context context;
     private static final String[][] data = {{"audia4", "audiq7", "audir8"}, {"bmwm6", "bmwx6"}, {"ferrarienzo", "ferrarif430", "ferrarif430italia"}};
     private ExpandableListView expandableListView;
-
+    private RatePresenter mRatePresenter;
 
     public RateDialog(Context context) {
         super(context);
@@ -80,20 +83,20 @@ public class RateDialog extends AppCompatDialog {
         rateAnswers.add(r2);
 
 
-        RateQuestion q = new RateQuestion("Bạn có hài lòng với dịch vụ mặt đất của chúng tôi", rateAnswers);
-        RateQuestion q2 = new RateQuestion("Bạn có hài lòng với dịch vụ hành lý của chúng tôi", rateAnswers);
-        RateQuestion q3 = new RateQuestion("Bạn có hài lòng với dịch vụ sân bay của chúng tôi", rateAnswers);
-        RateQuestion q4 = new RateQuestion("Bạn có hài lòng với dịch vụ máy bay của chúng tôi", rateAnswers);
+        Rate q = new Rate("Bạn có hài lòng với dịch vụ mặt đất của chúng tôi", rateAnswers);
+        Rate q2 = new Rate("Bạn có hài lòng với dịch vụ hành lý của chúng tôi", rateAnswers);
+        Rate q3 = new Rate("Bạn có hài lòng với dịch vụ sân bay của chúng tôi", rateAnswers);
+        Rate q4 = new Rate("Bạn có hài lòng với dịch vụ máy bay của chúng tôi", rateAnswers);
 
 
-        ArrayList<RateQuestion> rateQuestions = new ArrayList<>();
-        rateQuestions.add(q);
-        rateQuestions.add(q2);
-        rateQuestions.add(q3);
-        rateQuestions.add(q4);
+        ArrayList<Rate> rateQuestionResponses = new ArrayList<>();
+        rateQuestionResponses.add(q);
+        rateQuestionResponses.add(q2);
+        rateQuestionResponses.add(q3);
+        rateQuestionResponses.add(q4);
 
         expandableListView = (ExpandableListView) findViewById(R.id.expandableListView1);
-        expandableListView.setAdapter(new SampleExpandableListAdapter(context, (Activity) context, rateQuestions));
+        expandableListView.setAdapter(new SampleExpandableListAdapter(context, rateQuestionResponses));
 
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             int previousGroup = -1;
@@ -105,9 +108,10 @@ public class RateDialog extends AppCompatDialog {
 //                previousGroup = groupPosition;
             }
         });
-        DLog.d("Rate Question size: " + rateQuestions.size());
-        for (int i = 0; i < rateQuestions.size(); i++) {
+        DLog.d("Rate Question size: " + rateQuestionResponses.size());
+        for (int i = 0; i < rateQuestionResponses.size(); i++) {
             expandableListView.expandGroup(i);
         }
     }
+
 }
