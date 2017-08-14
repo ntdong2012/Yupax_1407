@@ -73,7 +73,7 @@
 
     <dimen name="event_address_label_text_size">17sp</dimen>
     <dimen name="event_address_label_padding">11sp</dimen>
-    <dimen name="event_address_map_height">150dp</dimen>
+    <dimen name="event_address_map_height">250dp</dimen>
 
 
     <dimen name="personal_item_icon_size">20dp</dimen>

@@ -86,7 +86,6 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
     private Store currentStore;
 
     void updateStoreDetailUI(Store store) {
-        DLog.d("LOGO: " + store.getImages());
         Glide.with(this).load(store.getImages()).into(storeImv);
         storeName.setText(store.getName());
         storeAddress.setText(store.getAddress());
@@ -94,6 +93,8 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
         timeStatus.setText(store.getOpenTime());
         titleActionbar.setText(store.getName());
         saleTv.setText("" + store.getDescription());
+        DLog.d("Lat: " + store.getLat() + " Log: " + store.getLg());
+        addMarker(Double.parseDouble(store.getLat()), Double.parseDouble(store.getLg()));
     }
 
 
@@ -237,25 +238,45 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
             double longitude = mLastLocation.getLongitude();
 
             // create marker
-            MarkerOptions marker = new MarkerOptions().position(
-                    new LatLng(latitude, longitude)).title("Hello Maps");
-
-            // Changing marker icon
-            marker.icon(BitmapDescriptorFactory
-                    .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
-
-            // adding marker
-            mGoogleMap.addMarker(marker);
-            CameraPosition cameraPosition = new CameraPosition.Builder()
-                    .target(new LatLng(latitude, longitude)).zoom(12).build();
-            mGoogleMap.animateCamera(CameraUpdateFactory
-                    .newCameraPosition(cameraPosition));
+//            MarkerOptions marker = new MarkerOptions().position(
+//                    new LatLng(latitude, longitude)).title("Hello Maps");
+//
+//            // Changing marker icon
+//            marker.icon(BitmapDescriptorFactory
+//                    .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+//
+//            // adding marker
+//            mGoogleMap.addMarker(marker);
+//            CameraPosition cameraPosition = new CameraPosition.Builder()
+//                    .target(new LatLng(latitude, longitude)).zoom(12).build();
+//            mGoogleMap.animateCamera(CameraUpdateFactory
+//                    .newCameraPosition(cameraPosition));
             if (currentStore != null) {
                 distanceTv.setText(Utils.calculateDistance(latitude, longitude, Double.parseDouble(currentStore.getLat()),
                         Double.parseDouble(currentStore.getLg())) + " km");
             }
         }
-        ;
+
+    }
+
+    private void addMarker(double latitude, double longitude) {
+        MarkerOptions marker = new MarkerOptions().position(
+                new LatLng(latitude, longitude)).title("Hello Maps");
+
+        // Changing marker icon
+        marker.icon(BitmapDescriptorFactory
+                .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+
+        // adding marker
+        mGoogleMap.addMarker(marker);
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(latitude, longitude)).zoom(14).build();
+        mGoogleMap.animateCamera(CameraUpdateFactory
+                .newCameraPosition(cameraPosition));
+//        if (currentStore != null) {
+//            distanceTv.setText(Utils.calculateDistance(latitude, longitude, Double.parseDouble(currentStore.getLat()),
+//                    Double.parseDouble(currentStore.getLg())) + " km");
+//        }
     }
 
     @Override
