@@ -113,7 +113,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     }
 
 
-
     void initLocationList() {
         stores = new ArrayList<>();
         layoutManager = new LinearLayoutManager(getActivity());
@@ -123,6 +122,7 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
             public void onItemClick(Store location) {
                 Bundle b = new Bundle();
                 b.putString("ID", location.getStoreBranchHashcode());
+                b.putString("LOGO", location.getLogo());
                 StoreDetailActivity.callStoreDetailActivity(getActivity(), b);
             }
         });

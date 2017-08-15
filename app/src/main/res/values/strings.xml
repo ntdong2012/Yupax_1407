@@ -85,6 +85,7 @@ Không những thế, hành khách mua vé online và thanh toán thành công v
     <string name="ico_location" translatable="false">&#xf124;</string>
     <string name="ico_tag" translatable="false">&#xf02c;</string>
     <string name="ico_clock" translatable="false">&#xf017;</string>
+    <string name="ico_facebook" translatable="false">&#xf230;</string>
 
 
     <string name="register_login_state">Register login state</string>

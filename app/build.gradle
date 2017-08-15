@@ -7,8 +7,8 @@ android {
         applicationId "vsec.com.yupax"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 4
-        versionName "0.4"
+        versionCode 5
+        versionName "0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         buildConfigField "String", "BASEURL", "\"http://yupax.com/stripe/api/\""
@@ -56,4 +56,8 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
 
     compile 'com.wdullaer:materialdatetimepicker:3.2.2'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.oguzbabaoglu:fancymarkers:0.2'
+    compile 'com.mcxiaoke.volley:library:1.0.15'
 }

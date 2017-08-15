@@ -5,17 +5,27 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -26,10 +36,21 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.oguzbabaoglu.fancymarkers.CustomMarker;
+import com.oguzbabaoglu.fancymarkers.MarkerManager;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,8 +60,11 @@ import vsec.com.yupax.base.contract.StoreDetailContract;
 import vsec.com.yupax.model.http.response.Store;
 import vsec.com.yupax.model.http.response.StoreDetailResponse;
 import vsec.com.yupax.presenter.StoreDetailPresenter;
+import vsec.com.yupax.utils.PicassoMarker;
+import vsec.com.yupax.utils.ToastUtils;
 import vsec.com.yupax.utils.Utils;
 import vsec.com.yupax.utils.log.DLog;
+import vsec.com.yupax.utils.marker.NetworkMarker;
 
 public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> implements StoreDetailContract.View, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
@@ -84,6 +108,10 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
     TextView timeStatus;
 
     private Store currentStore;
+    private String logo;
+
+    private MarkerManager<NetworkMarker> networkMarkerManager;
+
 
     void updateStoreDetailUI(Store store) {
         Glide.with(this).load(store.getImages()).into(storeImv);
@@ -93,8 +121,27 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
         timeStatus.setText(store.getOpenTime());
         titleActionbar.setText(store.getName());
         saleTv.setText("" + store.getDescription());
-        DLog.d("Lat: " + store.getLat() + " Log: " + store.getLg());
-        addMarker(Double.parseDouble(store.getLat()), Double.parseDouble(store.getLg()));
+        if (!TextUtils.isEmpty(store.getLogo())) {
+            logo = store.getLogo();
+        }
+        addMarker(Double.parseDouble(store.getLat()), Double.parseDouble(store.getLg()), store.getName());
+
+        double latitude = mLastLocation.getLatitude();
+        double longitude = mLastLocation.getLongitude();
+        if (currentStore != null) {
+            distanceTv.setText(Utils.calculateDistance(latitude, longitude, Double.parseDouble(currentStore.getLat()),
+                    Double.parseDouble(currentStore.getLg())) + " km");
+            // create marker
+
+        }
+        MarkerOptions marker = new MarkerOptions().position(
+                new LatLng(latitude, longitude)).title("Vị trí của tôi");
+
+        // Changing marker icon
+        marker.icon(BitmapDescriptorFactory
+                .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+        // adding marker
+        mGoogleMap.addMarker(marker);
     }
 
 
@@ -113,7 +160,8 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
         if (getIntent() != null) {
             Bundle b = getIntent().getBundleExtra("home_data");
             storeHashcodeBrand = b.getString("ID");
-            DLog.d("Store: " + storeHashcodeBrand);
+            logo = b.getString("LOGO");
+            DLog.d("Store: " + storeHashcodeBrand + " logo: " + logo);
         }
     }
 
@@ -163,6 +211,17 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
         overridePendingTransition(R.anim.left_in, R.anim.right_out);
     }
 
+
+    @OnClick(R.id.facebook_share)
+    void handleFacebookShare() {
+        ToastUtils.shortShow("facebook share");
+    }
+
+    @OnClick(R.id.mail_share)
+    void handleMailShare() {
+        ToastUtils.shortShow("email share");
+    }
+
     @Override
     protected int getLayout() {
         return R.layout.activity_company_detail_new_layout;
@@ -170,6 +229,10 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
 
     @Override
     protected void initEventAndData() {
+        if (imageLoader == null) {
+            final RequestQueue queue = Volley.newRequestQueue(this);
+            imageLoader = new ImageLoader(queue, new NoImageCache());
+        }
         getLocation();
     }
 
@@ -180,7 +243,6 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
 
     @Override
     public void onGetStoreDetailSuccess(StoreDetailResponse storeDetailResponse) {
-        DLog.d("onGetStoreDetailSuccess");
         onStopLoading();
         if (storeDetailResponse.getError().getCode().equals("200")) {
             currentStore = storeDetailResponse.getStore();
@@ -229,58 +291,85 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
         mLastLocation = location;
         if (mLastLocation != null) {
             DLog.d("lat : " + mLastLocation.getLatitude() + " Long: " + mLastLocation.getLongitude());
-        } else {
-            DLog.d("Lat long null");
         }
         if (mGoogleMap != null && mLastLocation != null) {
-            Log.d("ntdong", "localReceiver23234234234");
             double latitude = mLastLocation.getLatitude();
             double longitude = mLastLocation.getLongitude();
-
-            // create marker
-//            MarkerOptions marker = new MarkerOptions().position(
-//                    new LatLng(latitude, longitude)).title("Hello Maps");
-//
-//            // Changing marker icon
-//            marker.icon(BitmapDescriptorFactory
-//                    .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
-//
-//            // adding marker
-//            mGoogleMap.addMarker(marker);
-//            CameraPosition cameraPosition = new CameraPosition.Builder()
-//                    .target(new LatLng(latitude, longitude)).zoom(12).build();
-//            mGoogleMap.animateCamera(CameraUpdateFactory
-//                    .newCameraPosition(cameraPosition));
             if (currentStore != null) {
                 distanceTv.setText(Utils.calculateDistance(latitude, longitude, Double.parseDouble(currentStore.getLat()),
                         Double.parseDouble(currentStore.getLg())) + " km");
+                // create marker
+
             }
+            MarkerOptions marker = new MarkerOptions().position(
+                    new LatLng(latitude, longitude)).title("Vị trí của tôi");
+
+            // Changing marker icon
+            marker.icon(BitmapDescriptorFactory
+                    .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+            // adding marker
+            mGoogleMap.addMarker(marker);
         }
 
     }
 
-    private void addMarker(double latitude, double longitude) {
-        MarkerOptions marker = new MarkerOptions().position(
-                new LatLng(latitude, longitude)).title("Hello Maps");
+    private void addMarker(double latitude, double longitude, String name) {
 
-        // Changing marker icon
-        marker.icon(BitmapDescriptorFactory
-                .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
-        // adding marker
-        mGoogleMap.addMarker(marker);
+        networkMarkerManager.addMarkers(createNetworkMarkers());
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude)).zoom(14).build();
         mGoogleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
-//        if (currentStore != null) {
-//            distanceTv.setText(Utils.calculateDistance(latitude, longitude, Double.parseDouble(currentStore.getLat()),
-//                    Double.parseDouble(currentStore.getLg())) + " km");
-//        }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.mGoogleMap = googleMap;
+        networkMarkerManager = new MarkerManager<>(googleMap);
+
+    }
+
+    private static final ArrayList<LatLng> LOCATIONS = new ArrayList<>();
+    private static ImageLoader imageLoader;
+
+
+    private ArrayList<NetworkMarker> createNetworkMarkers() {
+        LOCATIONS.add(new LatLng(Double.parseDouble(currentStore.getLat()), Double.parseDouble(currentStore.getLg())));
+        final ArrayList<NetworkMarker> networkMarkers = new ArrayList<>(LOCATIONS.size());
+
+        for (LatLng location : LOCATIONS) {
+            networkMarkers.add(new NetworkMarker(this, location, imageLoader, logo));
+        }
+
+        return networkMarkers;
+    }
+
+    /**
+     * Not interested in caching images.
+     */
+    private static class NoImageCache implements ImageLoader.ImageCache {
+
+        @Override
+        public Bitmap getBitmap(String url) {
+            return null;
+        }
+
+        @Override
+        public void putBitmap(String url, Bitmap bitmap) {
+            // Do nothing
+        }
+    }
+
+    /**
+     * Marker click listener that always returns true.
+     */
+    private static class DisableClick<T extends CustomMarker>
+            implements MarkerManager.OnMarkerClickListener<T> {
+
+        @Override
+        public boolean onMarkerClick(T marker) {
+            return true;
+        }
     }
 }
