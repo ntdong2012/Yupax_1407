@@ -1,7 +1,5 @@
 package vsec.com.yupax.presenter;
 
-import android.util.Log;
-
 import javax.inject.Inject;
 
 import vsec.com.yupax.base.RxPresenter;
@@ -41,7 +39,7 @@ public class StoreDetailPresenter extends RxPresenter<StoreDetailContract.View> 
                 .subscribeWith(new CommonSubscriber<StoreDetailResponse>(mView) {
                     @Override
                     public void onNext(StoreDetailResponse loginResponse) {
-                        DLog.d(loginResponse.getStore().getLogo());
+                        DLog.d(loginResponse.getStore().getName());
                         mView.onGetStoreDetailSuccess(loginResponse);
                     }
 

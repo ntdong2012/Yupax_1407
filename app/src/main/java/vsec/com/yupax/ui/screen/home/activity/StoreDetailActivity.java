@@ -6,18 +6,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -36,31 +33,25 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.oguzbabaoglu.fancymarkers.CustomMarker;
 import com.oguzbabaoglu.fancymarkers.MarkerManager;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.StoreDetailContract;
+import vsec.com.yupax.model.http.response.Promotion;
 import vsec.com.yupax.model.http.response.Store;
 import vsec.com.yupax.model.http.response.StoreDetailResponse;
 import vsec.com.yupax.presenter.StoreDetailPresenter;
-import vsec.com.yupax.utils.PicassoMarker;
+import vsec.com.yupax.ui.view.adapter.StorePromotionAdapter;
 import vsec.com.yupax.utils.ToastUtils;
 import vsec.com.yupax.utils.Utils;
 import vsec.com.yupax.utils.log.DLog;
@@ -110,6 +101,13 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
     private Store currentStore;
     private String logo;
 
+    @BindView(R.id.promotion_lv)
+    RecyclerView promotionRv;
+
+    StorePromotionAdapter storePromotionAdapter;
+    RecyclerView.LayoutManager layoutManager;
+    ArrayList<Promotion> promotions;
+
     private MarkerManager<NetworkMarker> networkMarkerManager;
 
 
@@ -119,29 +117,38 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
         storeAddress.setText(store.getAddress());
         phoneTv.setText(store.getMobile());
         timeStatus.setText(store.getOpenTime());
-        titleActionbar.setText(store.getName());
-        saleTv.setText("" + store.getDescription());
+        titleActionbar.setText(store.getStoreName());
+        saleTv.setText(Html.fromHtml(store.getDescription()));
         if (!TextUtils.isEmpty(store.getLogo())) {
             logo = store.getLogo();
         }
         addMarker(Double.parseDouble(store.getLat()), Double.parseDouble(store.getLg()), store.getName());
 
-        double latitude = mLastLocation.getLatitude();
-        double longitude = mLastLocation.getLongitude();
-        if (currentStore != null) {
-            distanceTv.setText(Utils.calculateDistance(latitude, longitude, Double.parseDouble(currentStore.getLat()),
-                    Double.parseDouble(currentStore.getLg())) + " km");
-            // create marker
 
+        if (store.getPromotions() != null && store.getPromotions().size() > 0) {
+            promotions.clear();
+            promotions.addAll(store.getPromotions());
+            storePromotionAdapter.notifyDataSetChanged();
         }
-        MarkerOptions marker = new MarkerOptions().position(
-                new LatLng(latitude, longitude)).title("Vị trí của tôi");
 
-        // Changing marker icon
-        marker.icon(BitmapDescriptorFactory
-                .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-        // adding marker
-        mGoogleMap.addMarker(marker);
+        if (mLastLocation != null) {
+            double latitude = mLastLocation.getLatitude();
+            double longitude = mLastLocation.getLongitude();
+            if (currentStore != null) {
+                distanceTv.setText(Utils.calculateDistance(latitude, longitude, Double.parseDouble(currentStore.getLat()),
+                        Double.parseDouble(currentStore.getLg())) + " km");
+                // create marker
+
+            }
+            MarkerOptions marker = new MarkerOptions().position(
+                    new LatLng(latitude, longitude)).title("Vị trí của tôi");
+
+            // Changing marker icon
+            marker.icon(BitmapDescriptorFactory
+                    .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+            // adding marker
+            mGoogleMap.addMarker(marker);
+        }
     }
 
 
@@ -234,6 +241,17 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
             imageLoader = new ImageLoader(queue, new NoImageCache());
         }
         getLocation();
+
+        promotions = new ArrayList<>();
+        storePromotionAdapter = new StorePromotionAdapter(this, promotions, new StorePromotionAdapter.IPromotionClick() {
+            @Override
+            public void onPromotionClick(Promotion p) {
+
+            }
+        });
+        layoutManager = new LinearLayoutManager(this);
+        promotionRv.setLayoutManager(layoutManager);
+        promotionRv.setAdapter(storePromotionAdapter);
     }
 
     @Override

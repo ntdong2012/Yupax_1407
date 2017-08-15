@@ -159,17 +159,11 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                Log.d("ntdong", "dy: " + dy);
                 if (dy > 0) {
                     // Scrolling up
-                    Log.d("ntdong", "isScrolling up");
                     animateMapView(0);
-
                 } else if (dy < 0) {
-
-                    Log.d("ntdong", "isScrolling down");
                     animateMapView(getResources().getInteger(R.integer.address_google_map_fragment));
-                    // Scrolling down
                 }
             }
         });
@@ -421,6 +415,15 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
             for (int i = 0; i < listStoreResponse.getStores().size(); i++) {
                 stores.add(listStoreResponse.getStores().get(i));
             }
+
+            if (stores != null && stores.size() > 0 && mLastLocation != null) {
+                for (int i = 0; i < stores.size(); i++) {
+                    stores.get(i).setMyLat(mLastLocation.getLatitude());
+                    stores.get(i).setMyLog(mLastLocation.getLongitude());
+                }
+                storeAdapter.notifyDataSetChanged();
+            }
+
         } else {
             Toast.makeText(getActivity(), listStoreResponse.getErrorResponse().getMessage(), Toast.LENGTH_SHORT).show();
             DLog.d(listStoreResponse.getErrorResponse().getMessage());
@@ -507,12 +510,13 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         public void onReceive(Context context, Intent intent) {
             DLog.d("localReceiver");
             if (mGoogleMap != null && mLastLocation != null) {
+                DLog.d("get google map & location is ok " + stores.size());
                 double latitude = mLastLocation.getLatitude();
                 double longitude = mLastLocation.getLongitude();
 
                 // create marker
                 MarkerOptions marker = new MarkerOptions().position(
-                        new LatLng(latitude, longitude)).title("Hello Maps");
+                        new LatLng(latitude, longitude)).title("Vị trí của tôi");
 
                 // Changing marker icon
                 marker.icon(BitmapDescriptorFactory
@@ -529,9 +533,9 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                         stores.get(i).setMyLat(latitude);
                         stores.get(i).setMyLog(longitude);
                     }
+                    DLog.d("lat long set my lat");
                     storeAdapter.notifyDataSetChanged();
                 }
-
                 if (mLastLocation != null) {
                     mPresenter.getListStores("" + mLastLocation.getLatitude(), "" + mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
                 } else {

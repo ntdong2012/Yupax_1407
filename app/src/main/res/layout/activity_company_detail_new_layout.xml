@@ -208,11 +208,59 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/time_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/phone_wrapper"
+                android:layout_marginLeft="@dimen/df_martin_sm"
+                android:layout_marginRight="@dimen/df_martin_sm"
+                android:layout_marginTop="@dimen/df_martin_sm"
+                android:orientation="horizontal">
+
+                <vsec.com.yupax.ui.view.customview.FontAwesomeTv
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center"
+                    android:text="@string/ico_clock"
+                    android:textColor="@color/bg_new_design" />
+
+                <TextView
+                    android:id="@+id/time_status_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/phone_icon"
+                    android:ellipsize="end"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text=""
+                    android:textColor="@color/time_status_color_tv" />
+
+                <TextView
+                    android:id="@+id/time_note_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/df_martin"
+                    android:layout_toRightOf="@id/phone_icon"
+                    android:ellipsize="end"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:text=""
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/sale_tv_one"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/phone_wrapper"
+                android:layout_below="@id/time_wrapper"
                 android:layout_marginLeft="@dimen/df_martin"
                 android:layout_marginRight="@dimen/df_martin_sm"
                 android:layout_marginTop="@dimen/df_martin_sm"
@@ -221,7 +269,7 @@
                 android:paddingLeft="@dimen/df_martin_sm"
                 android:paddingRight="@dimen/df_martin_sm"
                 android:text=""
-                android:textColor="@color/colorAccent"
+                android:textColor="@color/mdtp_light_gray"
                 android:textSize="@dimen/df_text_size" />
 
             <TextView
@@ -269,81 +317,43 @@
                 android:textSize="@dimen/df_text_size"
                 android:visibility="gone" />
 
-            <LinearLayout
-                android:id="@+id/time_wrapper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/sale_tv_four"
-                android:layout_marginLeft="@dimen/df_martin_sm"
-                android:layout_marginRight="@dimen/df_martin_sm"
-                android:layout_marginTop="@dimen/df_martin_sm"
-                android:orientation="horizontal">
-
-                <vsec.com.yupax.ui.view.customview.FontAwesomeTv
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center"
-                    android:text="@string/ico_clock"
-                    android:textColor="@color/bg_new_design" />
-
-                <TextView
-                    android:id="@+id/time_status_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/df_martin"
-                    android:layout_toRightOf="@id/phone_icon"
-                    android:ellipsize="end"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:text=""
-                    android:textColor="@color/time_status_color_tv" />
-
-                <TextView
-                    android:id="@+id/time_note_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/df_martin"
-                    android:layout_toRightOf="@id/phone_icon"
-                    android:ellipsize="end"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:text=""
-                    android:visibility="gone" />
-
-            </LinearLayout>
 
             <vsec.com.yupax.ui.view.customview.FontAwesomeTv
                 android:id="@+id/facebook_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/time_wrapper"
+                android:layout_below="@id/sale_tv_four"
                 android:layout_marginLeft="@dimen/df_martin"
                 android:layout_marginTop="@dimen/df_martin"
                 android:text="@string/ico_facebook"
-                android:textSize="23sp" />
+                android:textSize="23sp"
+                android:visibility="gone" />
 
             <vsec.com.yupax.ui.view.customview.FontAwesomeTv
                 android:id="@+id/mail_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/facebook_share"
-                android:layout_below="@id/time_wrapper"
+                android:layout_below="@id/sale_tv_four"
                 android:layout_marginLeft="@dimen/df_martin_bi"
                 android:layout_marginTop="@dimen/df_martin"
+                android:layout_toRightOf="@id/facebook_share"
                 android:text="@string/ico_email"
-                android:textSize="23sp" />
+                android:textSize="23sp"
+                android:visibility="gone" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/promotion_lv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/mail_share"
+                android:layout_marginTop="10dp" />
 
 
             <com.google.android.gms.maps.MapView
                 android:id="@+id/mapView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/event_address_map_height"
-                android:layout_below="@id/facebook_share"
+                android:layout_below="@id/promotion_lv"
                 android:layout_marginBottom="@dimen/df_martin"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"

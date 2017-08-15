@@ -134,8 +134,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar">
+            android:layout_height="match_parent">
 
 
             <RelativeLayout
@@ -175,31 +174,30 @@
 
 
             <!--<android.support.v7.widget.AppCompatButton-->
-                <!--android:id="@+id/join_btn"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/df_btn_height"-->
-                <!--android:layout_alignParentBottom="true"-->
-                <!--android:layout_marginBottom="@dimen/df_martin"-->
-                <!--android:layout_marginLeft="@dimen/df_martin_bi"-->
-                <!--android:layout_marginRight="@dimen/df_martin_bi"-->
-                <!--android:layout_marginTop="@dimen/df_martin_bi"-->
-                <!--android:background="@drawable/btn_border"-->
-                <!--android:text="@string/join_label"-->
-                <!--android:textAllCaps="true"-->
-                <!--android:textColor="@android:color/white"-->
-                <!--android:textSize="@dimen/df_btn_text_size" />-->
+            <!--android:id="@+id/join_btn"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/df_btn_height"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_marginBottom="@dimen/df_martin"-->
+            <!--android:layout_marginLeft="@dimen/df_martin_bi"-->
+            <!--android:layout_marginRight="@dimen/df_martin_bi"-->
+            <!--android:layout_marginTop="@dimen/df_martin_bi"-->
+            <!--android:background="@drawable/btn_border"-->
+            <!--android:text="@string/join_label"-->
+            <!--android:textAllCaps="true"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textSize="@dimen/df_btn_text_size" />-->
 
             <!--<TextView-->
-                <!--android:id="@+id/event_detail_message_tv"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_above="@id/join_btn"-->
-                <!--android:layout_below="@id/event_image"-->
-                <!--android:layout_marginLeft="@dimen/df_martin_sm"-->
-                <!--android:layout_marginRight="@dimen/df_martin_sm"-->
-                <!--android:layout_marginTop="@dimen/df_martin_sm"-->
-                <!--android:text="@string/event_detail_message" />-->
-
+            <!--android:id="@+id/event_detail_message_tv"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_above="@id/join_btn"-->
+            <!--android:layout_below="@id/event_image"-->
+            <!--android:layout_marginLeft="@dimen/df_martin_sm"-->
+            <!--android:layout_marginRight="@dimen/df_martin_sm"-->
+            <!--android:layout_marginTop="@dimen/df_martin_sm"-->
+            <!--android:text="@string/event_detail_message" />-->
 
 
             <com.google.android.gms.maps.MapView
