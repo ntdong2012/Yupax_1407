@@ -141,13 +141,13 @@
 
         <ImageView
             android:id="@+id/rate_icon_iv"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/df_martin_sm"
-            android:src="@drawable/icon_rate"
-            android:visibility="gone" />
+            android:src="@drawable/icon_promotion"
+            android:visibility="visible" />
 
     </RelativeLayout>
 

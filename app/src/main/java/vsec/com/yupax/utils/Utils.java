@@ -63,7 +63,6 @@ public class Utils {
         DecimalFormat result = new DecimalFormat("#.##");
 
         return result.format(orgin);
-//        return  orgin;
     }
 
     public static int getMaximumMapHeight(Context context) {

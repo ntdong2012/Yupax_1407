@@ -7,12 +7,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,6 +24,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -37,6 +40,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.oguzbabaoglu.fancymarkers.CustomMarker;
+import com.oguzbabaoglu.fancymarkers.MarkerManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,11 +59,11 @@ import vsec.com.yupax.presenter.HomeFgPresenter;
 import vsec.com.yupax.ui.screen.home.activity.StoreDetailActivity;
 import vsec.com.yupax.ui.screen.login.activity.SignInActivity;
 import vsec.com.yupax.ui.view.adapter.StoreAdapter;
-import vsec.com.yupax.ui.view.dialog.RateDialog;
 import vsec.com.yupax.utils.PerUtils;
 import vsec.com.yupax.utils.ResizeAnimation;
 import vsec.com.yupax.utils.Utils;
 import vsec.com.yupax.utils.log.DLog;
+import vsec.com.yupax.utils.marker.NetworkMarker;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/14/17.
@@ -100,6 +105,23 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     private String currentProvinceId;
     private String keySearch = "";
 
+    private MarkerManager<NetworkMarker> networkMarkerManager;
+    private static ImageLoader imageLoader;
+
+
+    private ArrayList<NetworkMarker> createNetworkMarkers() {
+
+        final ArrayList<NetworkMarker> networkMarkers = new ArrayList<>(stores.size());
+
+        for (Store store : stores) {
+
+            LatLng m = new LatLng(Double.parseDouble(store.getLat()), Double.parseDouble(store.getLg()));
+
+            networkMarkers.add(new NetworkMarker(getActivity(), m, imageLoader, store.getLogo()));
+        }
+
+        return networkMarkers;
+    }
 
     public void updateProvinceID(String provinceID, String searchKey) {
         currentProvinceId = provinceID;
@@ -178,6 +200,11 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         initLocationList();
         onLoading();
 
+        if (imageLoader == null) {
+            final RequestQueue queue = Volley.newRequestQueue(getActivity());
+            imageLoader = new ImageLoader(queue, new NoImageCache());
+        }
+
     }
 
     public void registerLocationReceiver() {
@@ -244,6 +271,7 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.mGoogleMap = googleMap;
+        networkMarkerManager = new MarkerManager<>(googleMap);
         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent("getLocationOK"));
     }
 
@@ -409,6 +437,7 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         onStopLoading();
         storeRv.setVisibility(View.VISIBLE);
         storeAdapter.notifyDataSetChanged();
+        networkMarkerManager.addMarkers(createNetworkMarkers());
     }
 
     @Override
@@ -509,6 +538,35 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                     mPresenter.getListStores("", "", keySearch, currentCategoryId, currentProvinceId);
                 }
             }
+        }
+    }
+
+
+    /**
+     * Not interested in caching images.
+     */
+    private static class NoImageCache implements ImageLoader.ImageCache {
+
+        @Override
+        public Bitmap getBitmap(String url) {
+            return null;
+        }
+
+        @Override
+        public void putBitmap(String url, Bitmap bitmap) {
+            // Do nothing
+        }
+    }
+
+    /**
+     * Marker click listener that always returns true.
+     */
+    private static class DisableClick<T extends CustomMarker>
+            implements MarkerManager.OnMarkerClickListener<T> {
+
+        @Override
+        public boolean onMarkerClick(T marker) {
+            return true;
         }
     }
 }

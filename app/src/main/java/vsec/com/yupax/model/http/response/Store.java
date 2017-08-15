@@ -2,6 +2,8 @@ package vsec.com.yupax.model.http.response;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 /**
  * Created by ntdong2012 on 7/20/2017.
  */
@@ -48,6 +50,18 @@ public class Store {
     private String promotion;
     @SerializedName("description")
     private String description;
+
+    @SerializedName("listPromotion")
+    private ArrayList<Promotion> promotions;
+
+
+    public ArrayList<Promotion> getPromotions() {
+        return promotions;
+    }
+
+    public void setPromotions(ArrayList<Promotion> promotions) {
+        this.promotions = promotions;
+    }
 
     public String getPromotion() {
         return promotion;

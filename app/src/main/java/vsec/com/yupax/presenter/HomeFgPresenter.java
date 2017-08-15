@@ -1,5 +1,7 @@
 package vsec.com.yupax.presenter;
 
+import com.google.gson.Gson;
+
 import javax.inject.Inject;
 
 import vsec.com.yupax.base.RxPresenter;
@@ -15,6 +17,7 @@ import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.utils.CommonSubscriber;
 import vsec.com.yupax.utils.RxUtil;
 import vsec.com.yupax.utils.Utils;
+import vsec.com.yupax.utils.log.DLog;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 7/9/17.
@@ -47,6 +50,8 @@ public class HomeFgPresenter extends RxPresenter<HomeFgContract.View> implements
         listStoreRequest.setPageSize(10);
         listStoreRequest.setMerchantCode(dataManager.getCurrentMerchantCode());
         listStoreRequest.setToken(dataManager.getToken());
+
+        DLog.d(new Gson().toJson(listStoreRequest));
 
         addSubscribe(dataManager.getListStoreBrand(listStoreRequest)
                 .compose(RxUtil.<ListStoreResponse>rxSchedulerHelper())

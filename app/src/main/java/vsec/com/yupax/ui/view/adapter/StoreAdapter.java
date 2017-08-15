@@ -54,7 +54,7 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
 
         final Store store = gifts.get(position);
 
-        holder.locationNameTv.setText(store.getStoreName());
+        holder.locationNameTv.setText(store.getStoreBranchName());
         holder.phoneLabel.setText(store.getMobile());
         holder.addressTv.setText(store.getAddress());
         holder.locationLabelTv.setText("");
@@ -72,6 +72,12 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> 
         if (store.getMyLat() != 0 && store.getMyLog() != 0) {
             holder.locationLabelTv.setText(Utils.calculateDistance(store.getMyLat(), store.getMyLog(), Double.parseDouble(store.getLat()), Double.parseDouble(store.getLg()))
                     + " km");
+        }
+
+        if (store.getPromotions() != null && store.getPromotions().size() > 0) {
+            holder.rateIcon.setVisibility(View.VISIBLE);
+        } else {
+            holder.rateIcon.setVisibility(View.GONE);
         }
 
         if (!TextUtils.isEmpty(store.getPromotion())) {
