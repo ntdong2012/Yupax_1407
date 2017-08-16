@@ -246,6 +246,11 @@ public class StoreDetailActivity extends BaseActivity<StoreDetailPresenter> impl
         storePromotionAdapter = new StorePromotionAdapter(this, promotions, new StorePromotionAdapter.IPromotionClick() {
             @Override
             public void onPromotionClick(Promotion p) {
+                Bundle bundle = new Bundle();
+                bundle.putString("logo", p.getImages());
+                bundle.putString("description", p.getDescription());
+                EventDetailActivity.callEventDetail(StoreDetailActivity.this, bundle);
+
 
             }
         });

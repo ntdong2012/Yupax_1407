@@ -173,6 +173,15 @@
             </RelativeLayout>
 
 
+            <TextView
+                android:id="@+id/description_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_wrapper"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="10dp" />
+
             <!--<android.support.v7.widget.AppCompatButton-->
             <!--android:id="@+id/join_btn"-->
             <!--android:layout_width="match_parent"-->
@@ -205,7 +214,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/event_address_map_height"
                 android:layout_below="@id/image_wrapper"
-                android:visibility="visible" />
+                android:visibility="gone" />
         </RelativeLayout>
     </ScrollView>
 

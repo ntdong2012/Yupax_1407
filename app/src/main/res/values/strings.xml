@@ -56,7 +56,7 @@
     <string name="change_pass_success">You already changed your password!</string>
 
     <string name="change_profile_actionbar_title">Change profile</string>
-    <string name="user_login_label">Login user</string>
+    <string name="user_login_label">Email/Phone number</string>
     <string name="email_label">Email</string>
     <string name="phone_label">Phone</string>
     <string name="birthday_label">Birthday</string>

@@ -58,7 +58,7 @@
     <string name="notification_resend_message_success">Mã kích hoạt của bạn đã gửi về địa chỉ email </string>
 
     <string name="change_profile_actionbar_title">Thay đổi thông tin cá nhân</string>
-    <string name="user_login_label">Tên đăng nhập</string>
+    <string name="user_login_label">Email/Số điện thoại</string>
     <string name="email_label">Email</string>
     <string name="phone_label">Số điện thoại</string>
     <string name="birthday_label">Ngày sinh</string>

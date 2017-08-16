@@ -108,7 +108,8 @@
             android:paddingLeft="@dimen/df_martin"
             android:paddingRight="@dimen/df_martin"
             android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white" />
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/df_text_size" />
 
     </RelativeLayout>
 
@@ -153,7 +154,8 @@
             android:paddingLeft="@dimen/df_martin"
             android:paddingRight="@dimen/df_martin"
             android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white" />
+            android:textColorHint="@android:color/white"
+            android:textSize="@dimen/df_text_size" />
 
     </RelativeLayout>
 

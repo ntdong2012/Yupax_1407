@@ -58,7 +58,11 @@ public class NewsFg extends BaseFragment<NewsPresenter> implements NewContract.V
         newsAdapter = new NewsAdapter(getActivity(), news, new NewsAdapter.IEventClicked() {
             @Override
             public void onEventClicked(News charity) {
-                EventDetailActivity.callEventDetail(getActivity(), new Bundle());
+
+                Bundle b = new Bundle();
+                b.putString("logo", charity.getImages());
+                b.putString("description", charity.getDescription());
+                EventDetailActivity.callEventDetail(getActivity(), b);
             }
         });
 

@@ -75,7 +75,10 @@ public class PromotionFg extends BaseFragment<PromotionPresenter> implements Pro
         promotionAdapter = new PromotionAdapter(getActivity(), promotions, new PromotionAdapter.IEventClick() {
             @Override
             public void onEventClick(Promotion promotion) {
-                EventDetailActivity.callEventDetail(getActivity(), new Bundle());
+                Bundle b = new Bundle();
+                b.putString("logo", promotion.getImages());
+                b.putString("description", promotion.getDescription());
+                EventDetailActivity.callEventDetail(getActivity(), b);
             }
         });
         giftRecycleView.setAdapter(promotionAdapter);
@@ -124,7 +127,7 @@ public class PromotionFg extends BaseFragment<PromotionPresenter> implements Pro
         } else {
             ToastUtils.shortShow(getPromotionsResponse.getErrorResponse().getMessage());
             DLog.d(getPromotionsResponse.getErrorResponse().getMessage());
-            if(getPromotionsResponse.getErrorResponse().getCode().contains("203")) {
+            if (getPromotionsResponse.getErrorResponse().getCode().contains("203")) {
                 SignInActivity.callSignInActivity(getActivity(), new Bundle());
                 mPresenter.saveToken("");
                 getActivity().finish();
@@ -141,7 +144,7 @@ public class PromotionFg extends BaseFragment<PromotionPresenter> implements Pro
 
     @Override
     public void onStopLoading() {
-        if(progressBar != null)
-        progressBar.setVisibility(View.GONE);
+        if (progressBar != null)
+            progressBar.setVisibility(View.GONE);
     }
 }

@@ -4,11 +4,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.TextUtils;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.OnClick;
 import vsec.com.yupax.R;
 import vsec.com.yupax.base.BaseActivity;
 import vsec.com.yupax.base.contract.EventDetailContract;
+import vsec.com.yupax.component.ImageLoader;
 import vsec.com.yupax.presenter.EventDetailPresenter;
 
 public class EventDetailActivity extends BaseActivity<EventDetailPresenter> implements EventDetailContract.View {
@@ -19,6 +25,14 @@ public class EventDetailActivity extends BaseActivity<EventDetailPresenter> impl
         context.startActivity(intent);
         ((Activity) context).overridePendingTransition(R.anim.right_in, R.anim.left_out);
     }
+
+    private String logoURl;
+    private String description;
+    @BindView(R.id.event_image)
+    ImageView eventImage;
+    @BindView(R.id.description_tv)
+    TextView descriptionTv;
+
 
     @Override
     public void useLanguage(String language) {
@@ -47,6 +61,19 @@ public class EventDetailActivity extends BaseActivity<EventDetailPresenter> impl
 
     @Override
     protected void initEventAndData() {
+        Intent i = getIntent();
+        if (i != null) {
+            Bundle b = i.getBundleExtra("home_data");
+            logoURl = b.getString("logo");
+            description = b.getString("description");
+        }
+
+        if (!TextUtils.isEmpty(logoURl)) {
+            ImageLoader.load(this, logoURl, eventImage);
+        }
+        if (!TextUtils.isEmpty(description)) {
+            descriptionTv.setText(Html.fromHtml(description));
+        }
 
     }
 

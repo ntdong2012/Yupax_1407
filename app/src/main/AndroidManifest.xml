@@ -40,7 +40,9 @@
         <activity
             android:name=".ui.screen.home.activity.ChangeProfileActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity android:name=".ui.screen.home.activity.EventDetailActivity" />
+        <activity
+            android:name=".ui.screen.home.activity.EventDetailActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.screen.home.activity.StoreDetailActivity"
             android:windowSoftInputMode="stateAlwaysHidden" />
