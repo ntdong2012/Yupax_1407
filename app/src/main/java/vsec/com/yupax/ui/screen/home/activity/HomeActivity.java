@@ -173,6 +173,14 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
 
     }
 
+    public void hiddenFloatingButton() {
+        floatingActionButton.hide();
+    }
+
+    public void showFloatingButton() {
+        floatingActionButton.show();
+    }
+
     void initRegionSpinner() {
 
         cities = new ArrayList<>();

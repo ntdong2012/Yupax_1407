@@ -9,15 +9,16 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -29,6 +30,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -56,6 +59,7 @@ import vsec.com.yupax.model.http.response.GetCategoriesResponse;
 import vsec.com.yupax.model.http.response.ListStoreResponse;
 import vsec.com.yupax.model.http.response.Store;
 import vsec.com.yupax.presenter.HomeFgPresenter;
+import vsec.com.yupax.ui.screen.home.activity.HomeActivity;
 import vsec.com.yupax.ui.screen.home.activity.StoreDetailActivity;
 import vsec.com.yupax.ui.screen.login.activity.SignInActivity;
 import vsec.com.yupax.ui.view.adapter.StoreAdapter;
@@ -64,6 +68,8 @@ import vsec.com.yupax.utils.ResizeAnimation;
 import vsec.com.yupax.utils.Utils;
 import vsec.com.yupax.utils.log.DLog;
 import vsec.com.yupax.utils.marker.NetworkMarker;
+
+import static android.content.Context.LOCATION_SERVICE;
 
 /**
  * Created by nguyenthanhdong0109@gmail.com on 5/14/17.
@@ -81,8 +87,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     @BindView(R.id.mapView)
     MapView mMapView;
-    @BindView(R.id.map_down_icon)
-    ImageView mapDownIcon;
 
     Location mLastLocation;
     GoogleApiClient mGoogleApiClient;
@@ -97,13 +101,19 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     RecyclerView storeRv;
     @BindView(R.id.process)
     ProgressBar progressBar;
+    @BindView(R.id.map_down_icon)
+    ImageView mapDownIcon;
     StoreAdapter storeAdapter;
     ArrayList<Store> stores;
     RecyclerView.LayoutManager layoutManager;
 
+    @BindView(R.id.map_wrapper)
+    RelativeLayout mapWrapper;
+
     private int currentCategoryId;
     private String currentProvinceId;
     private String keySearch = "";
+    private boolean isFirstTime = true;
 
     private MarkerManager<NetworkMarker> networkMarkerManager;
     private static ImageLoader imageLoader;
@@ -160,7 +170,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (dy > 0) {
-                    // Scrolling up
                     animateMapView(0);
                 } else if (dy < 0) {
                     animateMapView(getResources().getInteger(R.integer.address_google_map_fragment));
@@ -176,12 +185,14 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     @Override
     protected int getLayoutId() {
-        return R.layout.address_fg;
+        return R.layout.home_fg_layout;
     }
 
     @Override
     protected void initEventAndData() {
-
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
         initMapView();
         mPresenter.getCategories();
         currentCategoryId = 0;
@@ -231,7 +242,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     @Override
     public void onStart() {
-
         if (mGoogleApiClient != null) {
             mGoogleApiClient.connect();
         }
@@ -246,15 +256,23 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     @OnClick(R.id.map_down_icon)
     void onMapDownClicked() {
-        animateMapView(Utils.getMaximumMapHeight(getActivity()));
+        mapDownIcon.animate().rotation(mapDownIcon.getRotation() + 180F).setDuration(1);
+        if (isFirstTime) {
+            animateMapView(Utils.getMaximumMapHeight(getActivity()));
+            ((HomeActivity) getActivity()).hiddenFloatingButton();
+        } else {
+            animateMapView(getResources().getInteger(R.integer.address_google_map_fragment));
+            ((HomeActivity) getActivity()).showFloatingButton();
+        }
+        isFirstTime = !isFirstTime;
     }
 
     private void animateMapView(int height) {
-        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mMapView.getLayoutParams();
-        ResizeAnimation a = new ResizeAnimation(mMapView);
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mapWrapper.getLayoutParams();
+        ResizeAnimation a = new ResizeAnimation(mapWrapper);
         a.setDuration(100);
         a.setParams(lp.height, Utils.dpToPx(getResources(), height));
-        mMapView.startAnimation(a);
+        mapWrapper.startAnimation(a);
     }
 
     private boolean getMapViewStatus() {
@@ -291,8 +309,13 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         if (mGoogleApiClient != null) {
             mGoogleApiClient.connect();
         }
+
+
+        mLocationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+//        mLocationManager.requestLocationUpdates(m);
     }
 
+    private LocationManager mLocationManager;
 
     @Override
     public void onDestroy() {
@@ -301,23 +324,14 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     }
 
-    private String[] verifyPermission() {
-        String[] pers = new String[2];
-        if (!PerUtils.hasAccessCoarseLocationPermission(getActivity()) && PerUtils.isNeverAskAgainWithAccessCoarseLocationPermission(getActivity())) {
-            pers[0] = (Manifest.permission.ACCESS_COARSE_LOCATION);
-        }
-        if (!PerUtils.hasAccessFineLocationPermission(getActivity()) && PerUtils.isNeverAskAgainWithAccessFineLocationPermission(getActivity())) {
-            pers[1] = Manifest.permission.ACCESS_FINE_LOCATION;
-        }
-        return pers;
-    }
-
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (verifyLocationPermission()) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(
-                    mGoogleApiClient, locationRequest, this);
+        if (verifyLocationPermission() && isAllPerOk) {
+            if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+                LocationServices.FusedLocationApi.requestLocationUpdates(
+                        mGoogleApiClient, locationRequest, (com.google.android.gms.location.LocationListener) this);
+            }
         }
     }
 
@@ -326,9 +340,11 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         switch (requestCode) {
             case PerUtils.REQUEST_LOCATION_PERMISSIONS:
-                if (isPermissionGrantedByUser(grantResults)) {
-                    LocationServices.FusedLocationApi.requestLocationUpdates(
-                            mGoogleApiClient, locationRequest, this);
+                if (isPermissionGrantedByUser(grantResults) && isAllPerOk) {
+                    if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+                        LocationServices.FusedLocationApi.requestLocationUpdates(
+                                mGoogleApiClient, locationRequest, (com.google.android.gms.location.LocationListener) this);
+                    }
                 }
                 break;
             default:
@@ -338,36 +354,27 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
 
     @TargetApi(Build.VERSION_CODES.M)
-    private boolean verifyFineLocationPermission() {
-        List<String> permissionNeeded = new ArrayList<String>();
-        if (!PerUtils.hasAccessFineLocationPermission(getActivity()) &&
-                !PerUtils.isNeverAskAgainWithAccessFineLocationPermission(getActivity())) {
-            permissionNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
-        if (permissionNeeded.size() > 0) {
-            this.requestPermissions(permissionNeeded.toArray(new String[permissionNeeded.size()]), PerUtils.REQUEST_CODE_FINE_LOCATION_PERMISSIONS);
-            return false;
-        }
-        return true;
-    }
-
-    @TargetApi(Build.VERSION_CODES.M)
     private boolean verifyLocationPermission() {
         List<String> permissionNeeded = new ArrayList<String>();
-        if (!PerUtils.hasAccessFineLocationPermission(getActivity()) &&
-                !PerUtils.isNeverAskAgainWithAccessFineLocationPermission(getActivity())) {
+        if (!PerUtils.hasAccessCoarseLocationPermission(getActivity()) &&
+                !PerUtils.hasAccessCoarseLocationPermission(getActivity())) {
             permissionNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION);
         }
+
         if (!PerUtils.hasAccessFineLocationPermission(getActivity()) &&
                 !PerUtils.isNeverAskAgainWithAccessFineLocationPermission(getActivity())) {
             permissionNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
+
         if (permissionNeeded.size() > 0) {
+            isAllPerOk = false;
             this.requestPermissions(permissionNeeded.toArray(new String[permissionNeeded.size()]), PerUtils.REQUEST_LOCATION_PERMISSIONS);
             return false;
         }
         return true;
     }
+
+    private boolean isAllPerOk = true;
 
     private boolean isPermissionGrantedByUser(int[] grantResults) {
         boolean isOK = true;
@@ -378,28 +385,31 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                 }
             }
         }
+        isAllPerOk = isOK;
         return isOK;
     }
 
 
     @Override
     public void onConnectionSuspended(int i) {
-
+        DLog.d("onConnectionSuspended");
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
+        DLog.d("onConnectionFailed");
     }
 
     @Override
     public void onLocationChanged(Location location) {
+        DLog.d("onLocationChanged");
         if (mLastLocation != null) {
             return;
         }
         mLastLocation = location;
         LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent("getLocationOK"));
     }
+
 
     @Override
     public void useLanguage(String language) {
@@ -541,10 +551,28 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                 } else {
                     mPresenter.getListStores("", "", keySearch, currentCategoryId, currentProvinceId);
                 }
+            } else if (mLastLocation == null) {
+                getLocation();
+                if (mGoogleApiClient.isConnected()) {
+                    LocationServices.FusedLocationApi.requestLocationUpdates(
+                            mGoogleApiClient, locationRequest, (com.google.android.gms.location.LocationListener) HomeFg.this);
+                }
             }
         }
+
     }
 
+
+//    private final LocationListener mLocationListener = new LocationListener() {
+//        @Override
+//        public void onLocationChanged(final Location location) {
+//            if (mLastLocation != null) {
+//                return;
+//            }
+//            mLastLocation = location;
+//            LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent("getLocationOK"));
+//        }
+//    };
 
     /**
      * Not interested in caching images.

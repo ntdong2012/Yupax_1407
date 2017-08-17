@@ -23,33 +23,41 @@
         app:tabTextColor="@color/tab_text_not_select_color" />
 
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
+    <RelativeLayout
+        android:id="@+id/map_wrapper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/address_google_map_fragment"
-        android:layout_below="@id/tabs"
-        android:layout_marginLeft="@dimen/df_martin_ssm"
-        android:layout_marginRight="@dimen/df_martin_ssm"
-        android:layout_marginTop="@dimen/df_martin_ssm"
-        android:background="@drawable/df_bg_border"
-        android:visibility="visible" />
+        android:layout_below="@id/tabs">
 
-    <ImageView
-        android:id="@+id/map_down_icon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="@dimen/df_martin"
-        android:layout_marginTop="250dp"
-        android:backgroundTint="@android:color/white"
-        android:src="@drawable/down_icon"
-        android:visibility="gone" />
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/df_martin_ssm"
+            android:layout_marginRight="@dimen/df_martin_ssm"
+            android:layout_marginTop="@dimen/df_martin_ssm"
+            android:background="@drawable/df_bg_border"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/map_down_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/df_martin"
+            android:layout_marginRight="@dimen/df_martin"
+            android:backgroundTint="@android:color/white"
+            android:src="@drawable/down"
+            android:visibility="visible" />
+    </RelativeLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/address_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mapView"
+        android:layout_below="@id/map_wrapper"
         android:layout_marginLeft="@dimen/df_martin_ssm"
         android:layout_marginRight="@dimen/df_martin_ssm"
         android:layout_marginTop="@dimen/df_martin_ssm" />
@@ -58,7 +66,7 @@
         android:id="@+id/process"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mapView"
+        android:layout_below="@id/map_wrapper"
         android:layout_centerHorizontal="true" />
 
 

@@ -57,7 +57,7 @@
     <dimen name="donate_btn_width">60dp</dimen>
 
     <dimen name="address_google_map_fragment">230dp</dimen>
-    <integer name="address_google_map_fragment">170</integer>
+    <integer name="address_google_map_fragment">230</integer>
     <dimen name="address_tab_height">40dp</dimen>
     <dimen name="content_padding">8dp</dimen>
     <dimen name="transaction_item_martin_top">0.5dp</dimen>
