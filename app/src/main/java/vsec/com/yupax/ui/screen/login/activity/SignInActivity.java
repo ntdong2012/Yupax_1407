@@ -1,8 +1,12 @@
 package vsec.com.yupax.ui.screen.login.activity;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Html;
@@ -13,6 +17,9 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnEditorAction;
@@ -22,6 +29,7 @@ import vsec.com.yupax.base.contract.SignInContract;
 import vsec.com.yupax.model.http.response.LoginResponse;
 import vsec.com.yupax.presenter.SignInPresenter;
 import vsec.com.yupax.utils.AnimationUtils;
+import vsec.com.yupax.utils.PerUtils;
 import vsec.com.yupax.utils.Utils;
 import vsec.com.yupax.utils.log.DLog;
 
@@ -39,6 +47,55 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
     @BindView(R.id.save_login_states_radio_btn)
     RadioButton saveLoginStateRb;
 
+
+    @TargetApi(Build.VERSION_CODES.M)
+    boolean verifyPermission() {
+        List<String> permissionNeeded = new ArrayList<String>();
+        if (!PerUtils.hasAccessCoarseLocationPermission(this) &&
+                !PerUtils.hasAccessCoarseLocationPermission(this)) {
+            permissionNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+
+        if (!PerUtils.hasAccessFineLocationPermission(this) &&
+                !PerUtils.isNeverAskAgainWithAccessFineLocationPermission(this)) {
+            permissionNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+
+        if (permissionNeeded.size() > 0) {
+            this.requestPermissions(permissionNeeded.toArray(new String[permissionNeeded.size()]), PerUtils.REQUEST_LOCATION_PERMISSIONS);
+            return false;
+        }
+        return true;
+    }
+
+
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case PerUtils.REQUEST_LOCATION_PERMISSIONS:
+                if (isPermissionGrantedByUser(grantResults)) {
+                    initUI();
+                } else {
+                    finish();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private boolean isPermissionGrantedByUser(int[] grantResults) {
+        boolean isOK = true;
+        if (grantResults.length > 0) {
+            for (int i = 0; i < grantResults.length; i++) {
+                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
+                    isOK = false;
+                }
+            }
+        }
+        return isOK;
+    }
 
     public static void callSignInActivity(Context context, Bundle bundle) {
         Intent i = new Intent(context, SignInActivity.class);
@@ -124,7 +181,12 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
 
     @Override
     protected void initEventAndData() {
+        if (verifyPermission()) {
+            initUI();
+        }
+    }
 
+    void initUI() {
         boolean isSaveLogin = mPresenter.getSaveLoginState();
         String token = mPresenter.getToken();
         DLog.d("Is save login : " + isSaveLogin + " Token: " + token);
@@ -162,8 +224,8 @@ public class SignInActivity extends BaseActivity<SignInPresenter> implements Sig
                 }
             }
         });
-
     }
+
     private boolean flagmale = false;
 
 

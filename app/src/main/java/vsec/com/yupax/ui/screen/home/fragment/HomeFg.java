@@ -81,7 +81,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     public HomeFg() {
     }
 
-    View rootView;
     @BindView(R.id.tabs)
     TabLayout tabLayout;
 
@@ -190,9 +189,7 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     @Override
     protected void initEventAndData() {
-        if (mGoogleApiClient != null) {
-            mGoogleApiClient.connect();
-        }
+
         initMapView();
         mPresenter.getCategories();
         currentCategoryId = 0;
@@ -228,7 +225,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     void initMapView() {
         mMapView.onCreate(getBundle());
-
         mMapView.onResume();
 
         try {
@@ -274,11 +270,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
         a.setParams(lp.height, Utils.dpToPx(getResources(), height));
         mapWrapper.startAnimation(a);
     }
-
-    private boolean getMapViewStatus() {
-        return mMapViewExpanded;
-    }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -327,68 +318,12 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (verifyLocationPermission() && isAllPerOk) {
-            if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-                LocationServices.FusedLocationApi.requestLocationUpdates(
-                        mGoogleApiClient, locationRequest, (com.google.android.gms.location.LocationListener) this);
-            }
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            LocationServices.FusedLocationApi.requestLocationUpdates(
+                    mGoogleApiClient, locationRequest, (com.google.android.gms.location.LocationListener) this);
         }
+
     }
-
-    @TargetApi(Build.VERSION_CODES.M)
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case PerUtils.REQUEST_LOCATION_PERMISSIONS:
-                if (isPermissionGrantedByUser(grantResults) && isAllPerOk) {
-                    if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
-                        LocationServices.FusedLocationApi.requestLocationUpdates(
-                                mGoogleApiClient, locationRequest, (com.google.android.gms.location.LocationListener) this);
-                    }
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-
-    @TargetApi(Build.VERSION_CODES.M)
-    private boolean verifyLocationPermission() {
-        List<String> permissionNeeded = new ArrayList<String>();
-        if (!PerUtils.hasAccessCoarseLocationPermission(getActivity()) &&
-                !PerUtils.hasAccessCoarseLocationPermission(getActivity())) {
-            permissionNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-        }
-
-        if (!PerUtils.hasAccessFineLocationPermission(getActivity()) &&
-                !PerUtils.isNeverAskAgainWithAccessFineLocationPermission(getActivity())) {
-            permissionNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
-
-        if (permissionNeeded.size() > 0) {
-            isAllPerOk = false;
-            this.requestPermissions(permissionNeeded.toArray(new String[permissionNeeded.size()]), PerUtils.REQUEST_LOCATION_PERMISSIONS);
-            return false;
-        }
-        return true;
-    }
-
-    private boolean isAllPerOk = true;
-
-    private boolean isPermissionGrantedByUser(int[] grantResults) {
-        boolean isOK = true;
-        if (grantResults.length > 0) {
-            for (int i = 0; i < grantResults.length; i++) {
-                if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                    isOK = false;
-                }
-            }
-        }
-        isAllPerOk = isOK;
-        return isOK;
-    }
-
 
     @Override
     public void onConnectionSuspended(int i) {
@@ -419,7 +354,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     @Override
     public void onGetListStoreSuccess(ListStoreResponse listStoreResponse) {
-        DLog.d("onGetListStoreSuccess");
         stores.clear();
         if (listStoreResponse != null && listStoreResponse.getErrorResponse() != null && listStoreResponse.getErrorResponse().getCode().contains("200")) {
             for (int i = 0; i < listStoreResponse.getStores().size(); i++) {
@@ -465,8 +399,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
 
     @Override
     public void onGetCategoriesSuccess(GetCategoriesResponse getCategoriesResponse) {
-        DLog.d("onGetCategoriesSuccess");
-
         if (getCategoriesResponse != null && getCategoriesResponse.getErrorResponse() != null
                 && getCategoriesResponse.getErrorResponse().getCode().contains("200")) {
             for (int i = 0; i < getCategoriesResponse.getCategories().size(); i++) {
@@ -475,7 +407,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
                     @Override
                     public void onTabSelected(TabLayout.Tab tab) {
                         int position = tab.getPosition();
-                        DLog.d("Category Position : " + position);
                         currentCategoryId = position;
                         if (mLastLocation != null) {
                             mPresenter.getListStores("" + mLastLocation.getLatitude(), "" + mLastLocation.getLongitude(), keySearch, currentCategoryId, currentProvinceId);
@@ -563,20 +494,6 @@ public class HomeFg extends BaseFragment<HomeFgPresenter> implements OnMapReadyC
     }
 
 
-//    private final LocationListener mLocationListener = new LocationListener() {
-//        @Override
-//        public void onLocationChanged(final Location location) {
-//            if (mLastLocation != null) {
-//                return;
-//            }
-//            mLastLocation = location;
-//            LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(new Intent("getLocationOK"));
-//        }
-//    };
-
-    /**
-     * Not interested in caching images.
-     */
     private static class NoImageCache implements ImageLoader.ImageCache {
 
         @Override
